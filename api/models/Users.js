@@ -38,7 +38,7 @@ User.init(
       type: S.STRING,
     },
     age: {
-      type: S.NUMBER,
+      type: S.INTEGER,
       allowNull: false,
     },
     admin: {
