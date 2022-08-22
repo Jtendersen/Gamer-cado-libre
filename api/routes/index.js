@@ -1,6 +1,6 @@
 const express = require("express");
 const users = require("./users.js");
-//const products = require("./products.js");
+const products = require("./products.js");
 //const carts = require("./carts.js");
 
 const router = express.Router();
