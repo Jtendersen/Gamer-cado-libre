@@ -9,7 +9,7 @@ Cart.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    totalPrize: {
+    totalPrice: {
       type: DataTypes.STRING,
       allowNull: false,
     },
