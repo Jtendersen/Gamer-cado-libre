@@ -1,20 +1,15 @@
 const express = require('express')
 const app = express()
 const db = require("./db/db")
-//const models = require("./models")
-//const routes = require("./routes")
+const models = require("./models")
+const routes = require("./routes")
 const cors = require("cors")
-
 
 app.use(cors())
 
-
 app.use(express.json())
 
-//app.use("/api", routes)
-
-
-
+app.use("/api", routes)
 
 app.get('/', function(req,res){
     res.send("Hola mundo!")
