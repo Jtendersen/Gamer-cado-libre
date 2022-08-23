@@ -14,10 +14,10 @@ function App() {
         <Route path='/' element={
           <div className="App">
             <Navbar/>
-            <button onClick={()=>{navigate('/signup')}}>signup</button>
             <Footer/>
           </div>
         }/>
+        <Route path='/user' element={''}/>
         <Route path='/cart' element={''}/>
         <Route path='/signup' element={<><SignUp/></>}/>
         {/* <Route path='/signin' element={<signIn/>}/> */}
