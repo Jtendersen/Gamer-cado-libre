@@ -1,11 +1,6 @@
 const express = require("express");
 const app = express();
 
-//requiero solo para crear las tablas
-// const user = require("./models/Users");
-// const products = require("./models/Products");
-// const carts = require("./models/Carts");
-
 const db = require("./db/db");
 require("./models");
 const routes = require("./routes");
@@ -21,7 +16,7 @@ app.get("/", function (req, res) {
   res.send("Hola mundo!");
 });
 
-db.sync({ force: false }).then(() => {
+db.sync({ force: true }).then(() => {
   console.log("Se conecto bien la db");
   app.listen(3001, () => console.log("Servidor corriendo en el puerto 3001"));
 });
