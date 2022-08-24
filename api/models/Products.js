@@ -17,7 +17,7 @@ Product.init(
     valoration: {
       type: S.STRING,
     },
-    age: {
+    esrb: {
       type: S.INTEGER,
     },
     genre: {

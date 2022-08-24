@@ -1,10 +1,10 @@
 "use strict";
+const { faker } = require("@faker-js/faker");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let userList = [
       {
-        id: 1,
         email: "isaac@gmail.com",
         firstName: "Isaac",
         lastName: "Manzo",
@@ -18,7 +18,6 @@ module.exports = {
       },
 
       {
-        id: 2,
         email: "juancho@gmail.com",
         firstName: "Juan",
         lastName: "Tender",
@@ -32,7 +31,6 @@ module.exports = {
       },
 
       {
-        id: 3,
         email: "nahuel@gmail.com",
         firstName: "Nahuel",
         lastName: "Russo",
@@ -46,7 +44,6 @@ module.exports = {
       },
 
       {
-        id: 4,
         email: "thomas@gmail.com",
         firstName: "Thomas",
         lastName: "Villaverde",
@@ -60,7 +57,6 @@ module.exports = {
       },
 
       {
-        id: 5,
         email: "emmanuel@gmail.com",
         firstName: "Emmanuel",
         lastName: "Dacal",
@@ -70,6 +66,72 @@ module.exports = {
         admin: false,
         updatedAt: "2022-08-23T19:13:32.927Z",
         createdAt: "2022-08-23T19:13:32.927Z",
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
+        salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
+      },
+      {
+        email: faker.internet.email(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        password: faker.internet.password(),
+        age: Math.floor(Math.random() * (60 - 10 + 1) + 10),
+        admin: false,
+        updatedAt: faker.date.past(),
+        createdAt: faker.date.past(),
         salt: "$2b$10$1OuFEkDnIEeWauT./AWFn.",
       },
     ];
