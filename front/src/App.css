@@ -40,3 +40,24 @@
 .css-9jyc04 {
   margin-top: 0px;
 }
+
+#content {
+  display: flex;
+  flex-direction: row;
+}
+
+#sidebar {
+  width: 20%;
+  margin: 1%;
+}
+
+#grid {
+  width: 75%;
+  margin: 1%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#card {
+  padding: 1%;
+}

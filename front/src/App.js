@@ -5,10 +5,12 @@ import Navbar from './commons/Navbar';
 import Footer from './commons/Footer';
 import SignUp from './components/Signup';
 import SignIn from './components/Signin'
+import { Products } from './components/Products';
+
 
 function App() {
 
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
   return (
       <Routes>
         <Route path='/' element={
@@ -22,7 +24,9 @@ function App() {
         <Route path='/signup' element={<><SignUp/></>}/>
         <Route path='/signin' element={<SignIn/>}/>
         <Route path='/products' element={''}/>
+        <Route path='/products' element={<Products/>}/>
         <Route path='/products/:genre' element={''}/>
+        <Route path='/product/:name' element={''}/>
       </Routes>
   );
 }

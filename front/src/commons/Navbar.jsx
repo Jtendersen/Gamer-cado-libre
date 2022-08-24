@@ -13,17 +13,17 @@ const Navbar = () => {
 
   let Auth;
   const navigate = useNavigate()
-  const handle = (string)=>{
+  const sendTo = (string)=>{
     navigate(`/${string}`)
   }
 
-  if(''){
-    Auth = <Button color="inherit" onClick={()=>{handle('signup')}}>SignUp</Button>
+  if('a'){
+    Auth = <Button color="inherit" onClick={()=>{sendTo('signup')}}>SignUp</Button>
   } else{
-    Auth =<>  <Button color='inherit' onClick={()=>{handle('user')}}>
+    Auth =<>  <Button color='inherit' onClick={()=>{sendTo('user')}}>
                 UserName
               </Button>
-              <Button color='inherit' onClick={()=>{handle('cart')}}>
+              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
                 Cart
               </Button>
           </>
@@ -42,7 +42,7 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Button color="inherit" onClick={()=>{handle('products')}}>Products</Button>
+          <Button color="inherit" onClick={()=>{sendTo('products')}}>Products</Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Gamer-cado Libre
           </Typography>

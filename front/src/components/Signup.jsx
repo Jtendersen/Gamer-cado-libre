@@ -9,37 +9,28 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useNavigate } from "react-router";
 
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
+    let admin = false;
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const secret = data.get('secret')
+    if(secret == 'admin123') admin = true
     //aca va el axios para mandar el signup al back
     console.log({
       name: `${data.get("firstName")} ${data.get("lastName")}`,
       email: data.get("email"),
       password: data.get("password"),
+      age: data.get("age"),
+      admin: admin
     });
+    navigate('/signin')
   };
 
   return (
@@ -84,6 +75,26 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="age"
+                  label="Age"
+                  name="age"
+                  autoComplete="age"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="secret"
+                  label="Are you admin?"
+                  name="secret"
+                  autoComplete="secret"
                 />
               </Grid>
               <Grid item xs={12}>
