@@ -40,3 +40,69 @@
 .css-9jyc04 {
   margin-top: 0px;
 }
+
+#content {
+  display: flex;
+  flex-direction: row;
+}
+
+#sidebar {
+  width: 20%;
+  margin: 1%;
+}
+
+#grid {
+  width: 75%;
+  margin: 1%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#card {
+  padding: 1%;
+}
+
+#product {
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+#img {
+  width: 30%;
+  margin: 2%;
+  height: 380px;
+}
+
+#img > img{
+  height: 100%;
+}
+
+#gameInfo{
+  width: 70%;
+  margin: 2%;
+}
+#gameInfo > h1 {
+  font-size: xxx-large;
+  margin-bottom: 10px;
+}
+#gameInfo > h2 {
+  font-size: xx-large;
+}
+
+#gameInfo > p {
+  font-size: larger;
+}
+
+#text{
+  font-size: 110%;
+}
+
+#digitalText {
+  margin-top: 4%;
+}
