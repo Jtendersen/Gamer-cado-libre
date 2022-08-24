@@ -4,7 +4,7 @@ import {Route, Routes, useNavigate} from 'react-router-dom'
 import Navbar from './commons/Navbar';
 import Footer from './commons/Footer';
 import SignUp from './components/Signup';
-//import signIn from './components/signIn'
+import SignIn from './components/Signin'
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
         <Route path='/user' element={''}/>
         <Route path='/cart' element={''}/>
         <Route path='/signup' element={<><SignUp/></>}/>
-        {/* <Route path='/signin' element={<signIn/>}/> */}
+        <Route path='/signin' element={<SignIn/>}/>
         <Route path='/products' element={''}/>
         <Route path='/products/:genre' element={''}/>
       </Routes>
