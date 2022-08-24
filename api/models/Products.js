@@ -19,10 +19,7 @@ Product.init(
     },
     esrb: {
       type: S.INTEGER,
-    },
-    genre: {
-      type: S.STRING,
-    },
+    }
   },
   { sequelize: db, modelName: "product" }
 );
