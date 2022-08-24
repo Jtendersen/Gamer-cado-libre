@@ -13,6 +13,15 @@ Order.init(
     totalOrderPrice: {
       type: DataTypes.INTEGER,
     },
+    paymentMethod: {
+      type: DataTypes.STRING,
+    },
+    state: {
+      type: DataTypes.STRING,
+      validate: {
+        isIn: [["created", "payed"]],
+      },
+    },
   },
   {
     sequelize,

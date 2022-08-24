@@ -6,7 +6,7 @@ const Order = require("./Orders");
 Order.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Order);
 Cart.belongsTo(Order, { foreignKey: "orderId" });
-Cart.hasOne(Order);
+// Cart.hasOne(Order);
 Cart.belongsTo(Product, { foreignKey: "productId" });
 Cart.belongsTo(User);
 User.hasMany(Cart);
