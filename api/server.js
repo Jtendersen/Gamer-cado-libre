@@ -1,21 +1,22 @@
-const express = require('express')
-const app = express()
-const db = require("./db/db")
-const models = require("./models")
-const routes = require("./routes")
-const cors = require("cors")
+const express = require("express");
+const app = express();
 
-app.use(cors())
+const db = require("./db/db");
+require("./models");
+const routes = require("./routes");
+const cors = require("cors");
 
-app.use(express.json())
+app.use(cors());
 
-app.use("/api", routes)
+app.use(express.json());
 
-app.get('/', function(req,res){
-    res.send("Hola mundo!")
-})
+app.use("/api", routes);
 
-db.sync({ force: false,}).then(()=>{
-    console.log("Se conecto bien la db")
-    app.listen(3001, () => console.log("Servidor corriendo en el puerto 3001") )
-})
+app.get("/", function (req, res) {
+  res.send("Hola mundo!");
+});
+
+db.sync({ force: false }).then(() => {
+  console.log("Se conecto bien la db");
+  app.listen(3001, () => console.log("Servidor corriendo en el puerto 3001"));
+});

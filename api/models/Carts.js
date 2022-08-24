@@ -1,17 +1,27 @@
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../db/db");
+const Product = require("./Products");
 
 class Cart extends Model {}
 
 Cart.init(
   {
     quantity: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    totalPrice: {
+    state: {
       type: DataTypes.STRING,
-      allowNull: false,
+      validate: {
+        isIn: [["complete", "pending"]],
+      },
+      defaultValue: "pending",
+    },
+    totalPrice: {
+      type: DataTypes.INTEGER,
+    },
+    productId: {
+      type: DataTypes.INTEGER,
     },
   },
   {
@@ -19,5 +29,11 @@ Cart.init(
     modelName: "cart",
   }
 );
+
+//El hook trae el precio unitario y multiplica x cantidad
+Cart.addHook("beforeCreate", async (cart) => {
+  const product = await Product.findByPk(cart.productId);
+  cart.totalPrice = product.dataValues.price * cart.quantity;
+});
 
 module.exports = Cart;
