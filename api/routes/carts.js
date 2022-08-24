@@ -4,6 +4,8 @@ const Cart = require("../models/Carts");
 const router = express.Router();
 
 router.post("/add/:userId", (req, res, next) => {
+  //EL FRONT DEBERIA EVITAR EL PEDIDO DUPLICADO MISMO USER MISMO PRODUCTO?
+  //x ej: agrega prod1. Luego agrega prod1, el front deberia sumar?
   //ver de levantar el usuario por req.cookies
   /*MODELO DE BODY
     {
@@ -22,8 +24,6 @@ router.post("/add/:userId", (req, res, next) => {
 });
 
 router.delete("/delete/:userId", (req, res, next) => {
-  //EL FRONT DEBERIA EVITAR EL PEDIDO DUPLICADO MISMO USER MISMO PRODUCTO?
-  //x ej: agrega prod1. Luego agrega prod1, el front deberia sumar?
   //VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
   //ver de levantar el usuario por req.cookies
   Cart.destroy({
@@ -34,6 +34,30 @@ router.delete("/delete/:userId", (req, res, next) => {
   })
     .then(() => {
       res.sendStatus(204);
+    })
+    .catch(next);
+});
+
+router.put("/:userId", (req, res, next) => {
+  /*REQ BODY TIPO
+    {
+        quantity: cant,
+        productId: pId,
+    }
+    */
+  Cart.findOne({
+    where: {
+      productId: req.body.productId,
+      userId: req.params.userId,
+    },
+  })
+    .then((productToUpdate) => {
+      productToUpdate
+        .update({ quantity: req.body.quantity })
+        .then((productUpdated) => {
+          //VER QUE DATOS REQUIERE EL FRONT ANTE LA ACTUALIZACION DE LA CANT.
+          res.send(productUpdated.dataValues);
+        });
     })
     .catch(next);
 });
