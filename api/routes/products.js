@@ -1,19 +1,23 @@
 const express= require('express')
 const router = express.Router()
-const {Product,User}= require('../models')
+const {Product,User, Genre}= require('../models')
 
-router.get('/',(req,res)=>{
+router.get('/allProducts',(req,res)=>{
     Product.findAll()
     .then(allProducts=>res.status(200).send(allProducts))
 })
-
 router.get('/:product',(req,res)=>{
-    Product.findAll({where:{name:req.params.product}})
+    Product.findOne({where:{name:req.params.product}})
     .then(productMatched=>res.status(200).send(productMatched))
 })
-router.get('/:genre',(req,res)=>{
-    Product.findAll({where:{genre:req.params.genre}})
-    .then(products=>res.status(200).send(products))
+router.get('/allGenres/:genre',(req,res)=>{
+    Genre.findOne({where:{genre:req.params.genre}})
+    .then(genreMatched=>{
+        if(!genreMatched)res.status(404).send('ESE GENERO NO EXISTE, COMPROBAR COMO FUE TIPEADO')
+        const {id}=genreMatched
+        Product.findAll({where:{genreId:id}})
+        .then(productsMatched=>res.status(200).send(productsMatched))
+    })
 })
 
 
