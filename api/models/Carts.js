@@ -18,15 +18,11 @@ Cart.init(
       defaultValue: "pending",
     },
     totalPrice: {
-      //HARDCODEADO. CAMBIAR POR HOOK
       type: DataTypes.INTEGER,
     },
     productId: {
       type: DataTypes.INTEGER,
     },
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    // },
   },
   {
     sequelize,
@@ -34,10 +30,10 @@ Cart.init(
   }
 );
 
-Cart.addHook("beforeValidate", async (cart, options) => {
+//El hook trae el precio unitario y multiplica x cantidad
+Cart.addHook("beforeCreate", async (cart) => {
   const product = await Product.findByPk(cart.productId);
-  // cart.totalPrice = data.price* cart.quantity
+  cart.totalPrice = product.dataValues.price * cart.quantity;
 });
-//hacer un hook para traer precio unitario y multiplicarlo por cantidad before create?
 
 module.exports = Cart;

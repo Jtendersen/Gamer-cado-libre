@@ -8,7 +8,9 @@ User.hasMany(Order);
 Cart.belongsTo(Order, { foreignKey: "orderId" });
 Cart.hasOne(Order);
 Cart.belongsTo(Product, { foreignKey: "productId" });
-Cart.belongsTo(User, { foreignKey: "userId" });
+//saque en la linea de abajo , { foreignKey: "userId" }
+Cart.belongsTo(User);
+User.hasMany(Cart);
 Product.hasOne(Cart);
 
 module.exports = { User, Product, Cart, Order };
