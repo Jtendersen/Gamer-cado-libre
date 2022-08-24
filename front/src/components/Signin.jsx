@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {sendLoginRequest} from "../state/user"
 import {useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
@@ -28,7 +28,7 @@ export default function SignIn() {
 
 const navigate = useNavigate()
 const dispatch = useDispatch()
-const user = useSelector((state)=>state.user)
+
 const theme = createTheme();
 const emailRe =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -41,8 +41,8 @@ const {
   formState: {errors},
 }= useForm()
 
-const onSubmit = (data) => {
-  dispatch(sendLoginRequest(data))
+async function onSubmit(data){
+  let user = await dispatch(sendLoginRequest(data))
   user && navigate('/')
  };
 

@@ -10,27 +10,34 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
+import {useForm} from 'react-hook-form'
+import { useDispatch } from "react-redux";
+import {sendSigninRequest} from "../state/user"
 
 const theme = createTheme();
 
 export default function SignUp() {
 
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const handleSubmit = (event) => {
+  const emailRe =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  }= useForm()
+
+  
+  async function onSubmit (data){
+
     let admin = false;
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const secret = data.get('secret')
-    if(secret === 'admin123') admin = true
-    //aca va el axios para mandar el signup al back
-    console.log({
-      name: `${data.get("firstName")} ${data.get("lastName")}`,
-      email: data.get("email"),
-      password: data.get("password"),
-      age: data.get("age"),
-      admin: admin
-    });
-    navigate('/signin')
+  
+    const secret = data.secret
+    if(secret === 'admin123') admin = true;
+
+    let created = await dispatch(sendSigninRequest({data}));
+    created && navigate('/signin')
   };
 
   return (
@@ -52,7 +59,7 @@ export default function SignUp() {
           <Box
             component="form"
             noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
@@ -65,6 +72,18 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  {...register("firstName",{required:"Required",
+                      minLength:{
+                        value:2,
+                        message: "Name should have 2 characters min"
+                     },
+                      maxLength:{
+                        value:20,
+                        message: "Name should have 20 characters max"
+                      }
+                   })}
+                   error={!!errors?.firstName}
+                  helperText={errors?.firstName? errors.firstName.message:null}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -75,6 +94,18 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  {...register("lastName",{required:"Required",
+                      minLength:{
+                        value:2,
+                        message: "LastName should have 2 characters min"
+                     },
+                      maxLength:{
+                        value:20,
+                        message: "LastName should have 20 characters max"
+                      }
+                   })}
+                   error={!!errors?.lastName}
+                  helperText={errors?.lastName? errors.lastName.message:null}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -85,6 +116,12 @@ export default function SignUp() {
                   label="Age"
                   name="age"
                   autoComplete="age"
+                  type= "number"
+                  {...register("age",{required:"Required",
+                      
+                   })}
+                   error={!!errors?.age}
+                  helperText={errors?.age? errors.age.message:null}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -95,6 +132,19 @@ export default function SignUp() {
                   label="Are you admin?"
                   name="secret"
                   autoComplete="secret"
+                  {...register("secret",{
+                  minLength:{
+                    value:8,
+                    message: "secret must be 8 characters"
+                 },
+                  maxLength:{
+                    value:8,
+                    message: "secret must be 8 characters"
+                  }
+               })}
+               error={!!errors?.secret}
+              helperText={errors?.secret? errors.secret.message:null}
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -105,6 +155,14 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  {...register("email",{required:"Required",
+                    pattern:{
+                      value: emailRe,
+                      message: "invalid email adress"
+                    }
+                  })}
+                  error={!!errors?.email}
+                  helperText={errors?.email? errors.email.message:null}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +174,18 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  {...register("password",{required:"Required",
+                      minLength:{
+                        value:6,
+                        message: "password should have 6 characters min"
+                     },
+                      maxLength:{
+                        value:6,
+                        message: "password should have 8 characters max"
+                      }
+                   })}
+                   error={!!errors?.password}
+                  helperText={errors?.password? errors.password.message:null}
                 />
               </Grid>
             </Grid>
