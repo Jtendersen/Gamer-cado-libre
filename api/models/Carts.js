@@ -31,7 +31,7 @@ Cart.init(
 );
 
 //El hook trae el precio unitario y multiplica x cantidad
-Cart.addHook("beforeCreate", async (cart) => {
+Cart.addHook("beforeUpdate", async (cart) => {
   const product = await Product.findByPk(cart.productId);
   cart.totalPrice = product.dataValues.price * cart.quantity;
 });
