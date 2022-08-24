@@ -10,9 +10,9 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
       <Link color="inherit" href="http://localhost:3000/">
-        Home
+        
       </Link>
-      {` ${new Date().getFullYear()}.`}
+      {` ${new Date().getFullYear()} Gamer-cado Libre SA.`}
     </Typography>
   );
 }
@@ -23,8 +23,6 @@ export default function Footer() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        //height temporal, cuando haya mas datos en la pagina principal se borra atributo
-        height: '750px',
       }}
     >
       <CssBaseline />
@@ -41,9 +39,6 @@ export default function Footer() {
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="body1">
-            Gamer-cado Libre
-          </Typography>
           <Copyright/>
         </Container>
       </Box>

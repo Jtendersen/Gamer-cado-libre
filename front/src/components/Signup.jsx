@@ -21,7 +21,7 @@ export default function SignUp() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const secret = data.get('secret')
-    if(secret == 'admin123') admin = true
+    if(secret === 'admin123') admin = true
     //aca va el axios para mandar el signup al back
     console.log({
       name: `${data.get("firstName")} ${data.get("lastName")}`,
