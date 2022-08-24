@@ -41,7 +41,7 @@ User.init(
       type: S.INTEGER,
       allowNull: false,
     },
-    admin: {
+    isAdmin: {
       type: S.BOOLEAN,
       allowNull: false,
     },
