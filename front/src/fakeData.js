@@ -5,7 +5,8 @@ const fakeData = [
       age: 1996,
       name: "Juego 1",
       sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
+      email: "velezroman@spherix.com",
+      price: 12,
     },
     {
       id: 1,
@@ -13,7 +14,8 @@ const fakeData = [
       age: 2012,
       name: "Juego 2",
       sinapsis: "Sinapsis del juego",
-      email: "celinaadams@spherix.com"
+      email: "celinaadams@spherix.com",
+      price: 44,
     },
     {
       id: 2,
@@ -21,7 +23,8 @@ const fakeData = [
       age: 2015,
       name: "Juego 3",
       sinapsis: "Sinapsis del juego",
-      email: "vanessaodonnell@spherix.com"
+      email: "vanessaodonnell@spherix.com",
+      price: 31,
     },
     {
       id: 3,
@@ -29,7 +32,8 @@ const fakeData = [
       age: 1990,
       name: "Juego 4",
       sinapsis: "Sinapsis del juego",
-      email: "cassiecolon@spherix.com"
+      email: "cassiecolon@spherix.com",
+      price: 22,
     },
     {
       id: 4,
@@ -37,8 +41,98 @@ const fakeData = [
       age: 1992,
       name: "Juego 5",
       sinapsis: "Sinapsis del juego",
-      email: "chasebell@spherix.com"
+      email: "chasebell@spherix.com",
+      price: 26,
     }
   ]
+
+const genres = [{
+  genre: "Point and Click",
+
+},
+{
+  genre: "Fighting",
+
+},
+{
+  genre: "Shooter",
+
+},
+{
+  genre: "Music",
+
+},
+{
+  genre: "Platform",
+
+},
+{
+  genre: "Puzzle",
+
+},
+{
+  genre: "Racing",
+
+},
+{
+  genre: "RPG",
+
+},
+{
+  genre: "Real Time Strategy RTS",
+
+},
+{
+  genre: "Simulator",
+
+},
+{
+  genre: "Sport",
+
+},
+{
+  genre: "Strategy",
+
+},
+{
+  genre: "Turn Based Strategy TBS",
+
+},
+{
+  genre: "Tactical",
+
+},
+{
+  genre: "Quiz / Trivia",
+
+},
+{
+  genre: "Pinball",
+
+},
+{
+  genre: "Adventure",
+
+},
+{
+  genre: "Arcade",
+
+},
+{
+  genre: "Visual Novel",
+
+},
+{
+  genre: "Indie",
+
+},
+{
+  genre: "Card and Board Game",
+
+},
+{
+  genre: "MOBA",
+
+}]
 
 module.exports = fakeData
