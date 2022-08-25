@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/Users");
 const router = express.Router();
-const { generateToken, validateToken } = require("../middlewares/tokens");
+const { generateToken, validateADM } = require("../middlewares/tokens");
 const { validateAuth } = require("../middlewares/auth");
 
 router.get("/", (req, res) => {
@@ -22,9 +22,10 @@ router.post("/login", (req, res) => {
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
       const payload = {
-        email: user.email,
+        email: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
+        admin: user.admin,
       };
       const token = generateToken(payload);
       res.cookie("token", token);
@@ -53,30 +54,34 @@ router.put("/register/:id", (req, res) => {
     },
     reurning: true,
     plain: true,
-  }).then((result) => {
-    const userUpdate = result[1];
-    res.json({
-      message: "Se actualizo correctamente",
-      userUpdate,
-    });
   })
-  .catch(error => res.sendStatus(500)) 
+    .then((result) => {
+      const userUpdate = result[1];
+      res.json({
+        message: "Se actualizo correctamente",
+        userUpdate,
+      });
+    })
+    .catch(error);
 });
 
-router.put("/register/:id", (req, res, next) => {
-  User.update({
-    isAdmin: req.body.isAdmin
-  },{
-    where: {
-      id: req.body.isAdmin
+router.put("/register/:id", validateADM, (req, res, next) => {
+  User.update(
+    {
+      admin: req.body.admin,
+    },
+    {
+      where: {
+        id: req.body.admin,
+      },
     }
-  })
-  .then((result)=>{
-    res.json(result)
-  })
-  .catch(next)
-})
-// ({isAdmin: req.body.isAdmin},{returning; true, where: {req.params.id}}
+  )
+    .then((result) => {
+      res.json(result);
+    })
+    .catch(next);
+});
+
 router.use("/", function (req, res) {
   res.sendStatus(404);
 });

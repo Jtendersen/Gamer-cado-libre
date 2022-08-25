@@ -5,10 +5,12 @@ const db = require("./db/db");
 require("./models");
 const routes = require("./routes");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 app.use(cors());
 
 app.use(express.json());
+app.use(cookieParser())
 
 app.use("/api", routes);
 
