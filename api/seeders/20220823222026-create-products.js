@@ -10,7 +10,7 @@ module.exports = {
         price: 1000,
         valoration: 7,
         esrb: 18,
-        genre: "terror",
+        // genreId: 1,
         updatedAt: "2022-08-23T22:40:23.479Z",
         createdAt: "2022-08-23T22:40:23.479Z",
       },
@@ -21,7 +21,7 @@ module.exports = {
         price: 10,
         valoration: 3,
         esrb: 20,
-        genre: "accion",
+        // genreId: 2,
         updatedAt: "2022-08-23T22:40:23.479Z",
         createdAt: "2022-08-23T22:40:23.479Z",
       },
@@ -32,7 +32,7 @@ module.exports = {
         price: 1500,
         valoration: 8,
         esrb: 15,
-        genre: "RPG",
+        // genreId: 3,
         updatedAt: "2022-08-23T22:40:23.479Z",
         createdAt: "2022-08-23T22:40:23.479Z",
       },
@@ -42,7 +42,7 @@ module.exports = {
         price: 5,
         valoration: 2,
         esrb: 8,
-        genre: "Abandoned Ware",
+        // genreId: 4,
         updatedAt: "2022-08-23T22:40:23.479Z",
         createdAt: "2022-08-23T22:40:23.479Z",
       },
@@ -52,7 +52,7 @@ module.exports = {
         price: 0,
         valoration: 9,
         esrb: 15,
-        genre: "Action",
+        // genreId: 5,
         updatedAt: "2022-08-23T22:40:23.479Z",
         createdAt: "2022-08-23T22:40:23.479Z",
       },
@@ -60,6 +60,6 @@ module.exports = {
     return queryInterface.bulkInsert("products", productList);
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("Users", null, {});
+    return queryInterface.bulkDelete("products", null, {});
   },
 };
