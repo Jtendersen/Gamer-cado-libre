@@ -7,9 +7,15 @@ import Typography from '@mui/material/Typography';
 import fakeData from '../fakeData';
 import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Grid from '../commons/Grid';
+import axios from 'axios';
 
 const Genre = () => {
 
+  const [games, setGames] = React.useState([])
+  React.useEffect(()=>{
+    axios.get('http://localhost:3001/api/products/allProducts').then((games)=>{setGames(games.data)})
+  },[])
+  console.log(games)
   let Auth;
   const [genre, setGenre] = React.useState('');
   const navigate = useNavigate()
@@ -67,7 +73,7 @@ const Genre = () => {
           </Box>
       </div>
       <div id='genre'>
-        <Grid games={fakeData}/>
+        <Grid games={games}/>
       </div>
     </>
   )
