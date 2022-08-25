@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { DataTypes, Model } = require("sequelize");
 const sequelize = require("../db/db");
 const Cart = require("./Carts");
@@ -19,8 +20,11 @@ Order.init(
     state: {
       type: DataTypes.STRING,
       validate: {
-        isIn: [["created", "payed"]],
+        isIn: [["created", "processed", "cancelled", "complete"]],
       },
+    },
+    sendingAddress: {
+      type: DataTypes.STRING,
     },
   },
   {
@@ -29,14 +33,20 @@ Order.init(
   }
 );
 
-Order.addHook("beforeCreate", async (cart) => {
-  const carts = await Cart.findAll({
-    where: {
-      userId: order.userId,
-      state: "pending",
-    },
-  });
-  order.totalPrice = product.dataValues.price * cart.quantity;
-});
+//como este hook no anda creo el calculo del precio en la ruta
+
+// Order.addHook("beforeCreate", async (order) => {
+//   let total = 0;
+//   const carts = await Cart.findAll({
+//     where: {
+//       [Op.and]: [{ userId: order.userId }, { state: "pending" }],
+//     },
+//   });
+//   carts.map((cart) => {
+//     total += cart.dataValues.totalPrice;
+//   });
+//   console.log("ESTE ES EL TOTAL DENTRO DEL HOOK ORDER", total);
+//   order.totalPrice = total;
+// });
 
 module.exports = Order;
