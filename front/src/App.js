@@ -7,9 +7,11 @@ import SignUp from './components/Signup';
 import SignIn from './components/Signin'
 import { Products } from './components/Products';
 import Product from './components/Product';
+import Cart from './components/Cart';
 import Genre from './components/Genre';
 import { useDispatch } from "react-redux";
 import {setUser} from "./state/user"
+
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
           <div className="App">
             <Navbar/>
             <Footer/>
+            <Cart/>
           </div>
         }/>
         <Route path='/user' element={''}/>
