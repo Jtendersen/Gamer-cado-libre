@@ -8,6 +8,7 @@ import SignIn from './components/Signin'
 import { Products } from './components/Products';
 import Product from './components/Product';
 //import signIn from './components/signIn'
+import Cart from './components/Cart';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <div className="App">
             <Navbar/>
             <Footer/>
+            <Cart/>
           </div>
         }/>
         <Route path='/user' element={''}/>
