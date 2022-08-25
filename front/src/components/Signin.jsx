@@ -122,7 +122,7 @@ async function onSubmit(data){
 
            <Grid container>
               <Grid item>
-                <Link href='/signup' variant="body2">
+                <Link id='link' href='/signup' variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
