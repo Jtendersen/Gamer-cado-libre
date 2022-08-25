@@ -23,6 +23,9 @@ export default function ActionAreaCard({game}) {
             <Typography variant="body2" color="text.secondary">
                 {game.sinapsis}
             </Typography>
+            <Typography >
+              {`$${game.price}`}
+            </Typography>
             </CardContent>
         </CardActionArea>
         </Card>

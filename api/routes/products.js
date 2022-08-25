@@ -5,9 +5,13 @@ const {Product,User, Genre}= require('../models')
 
 //DEVUELVE TODOS LOS PRODUCTOS
 router.get('/allProducts',(req,res,next)=>{
-    Product.findAll()
+    try {
+        Product.findAll()
     .then(allProducts=>res.status(200).send(allProducts))
-    .catch(next)
+    } catch (error) {
+        console.log(error)
+    }
+    
 })
 
 //BUSCA UN PRODUCTO POR ID
