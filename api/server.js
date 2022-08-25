@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 app.use(cors());
 
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.use("/api", routes);
 
@@ -18,7 +18,7 @@ app.get("/", function (req, res) {
   res.send("Hola mundo!");
 });
 
-db.sync({ force: false }).then(() => {
+db.sync({ force: true }).then(() => {
   console.log("Se conecto bien la db");
   app.listen(3001, () => console.log("Servidor corriendo en el puerto 3001"));
 });
