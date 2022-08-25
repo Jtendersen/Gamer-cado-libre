@@ -31,7 +31,7 @@ if(login){
         <div id='product'>
             <div className='content'>
                 <div id='img'>
-                    <img src="" alt="Imagen del juego" />
+                    <img src={game.src} alt="Imagen del juego" />
                 </div>
                 <div id='gameInfo'>
                     <h1>{game.name}</h1>
@@ -42,7 +42,7 @@ if(login){
                                 onChange={(event, newValue) => {setValue(newValue)}}
                             />
                         </Box>
-                    <h2>$35</h2>
+                    <h2>${game.price}</h2>
                     <Button variant="contained" onClick={handleCart}>Add to cart</Button>
                     <div id='digitalText'>
                         <Typography color="text.secondary">Este producto se vende en formato digital, el stock es ilimitado</Typography >                
@@ -51,7 +51,7 @@ if(login){
             </div>
             <div id='text'>
                 <h4>Descripcion:</h4>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error a sequi recusandae! Ea deserunt cupiditate ullam tenetur officia quia ad eveniet aut sunt impedit autem neque accusamus enim saepe eum veritatis, quas exercitationem quae! Quam aliquam eum tenetur repellat pariatur maiores asperiores, provident vitae ipsum, similique corporis deleniti rerum, libero earum? Sed cupiditate similique voluptate facilis? Vitae culpa magnam aperiam, distinctio quia modi repellendus doloremque similique deserunt, commodi aliquid expedita a, odio voluptates voluptate cupiditate dolor. Ea autem earum fugiat!</p>
+                <p>{game.description}</p>
             </div>
         </div>
         <Footer/>

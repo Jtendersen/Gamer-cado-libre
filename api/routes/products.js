@@ -17,7 +17,7 @@ router.get('/allProducts',(req,res,next)=>{
 //BUSCA UN PRODUCTO POR ID
 router.get('/:productID',(req,res,next)=>{
     try {
-        Product.findByPk(productID)
+        Product.findByPk(req.params.productID)
     .then(productMatched=>res.status(200).send(productMatched))
     } catch (error) {
         console.log(error)
