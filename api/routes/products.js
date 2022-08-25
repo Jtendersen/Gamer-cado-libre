@@ -5,16 +5,24 @@ const {Product,User, Genre}= require('../models')
 
 //DEVUELVE TODOS LOS PRODUCTOS
 router.get('/allProducts',(req,res,next)=>{
-    Product.findAll()
+    try {
+        Product.findAll()
     .then(allProducts=>res.status(200).send(allProducts))
-    .catch(next)
+    } catch (error) {
+        console.log(error)
+    }
+    
 })
 
 //BUSCA UN PRODUCTO POR ID
 router.get('/:productID',(req,res,next)=>{
-    Product.findByPk(productID)
+    try {
+        Product.findByPk(req.params.productID)
     .then(productMatched=>res.status(200).send(productMatched))
-    .catch(next)
+    } catch (error) {
+        console.log(error)
+    }
+    
 })
 
 //BUSCA TODOS LOS JUEGOS CON TITULO SIMILAR A EL INPUT DEL USER EN LA BUSQUEDA

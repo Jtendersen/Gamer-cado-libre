@@ -6,7 +6,8 @@ const fakeData = [
       quantity:1,
       name: "Juego 1",
       sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
+      email: "velezroman@spherix.com",
+      price: 12,
     },
     {
       id: 1,
@@ -15,7 +16,8 @@ const fakeData = [
       quantity:1,
       name: "Juego 2",
       sinapsis: "Sinapsis del juego",
-      email: "celinaadams@spherix.com"
+      email: "celinaadams@spherix.com",
+      price: 44,
     },
     {
       id: 2,
@@ -24,7 +26,8 @@ const fakeData = [
       quantity:1,
       name: "Juego 3",
       sinapsis: "Sinapsis del juego",
-      email: "vanessaodonnell@spherix.com"
+      email: "vanessaodonnell@spherix.com",
+      price: 31,
     },
     {
       id: 3,
@@ -33,7 +36,8 @@ const fakeData = [
       quantity:1,
       name: "Juego 4",
       sinapsis: "Sinapsis del juego",
-      email: "cassiecolon@spherix.com"
+      email: "cassiecolon@spherix.com",
+      price: 22,
     },
     {
       id: 4,
@@ -42,44 +46,96 @@ const fakeData = [
       quantity:1,
       name: "Juego 5",
       sinapsis: "Sinapsis del juego",
-      email: "chasebell@spherix.com"
-    },
-    {
-      id: 5,
-      picture: "http://placehold.it/32x32",
-      age: 1996,
-      quantity:1,
-      name: "Juego 1",
-      sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
-    },
-    {
-      id: 6,
-      picture: "http://placehold.it/32x32",
-      age: 1996,
-      quantity:1,
-      name: "Juego 1",
-      sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
-    },
-    {
-      id: 7,
-      picture: "http://placehold.it/32x32",
-      age: 1996,
-      quantity:1,
-      name: "Juego 1",
-      sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
-    },
-    {
-      id: 8,
-      picture: "http://placehold.it/32x32",
-      age: 1996,
-      quantity:1,
-      name: "Juego 1",
-      sinapsis: "Sinapsis del juego",
-      email: "velezroman@spherix.com"
-    },
+
   ]
+
+const genres = [{
+  genre: "Point and Click",
+
+},
+{
+  genre: "Fighting",
+
+},
+{
+  genre: "Shooter",
+
+},
+{
+  genre: "Music",
+
+},
+{
+  genre: "Platform",
+
+},
+{
+  genre: "Puzzle",
+
+},
+{
+  genre: "Racing",
+
+},
+{
+  genre: "RPG",
+
+},
+{
+  genre: "Real Time Strategy RTS",
+
+},
+{
+  genre: "Simulator",
+
+},
+{
+  genre: "Sport",
+
+},
+{
+  genre: "Strategy",
+
+},
+{
+  genre: "Turn Based Strategy TBS",
+
+},
+{
+  genre: "Tactical",
+
+},
+{
+  genre: "Quiz / Trivia",
+
+},
+{
+  genre: "Pinball",
+
+},
+{
+  genre: "Adventure",
+
+},
+{
+  genre: "Arcade",
+
+},
+{
+  genre: "Visual Novel",
+
+},
+{
+  genre: "Indie",
+
+},
+{
+  genre: "Card and Board Game",
+
+},
+{
+  genre: "MOBA",
+
+}]
 
 module.exports = fakeData

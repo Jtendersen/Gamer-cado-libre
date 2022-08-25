@@ -18,6 +18,7 @@ User.init(
     email: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: true,
       },
@@ -39,7 +40,6 @@ User.init(
     },
     age: {
       type: S.INTEGER,
-      allowNull: false,
     },
     admin: {
       type: S.BOOLEAN,
