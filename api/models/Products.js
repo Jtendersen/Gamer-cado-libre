@@ -7,18 +7,21 @@ Product.init(
   {
     name: {
       type: S.STRING,
+      allowNull:false
     },
     description: {
-      type: S.TEXT,
+      type: S.TEXT
     },
     price: {
       type: S.INTEGER,
+      allowNull:false
     },
     valoration: {
-      type: S.STRING,
+      type: S.INTEGER,
+      defaultValue:0
     },
     esrb: {
-      type: S.INTEGER,
+      type: S.STRING
     }
   },
   { sequelize: db, modelName: "product" }
