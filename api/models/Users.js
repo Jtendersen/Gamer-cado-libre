@@ -41,9 +41,9 @@ User.init(
       type: S.INTEGER,
       allowNull: false,
     },
-    isAdmin: {
+    admin: {
       type: S.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
   },
   { sequelize: db, modelName: "user" }
