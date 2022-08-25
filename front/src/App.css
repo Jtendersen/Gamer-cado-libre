@@ -106,3 +106,14 @@
 #digitalText {
   margin-top: 4%;
 }
+
+#signup {
+  float: right;
+}
+
+#genre {
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+

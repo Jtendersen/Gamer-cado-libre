@@ -19,7 +19,8 @@ const Navbar = () => {
   if('a'){
     Auth = <Button color="inherit" onClick={()=>{sendTo('signup')}}>SignUp</Button>
   } else{
-    Auth =<>  <Button color='inherit' onClick={()=>{sendTo('user')}}>
+    Auth =<>  
+              <Button color='inherit' onClick={()=>{sendTo('user')}}>
                 UserName
               </Button>
               <Button color='inherit' onClick={()=>{sendTo('cart')}}>
@@ -32,15 +33,6 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Button color="inherit" onClick={()=>{sendTo('products')}}>Products</Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Gamer-cado Libre

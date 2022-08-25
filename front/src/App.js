@@ -7,6 +7,7 @@ import SignUp from './components/Signup';
 import SignIn from './components/Signin'
 import { Products } from './components/Products';
 import Product from './components/Product';
+import Genre from './components/Genre';
 //import signIn from './components/signIn'
 
 function App() {
@@ -24,9 +25,8 @@ function App() {
         <Route path='/cart' element={''}/>
         <Route path='/signup' element={<><SignUp/></>}/>
         <Route path='/signin' element={<SignIn/>}/>
-        <Route path='/products' element={''}/>
         <Route path='/products' element={<Products/>}/>
-        <Route path='/products/:genre' element={''}/>
+        <Route path='/products/:genre' element={<Genre/>}/>
         <Route path='/product/:name' element={<Product/>}/>
       </Routes>
   );
