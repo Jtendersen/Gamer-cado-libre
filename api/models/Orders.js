@@ -35,18 +35,18 @@ Order.init(
 
 //como este hook no anda creo el calculo del precio en la ruta
 
-// Order.addHook("beforeCreate", async (order) => {
-//   let total = 0;
-//   const carts = await Cart.findAll({
-//     where: {
-//       [Op.and]: [{ userId: order.userId }, { state: "pending" }],
-//     },
-//   });
-//   carts.map((cart) => {
-//     total += cart.dataValues.totalPrice;
-//   });
-//   console.log("ESTE ES EL TOTAL DENTRO DEL HOOK ORDER", total);
-//   order.totalPrice = total;
-// });
+Order.addHook("beforeCreate", async (order) => {
+  let total = 0;
+  const carts = await Cart.findAll({
+    where: {
+      [Op.and]: [{ userId: order.userId }, { state: "pending" }],
+    },
+  });
+  carts.map((cart) => {
+    total += cart.dataValues.totalPrice;
+  });
+  console.log("ESTE ES EL TOTAL DENTRO DEL HOOK ORDER", total);
+  order.totalOrderPrice = total;
+});
 
 module.exports = Order;
