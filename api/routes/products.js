@@ -16,9 +16,13 @@ router.get('/allProducts',(req,res,next)=>{
 
 //BUSCA UN PRODUCTO POR ID
 router.get('/:productID',(req,res,next)=>{
-    Product.findByPk(productID)
+    try {
+        Product.findByPk(productID)
     .then(productMatched=>res.status(200).send(productMatched))
-    .catch(next)
+    } catch (error) {
+        console.log(error)
+    }
+    
 })
 
 //BUSCA TODOS LOS JUEGOS CON TITULO SIMILAR A EL INPUT DEL USER EN LA BUSQUEDA
