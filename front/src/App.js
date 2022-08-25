@@ -1,6 +1,6 @@
 import './App.css';
-//import {useEffect, useState} from 'react'
-import {Route, Routes, /* useNavigate */} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {Route, Routes} from 'react-router-dom'
 import Navbar from './commons/Navbar';
 import Footer from './commons/Footer';
 import SignUp from './components/Signup';
@@ -8,11 +8,24 @@ import SignIn from './components/Signin'
 import { Products } from './components/Products';
 import Product from './components/Product';
 import Genre from './components/Genre';
-//import signIn from './components/signIn'
+import { useDispatch } from "react-redux";
+import {setUser} from "./state/user"
+
 
 function App() {
 
-  //const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+
+    let storedUser = JSON.parse(localStorage.getItem("user"))
+    if(storedUser) dispatch(setUser(storedUser))
+   
+  }, []);
+
+
+
+  
   return (
       <Routes>
         <Route path='/' element={

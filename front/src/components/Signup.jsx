@@ -11,12 +11,16 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import {useForm} from 'react-hook-form'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {sendSigninRequest} from "../state/user"
+
 
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const user = useSelector((state)=>state.user)
+
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -30,14 +34,21 @@ export default function SignUp() {
 
   
   async function onSubmit (data){
+    
 
     let admin = false;
+    
   
     const secret = data.secret
     if(secret === 'admin123') admin = true;
 
-    let created = await dispatch(sendSigninRequest({data}));
-    created && navigate('/signin')
+    dispatch(sendSigninRequest(data))&& navigate('/')
+
+    await user
+
+    navigate('/')
+
+    
   };
 
   return (
@@ -180,7 +191,7 @@ export default function SignUp() {
                         message: "password should have 6 characters min"
                      },
                       maxLength:{
-                        value:6,
+                        value:8,
                         message: "password should have 8 characters max"
                       }
                    })}
