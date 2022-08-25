@@ -7,18 +7,15 @@ const generateToken = (payload) => {
 };
 
 const validateToken = (token) => {
-  return jwt.verify(token, SECRET)
+  return jwt.verify(token, SECRET);
 };
 
-function validateADM (req,res,next){
-const validateAdmin = (token) => {
-  return jwt.verify(token, SECRET)
-}
-if(validateAdmin.admin == true) {
-  next()
-}else(
-  res.sendStatus(401)
-)
+function validateADM(req, res, next) {
+  const token = req.cookies.token;
+  const validateAdmin = jwt.verify(token, SECRET);
+  if (validateAdmin.user.admin == true) {
+    next();
+  } else res.sendStatus(401);
 }
 
 module.exports = { generateToken, validateToken, validateADM };
