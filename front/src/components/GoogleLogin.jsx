@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux"; 
-import { useNavigate } from "react-router";
 import {sendLoginRequest} from "../state/user"
-
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -12,12 +11,23 @@ const GoogleLogin = () => {
  
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const user = useSelector((state)=>state.user)
   
 
   async function handleCallbackResponse(response) {
     const userObject = jwt_decode(response.credential);
-   let user= await dispatch(sendLoginRequest({google:true, name:userObject.name, email: userObject.email}))
-    user && navigate('/')
+   
+  
+    dispatch(sendLoginRequest(
+      {
+        google:true, 
+        firstName:userObject.given_name,
+        lastName:userObject.family_name,
+         email: userObject.email
+        }))
+    await user 
+    navigate('/')
   
   }
   
