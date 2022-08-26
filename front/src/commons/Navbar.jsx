@@ -16,6 +16,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+import { sendLogoutRequest } from '../state/user';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,8 +65,10 @@ export default function PrimarySearchAppBar() {
   const sendTo = (string)=>{
     navigate(`/${string}`)
   }
+  const dispatch = useDispatch()
+  const user = useSelector((state)=>state.user)
 
-  if('a'){
+  if(!user){
     Auth =  <>  
                 <Button color='inherit' onClick={()=>{sendTo('signin')}}>
                   Login
@@ -80,6 +84,12 @@ export default function PrimarySearchAppBar() {
               </Button>
               <Button color='inherit' onClick={()=>{sendTo('cart')}}>
                 Cart
+              </Button>
+              <Button color='inherit' onClick={()=>{
+                dispatch(sendLogoutRequest())
+                sendTo('')
+                }}>
+                Logout
               </Button>
           </>
   }
@@ -105,10 +115,10 @@ export default function PrimarySearchAppBar() {
 
   const handleSearch = (e)=>{
     setSearch(e.target.value)
+    console.log(search)
   }
   const handleSubmit = ()=>{
-    navigate(`/product/${search}`)
-    console.log('first')
+    navigate(`/products/search/${search}`)
   }
 
   const menuId = 'primary-search-account-menu';
@@ -213,18 +223,18 @@ export default function PrimarySearchAppBar() {
             </IconButton>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
-          
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              onClick={handleSearch}
-              onSubmit={handleSubmit}
-            />
-          </Search>
+          <form onSubmit={handleSubmit}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={handleSearch}
+              />
+            </Search>
+          </form>
             {Auth}
         </Toolbar>
       </AppBar>

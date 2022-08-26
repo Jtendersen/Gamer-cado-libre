@@ -7,6 +7,7 @@ import SignIn from './components/Signin'
 import { Products } from './components/Products';
 import Product from './components/Product';
 import Genre from './components/Genre';
+import Search from './components/Search';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/signin' element={<SignIn/>}/>
         <Route path='/products' element={<Products/>}/>
         <Route path='/products/:genre' element={<Genre/>}/>
+        <Route path='/products/search/:name' element={<Search/>}/>
         <Route path='/product/:name' element={<Product/>}/>
       </Routes>
   );
