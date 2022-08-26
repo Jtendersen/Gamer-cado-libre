@@ -9,10 +9,9 @@ import { Products } from './components/Products';
 import Product from './components/Product';
 import Cart from './components/Cart';
 import Genre from './components/Genre';
+import Search from './components/Search';
 import { useDispatch } from "react-redux";
 import {setUser} from "./state/user"
-
-
 
 function App() {
 
@@ -42,6 +41,7 @@ function App() {
         <Route path='/signin' element={<SignIn/>}/>
         <Route path='/products' element={<Products/>}/>
         <Route path='/products/:genre' element={<Genre/>}/>
+        <Route path='/products/search/:name' element={<Search/>}/>
         <Route path='/product/:name' element={<Product/>}/>
       </Routes>
   );
