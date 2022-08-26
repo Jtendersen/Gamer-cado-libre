@@ -8,11 +8,7 @@ import Link from '@mui/material/Link';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <Link color="inherit" href="http://localhost:3000/">
-        
-      </Link>
-      {` ${new Date().getFullYear()} Gamer-cado Libre SA.`}
+      {`Copyright ©  ${new Date().getFullYear()} Gamer-cado Libre SA.`}
     </Typography>
   );
 }

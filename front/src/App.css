@@ -59,7 +59,7 @@
 }
 
 #card {
-  padding: 1%;
+  margin: 8%;
 }
 
 #product {
@@ -105,4 +105,26 @@
 
 #digitalText {
   margin-top: 4%;
+}
+
+#signup {
+  float: right;
+}
+
+#genre {
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#margin {
+  margin-left: 20%;
+}
+
+link :link {
+  text-decoration: none;
+}
+
+link :visited {
+  text-decoration: none;
 }

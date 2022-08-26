@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {sendLoginRequest} from "../state/user"
 import {useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
@@ -31,6 +31,7 @@ const dispatch = useDispatch()
 
 const theme = createTheme();
 const emailRe =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const user = useSelector((state)=>state.user)
 
 
 
@@ -42,8 +43,11 @@ const {
 }= useForm()
 
 async function onSubmit(data){
-  let user = await dispatch(sendLoginRequest(data))
-  user && navigate('/')
+   dispatch(sendLoginRequest(data))
+   
+   await user 
+  
+   navigate('/')
  };
 
   return (
@@ -96,7 +100,7 @@ async function onSubmit(data){
                 message: "password should have 6 characters min"
               },
               maxLength:{
-                value:6,
+                value:8,
                 message: "password should have 8 characters max"
               }
             })}
@@ -118,7 +122,7 @@ async function onSubmit(data){
 
            <Grid container>
               <Grid item>
-                <Link href='/signup' variant="body2">
+                <Link id='link' href='/signup' variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -6,6 +6,16 @@ const generateToken = (payload) => {
   return token;
 };
 
-const validateToken = () => {};
+const validateToken = (token) => {
+  return jwt.verify(token, SECRET);
+};
 
-module.exports = { generateToken, validateToken };
+function validateADM(req, res, next) {
+  const token = req.cookies.token;
+  const validateAdmin = jwt.verify(token, SECRET);
+  if (validateAdmin.user.admin == true) {
+    next();
+  } else res.sendStatus(401);
+}
+
+module.exports = { generateToken, validateToken, validateADM };

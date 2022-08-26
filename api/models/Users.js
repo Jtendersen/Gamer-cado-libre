@@ -18,6 +18,7 @@ User.init(
     email: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: true,
       },
@@ -39,11 +40,10 @@ User.init(
     },
     age: {
       type: S.INTEGER,
-      allowNull: false,
     },
-    isAdmin: {
+    admin: {
       type: S.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
   },
   { sequelize: db, modelName: "user" }
