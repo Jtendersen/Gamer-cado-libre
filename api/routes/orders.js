@@ -5,7 +5,7 @@ const Order = require("../models/Orders");
 
 const router = express.Router();
 
-//cuando el cliente confirma el pedido:
+// Ruta para cuando el cliente confirma un pedido.
 router.post("/:userId", (req, res, next) => {
   //ver de recibir por cookies el usuario
   //recibe un req.body con el sig formato:
