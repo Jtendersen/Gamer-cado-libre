@@ -4,10 +4,12 @@ const router = express.Router();
 const { validateADM } = require("../middlewares/tokens");
 const { validateAuth } = require("../middlewares/auth");
 
+// Ruta para validar que token pertenece al usuario logueado.
 router.get("/secret", validateAuth, (req, res) => {
   res.send(req.user);
 });
 
+// Ruta para editar los campos de un usuario, email, firstName, lastName, password y age.
 router.put("/:id", (req, res) => {
   User.update(req.body, {
     where: {
@@ -24,6 +26,7 @@ router.put("/:id", (req, res) => {
   });
 });
 
+// Ruta para cambiar el valor de admin, false => true.
 router.put("/admin/:id", validateADM, (req, res, next) => {
   User.update(req.body, {
     where: {
@@ -36,6 +39,7 @@ router.put("/admin/:id", validateADM, (req, res, next) => {
     .catch(next);
 });
 
+// Ruta para borrar un usuario.
 router.delete("/delete/:id", validateADM,(req, res) => {
   User.destroy({
     where: {
@@ -46,11 +50,13 @@ router.delete("/delete/:id", validateADM,(req, res) => {
   });
 });
 
+// Ruta para mostrar todos los usuarios.
 router.get('/allUsers', validateADM,(req,res)=>{
   User.findAll()
   .then(products=>res.status(200).send(products))
 })
 
+// Ruta, en caso de que las anteriores fallen entonces se devolvera un error 404.
 router.use("/", function (req, res) {
   res.sendStatus(404);
 });
