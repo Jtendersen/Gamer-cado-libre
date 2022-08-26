@@ -40,7 +40,6 @@ User.init(
     },
     age: {
       type: S.INTEGER,
-      allowNull: false,
     },
     admin: {
       type: S.BOOLEAN,
