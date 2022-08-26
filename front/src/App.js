@@ -12,6 +12,7 @@ import Genre from './components/Genre';
 import Search from './components/Search';
 import { useDispatch } from "react-redux";
 import {setUser} from "./state/user"
+import SubNavbarGenre from "./commons/SubNavbarGenre";
 
 function App() {
 
@@ -24,13 +25,15 @@ function App() {
    
   }, []);
 
-
-
   return (
-      <Routes>
-        <Route path='/' element={
+    <Routes>
+      <Route
+        path="/"
+        element={
           <div className="App">
+
             <Navbar/>
+             <SubNavbarGenre />
             <Footer/>
             <Cart/>
           </div>
@@ -44,6 +47,7 @@ function App() {
         <Route path='/products/search/:name' element={<Search/>}/>
         <Route path='/product/:name' element={<Product/>}/>
       </Routes>
+
   );
 }
 
