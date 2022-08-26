@@ -37,17 +37,10 @@ router.get('/search/:input',(req,res,next)=>{
 
 //BUSCA TODOS LOS JUEGOS DE UN MISMO GENERO
 router.get('/allGenres/:genre',(req,res,next)=>{
-    Genre.findOne({where:{genre:req.params.genre}})
-    .then(genreMatched=>{
-        if(!genreMatched)res.status(404).send('ESE GENERO NO EXISTE, COMPROBAR COMO FUE TIPEADO')
-        const {id}=genreMatched
-        Product.findAll({where:{genreId:id}})
-        .then(productsMatched=>{
-            if(!productsMatched)res.status(404).send('NO HAY JUEGOS CON ESTE GENERO')
-            res.status(200).send(productsMatched)})
-            .catch(next)
-    })
-    .catch(next)
+    
+    Genre.findOne({where:
+        {genre:req.params.genre}, include:{model:Product}})
+        .then(resp=>{res.status(200).send(resp.dataValues.products)})
 })
 
 //ELIMINA UN PRODUCTO

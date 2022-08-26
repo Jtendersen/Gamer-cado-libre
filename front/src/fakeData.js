@@ -46,6 +46,7 @@ const fakeData = [
       quantity:1,
       name: "Juego 5",
       sinapsis: "Sinapsis del juego",
+    }
 
   ]
 
