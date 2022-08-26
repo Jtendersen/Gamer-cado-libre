@@ -59,7 +59,7 @@
 }
 
 #card {
-  padding: 1%;
+  margin: 8%;
 }
 
 #product {
@@ -117,3 +117,14 @@
   flex-wrap: wrap;
 }
 
+#margin {
+  margin-left: 20%;
+}
+
+link :link {
+  text-decoration: none;
+}
+
+link :visited {
+  text-decoration: none;
+}
