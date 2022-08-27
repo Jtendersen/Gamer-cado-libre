@@ -43,13 +43,14 @@ router.get('/allGenres/:genre',(req,res,next)=>{
         .then(resp=>{res.status(200).send(resp.dataValues.products)})
 })
 
-//ELIMINA UN PRODUCTO
+// Ruta para eliminar un producto.
 router.delete('/:productID',(req,res,next)=>{
         Product.destroy(productMatched,{where:{id:req.params.productID}})
         .then(()=>res.sendStatus(201))
         .catch(next)
 })
-//CREA UN PRODUCTO
+
+// Ruta para crear un producto.
 router.post('/',(req,res,next)=>{
     const {name,price}=req.body
     if(!name || !price) res.status(404).send('COLUMNA NAME Y PRICE NO PUEDE ESTAR UNDEFINED')
@@ -61,7 +62,7 @@ router.post('/',(req,res,next)=>{
 })
 
 
-//para agregar o cambiar el genero se tiene que pasar como parametro el id del genero | genreId:2 |
+// Ruta para agregar o cambiar el genero, se tiene que pasar como parametro el id del genero | genreId:2 |
 router.put('/:productID',(req,res,next)=>{
     if(!req.params.productID)res.status(404).send('PRODUCT ID EMPTY')
     Product.update(req.body,{where:{id:req.params.productID}})

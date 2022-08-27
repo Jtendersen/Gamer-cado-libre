@@ -7415,7 +7415,9 @@ let formateado = unformated.map((game) => {
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
+
     return queryInterface.bulkInsert("products", formateado);
+
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete("products", null, {});
