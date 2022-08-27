@@ -9,12 +9,14 @@ import { CardActionArea } from "@mui/material";
 export default class Responsive extends Component {
   render() {
     var settings = {
+      className: "center",
+      centerPadding: "1%",
       dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 8,
-      slidesToScroll: 1,
-      initialSlide: 0,
+      infinite: true,
+      // speed: 500,
+      slidesToShow: 6,
+      slidesToScroll: 7,
+      initialSlide: 1,
       responsive: [
         {
           breakpoint: 1024,
@@ -41,10 +43,14 @@ export default class Responsive extends Component {
           },
         },
       ],
+      afterChange: function (index) {
+        console.log(
+          `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+        );
+      },
     };
     return (
       <div>
-        <h2> GENRES </h2>
         <Slider {...settings}>
           <div>
             <h3>
