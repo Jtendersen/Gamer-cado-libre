@@ -12,31 +12,43 @@ export const Products = () => {
   const [description, setDescription] = useState('')
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
-  const [urlId, setUrlId] = useState('')
+  const [urlId, setUrlId] = useState('https://cdn.cloudflare.steamstatic.com/steam/apps/681040/header.jpg?t=1504857051')
 
 
-  const handleDescription = function (){
-
+  const handleDescription = function (e){
+    setDescription(e.target.value)
   }
-  const handleName = function (){
-
+  const handleName = function (e){
+    setName(e.target.value)
   }
-  const handlePrice = function (){
-
+  const handlePrice = function (e){
+    setPrice(e.target.value)
   }
-  const handleUrlId = function (){
-
+  const handleUrlId = function (e){
+    setUrlId(e.target.value)
+  }
+  const handleAddProduct = function (e){
+    e.preventDefault()
+    const newProduct = {name, price, description, urlId }
+    if(name == '' || price == '') return alert('Name and Price are inputs does we need')
+    else{
+    axios.post('http://localhost:3001/api/products', newProduct)
+          .then((res)=>{
+            if(res.status == 204) alert('The game was added succesfully')
+            if(res.status > 399) alert("The game wasn't be added")
+          })
+    }
   }
   const handleAdd = function (){
-    if(add) setAdd(true)
-    else setAdd(false)
+    if(add) setAdd(false)
+    else setAdd(true)
   }
 
   useEffect(()=>{
     axios.get('http://localhost:3001/api/products/allProducts').then((products)=>{setProducts(products.data)})
   },[])
 
-  if(add){
+  if(add == false){
     addView = <div id='addButton'><Button onClick={handleAdd}>Add Product</Button></div>
   }else{
     addView = <div id='viewAdded'>
@@ -56,10 +68,8 @@ export const Products = () => {
                     </Grid>
                     <Grid item sm={6}>
                       <TextField
-                        required
                         fullWidth
-                        label='Description'
-                        defaultValue={'New Game Description'}
+                        label='Description (not required)'
                         onChange={handleDescription}
                       />
                     </Grid>
@@ -76,16 +86,15 @@ export const Products = () => {
                     
                     <Grid item sm={6}>
                       <TextField
-                        required
                         fullWidth
-                        label='Image URL'
-                        defaultValue={'https://cdn.cloudflare.steamstatic.com/steam/apps/681040/header.jpg?t=1504857051'}
+                        label='Image URL (not required)'
                         onChange={handleUrlId}
                       />
                     </Grid>
                   </Grid>
                   <Button
                     type="submit"
+                    onClick={handleAddProduct}
                   >
                     Add
                   </Button>

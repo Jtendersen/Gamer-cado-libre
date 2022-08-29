@@ -58,7 +58,6 @@ function App() {
         }
       />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/products" element={<Products />} />
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
       <Route path="/product/:name" element={<Product />} />

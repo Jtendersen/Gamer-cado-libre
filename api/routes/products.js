@@ -22,7 +22,6 @@ router.get('/:productID',(req,res,next)=>{
     } catch (error) {
         console.log(error)
     }
-    
 })
 
 //BUSCA TODOS LOS JUEGOS CON TITULO SIMILAR A EL INPUT DEL USER EN LA BUSQUEDA
