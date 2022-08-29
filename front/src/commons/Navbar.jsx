@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
@@ -61,6 +61,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar() {
   let Auth;
+  let Genres;
+  const {pathname} = useLocation()
   const navigate = useNavigate()
   const sendTo = (string)=>{
     navigate(`/${string}`)
@@ -68,34 +70,7 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch()
   const user = useSelector((state)=>state.user)
 
-  if(!user){
-    Auth =  <>  
-                <Button color='inherit' onClick={()=>{sendTo('signin')}}>
-                  Login
-                </Button>
-                <Button color='inherit' onClick={()=>{sendTo('signup')}}>
-                  Signup
-                </Button>
-                <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                  Panel admin
-                </Button>
-            </>
-  } else{
-    Auth =<>  
-              <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                UserName
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
-                Cart
-              </Button>
-              <Button color='inherit' onClick={()=>{
-                dispatch(sendLogoutRequest())
-                sendTo('')
-                }}>
-                Logout
-              </Button>
-          </>
-  }
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [search, setSearch] = React.useState('')
@@ -200,6 +175,72 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  if(pathname != '/'){
+    Genres =<>
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <IconButton
+                  size="small"
+                  edge="end"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                  id='margin'
+                >
+                  Genres
+                </IconButton>
+              </Box>
+            </>
+  }else Genres = <></>
+
+  if(!user){
+    Auth =  <>  
+                <Button color='inherit' onClick={()=>{sendTo('signin')}}>
+                  Login
+                </Button>
+                <Button color='inherit' onClick={()=>{sendTo('signup')}}>
+                  Signup
+                </Button>
+            </>
+  } else{
+    if(user.admin == 'true'){
+    Auth =<>  
+              <Button color='inherit' onClick={()=>{sendTo('user')}}>
+                {user.name}
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+                Cart
+              </Button>
+              <Button color='inherit' onClick={()=>{
+                dispatch(sendLogoutRequest())
+                sendTo('')
+                }}>
+                Logout
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
+                Panel admin
+              </Button>
+          </>
+    }else{
+    Auth=   <>
+              <Button color='inherit' onClick={()=>{sendTo('user')}}>
+                {user.name}
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+                Cart
+              </Button>
+              <Button color='inherit' onClick={()=>{
+                dispatch(sendLogoutRequest())
+                sendTo('')
+                }}>
+                Logout
+              </Button>
+            </>
+    }
+  }
+  console.log(user.admin)
+  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -212,19 +253,7 @@ export default function PrimarySearchAppBar() {
           >
             <Link to='/' id='link' style={{ textDecoration: 'none' }}>Gamer-cado Libre</Link>
           </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="small"
-              edge="end"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              id='margin'
-            >
-              Genres
-            </IconButton>
-          </Box>
+          {Genres}
           <Box sx={{ flexGrow: 1 }} />
           <form onSubmit={handleSubmit}>
             <Search>

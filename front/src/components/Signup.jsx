@@ -127,7 +127,6 @@ export default function SignUp() {
                   label="Age"
                   name="age"
                   autoComplete="age"
-                  type= "number"
                   {...register("age",{required:"Required",
                       
                    })}
