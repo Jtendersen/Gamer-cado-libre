@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+
 // Ruta para visualizar el carrito completo, cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending".
 router.get("/:userId", (req, res, next) => {
   Cart.findAll({
@@ -17,14 +18,16 @@ router.get("/:userId", (req, res, next) => {
     .catch(next);
 });
 
+
 // Ruta para agregar un producto al carrito.
 router.post("/add/:userId", (req, res, next) => {
   const usuario = req.params.userId;
+
   Cart.findOne({
     where: {
       [Op.and]: [
-        { userId: usuario },
-        { productId: req.body.productId },
+        { userId: userId },
+        { productId: productId },
         { state: "pending" },
       ],
     },
@@ -40,9 +43,9 @@ router.post("/add/:userId", (req, res, next) => {
           });
       } else {
         Cart.create(req.body).then((resp) => {
-          Cart.findByPk(resp.dataValues.id).then((cart) => {
+          Cart.findByPk(resp.dataValues.userId).then((cart) => {
             cart
-              .setUser(usuario)
+              .setUser(userId)
               .then((newCart) => res.status(201).send(newCart));
           });
         });

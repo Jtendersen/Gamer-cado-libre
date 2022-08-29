@@ -13,16 +13,22 @@ import Genre from "./components/Genre";
 import Search from "./components/Search";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
+import {setCart} from "./state/cart"
 import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_panel from "./components/admin_panel";
 import Admin_genres from "./components/admin_panel/Admin_genres";
+
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
     let storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) dispatch(setUser(storedUser));
+    let storedCart = JSON.parse(localStorage.getItem("cart"))
+     //if(storedCart) dispatch(setCart(storedCart))
+
   }, []);
 
   return (

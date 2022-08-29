@@ -4,27 +4,23 @@ import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 export const sendLoginRequest = createAsyncThunk("LOGIN", (input) => {
   
  return axios.post("http://localhost:3001/api/auth/login",input).then((r)=> {
-  console.log("LOGIN",r.data)
   localStorage.setItem("user",JSON.stringify(r.data))
   return r.data})
 });
 
-export const sendSigninRequest = createAsyncThunk("SIGNIN", (input) => {
+export const sendSignUpRequest = createAsyncThunk("SIGNUP", (input) => {
   
-  return axios.post("http://localhost:3001/api/auth/register",input).then((r)=>{
-    localStorage.setItem("user",JSON.stringify(r.data))
-    return r.data
-  }
-  )
+  return axios.post("http://localhost:3001/api/auth/register",input)
+ 
  });
 
-export const sendLogoutRequest = createAsyncThunk("LOGOUT", (input) => {
-  return axios.post("http://localhost:3001/api/auth/logout",input).then(()=> {
+export const sendLogoutRequest = createAsyncThunk("LOGOUT", () => {
+  return axios.post("http://localhost:3001/api/auth/logout").then(()=> {
     localStorage.setItem("user",null)
     return null})
  });
 
- export const setUser = createAsyncThunk("SET", (input) => {
+ export const setUser = createAsyncThunk("SETUSER", (input) => {
   return input
  });
 
@@ -34,8 +30,8 @@ const user = JSON.parse(window.localStorage.getItem("user"))
 const userReducer = createReducer(user,{
   [sendLoginRequest.fulfilled]: (state, action) => action.payload,
   [sendLogoutRequest.fulfilled]: (state, action) => action.payload,
-  [sendSigninRequest.fulfilled]: (state, action) => action.payload,
-  [sendSigninRequest.fulfilled]: (state, action) => action.payload,
+  [sendSignUpRequest.fulfilled]: (state, action) => action.payload,
+  [setUser.fulfilled]: (state, action) => action.payload,
   
   
 });

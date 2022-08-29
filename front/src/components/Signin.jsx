@@ -43,9 +43,12 @@ const {
 }= useForm()
 
 async function onSubmit(data){
-   dispatch(sendLoginRequest(data))
+  
+  if(user) return alert("User already logged in")
+  
+  dispatch(sendLoginRequest(data))
    
-   await user 
+  await user 
   
    navigate('/')
  };
