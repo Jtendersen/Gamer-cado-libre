@@ -41,21 +41,16 @@
   margin-top: 0px;
 }
 
-#content {
-  display: flex;
-  flex-direction: row;
-}
-
 #sidebar {
   width: 20%;
   margin: 1%;
 }
 
 #grid {
-  width: 75%;
   margin: 1%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 #card {

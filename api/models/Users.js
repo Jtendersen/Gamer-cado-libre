@@ -49,6 +49,7 @@ User.init(
   { sequelize: db, modelName: "user" }
 );
 
+// Hook que hashea la contraseña de un usuario y le agrega su respectivo salt.
 User.addHook("beforeCreate", (user) => {
   const salt = bcrypt.genSaltSync();
   user.salt = salt;

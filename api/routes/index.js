@@ -5,6 +5,7 @@ const carts = require("./carts.js");
 const auth = require("./auth.js")
 const genres = require("./genres");
 const orders = require("./orders");
+const gamefinder = require("./gamefinder");
 
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.use("/auth", auth);
 router.use("/products", products);
 router.use("/cart", carts);
 router.use("/order", orders);
+router.use("/gamefinder", gamefinder);
 
 module.exports = router;

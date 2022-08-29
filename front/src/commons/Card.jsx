@@ -1,34 +1,33 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
 
-export default function ActionAreaCard({game}) {
+export default function ActionAreaCard({ game }) {
+  const baseURL = "https://images.igdb.com/igdb/image/upload/t_720p/";
   return (
-    <div id='card'>
-        <Card sx={{ maxWidth: 345 }}>
+    <div id="card">
+      <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
-            <CardMedia
+          <CardMedia
             component="img"
             height="100%"
-            image={game.picture}
+            image={baseURL + game.urlId + ".jpg"}
             alt="Portada del videojuego"
-            />
-            <CardContent>
+          />
+          <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-                {game.name}
+              {game.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-                {game.sinapsis}
+              {game.description}
             </Typography>
-            <Typography >
-              {`$${game.price}`}
-            </Typography>
-            </CardContent>
+            <Typography>{`$${game.price}`}</Typography>
+          </CardContent>
         </CardActionArea>
-        </Card>
+      </Card>
     </div>
   );
 }

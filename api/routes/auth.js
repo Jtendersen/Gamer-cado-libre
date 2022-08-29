@@ -3,6 +3,14 @@ const User = require("../models/Users");
 const router = express.Router();
 const { generateToken } = require("../middlewares/tokens");
 
+// Ruta para registrar un usuario.
+router.post("/register", (req, res) => {
+  User.create(req.body).then((user) => {
+    res.status(201).send(user);
+  });
+});
+
+// Ruta para loguear un usuario.
 router.post("/login", (req, res) => {
   const { email, password, firstName, lastName} = req.body;
 
@@ -58,13 +66,8 @@ router.post("/login", (req, res) => {
   })};
 });
 
-router.post("/register", (req, res) => {
-  
-  User.create(req.body).then((user) => {
-    res.status(201).send(user);
-    
-  });
-});
+
+// Ruta para desologuear un usuario.
 
 router.post("/logout", (req, res) => {
   res.clearCookie("token");

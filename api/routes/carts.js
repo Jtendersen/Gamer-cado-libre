@@ -4,11 +4,9 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
-//ruta para visualizar el carrito completo:
-//cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending"
-router.get("/", (req, res, next) => {
-  
-  
+
+// Ruta para visualizar el carrito completo, cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending".
+router.get("/:userId", (req, res, next) => {
   Cart.findAll({
     where: {
       [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
@@ -20,9 +18,11 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {
-  
-  const {userId, productId, totalPrice } = req.body
+
+// Ruta para agregar un producto al carrito.
+router.post("/add/:userId", (req, res, next) => {
+  const usuario = req.params.userId;
+
   Cart.findOne({
     where: {
       [Op.and]: [
@@ -54,6 +54,7 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
+// Ruta para borrar un producto del carrito
 router.delete("/delete/:userId", (req, res, next) => {
   //VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
   //ver de levantar el usuario por req.cookies
@@ -69,6 +70,7 @@ router.delete("/delete/:userId", (req, res, next) => {
     .catch(next);
 });
 
+// Ruta para actializar la cantidad de productos en el carrito.
 router.put("/:userId", (req, res, next) => {
   /*REQ BODY TIPO
     {
