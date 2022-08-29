@@ -3,16 +3,16 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 
 
-export const getCart = createAsyncThunk("GETCART", (itemId) => {
-  return axios.get(" http://localhost:3001/api/cart",itemId).then((r) => {
-  localStorage.setItem("cart",JSON.stringify(r.data))
-  console.log(r.data)
+export const getCart = createAsyncThunk("GETCART", ({userId}) => {
+  console.log("user Id de redux", userId);
+  return axios.get(`http://localhost:3001/api/cart/${userId}`).then((r) => {
+  localStorage.setItem("cart",JSON.stringify(r.data));
    return r.data})
   
 });
 
 export const addToCart = createAsyncThunk("ADDTOCART", (itemId) => {
-     axios.post("http://localhost:3001/api/cart",itemId).then((r) => {
+     return axios.post("http://localhost:3001/api/cart",itemId).then((r) => {
     return r.data});
   });
 

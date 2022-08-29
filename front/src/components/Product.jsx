@@ -7,10 +7,21 @@ import Footer from "../commons/Footer";
 import Navbar from "../commons/Navbar";
 import { Button } from "@mui/material";
 import axios from "axios";
+import { addToCart } from '../state/cart'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+
+
 const Product = () => {
+
+  const dispatch = useDispatch()
+  const user = useSelector((state)=>state.user)
   const [value, setValue] = React.useState(null);
   const params = useLocation();
   const [game, setGame] = React.useState({});
+
+
   React.useEffect(() => {
     axios
       .get(
@@ -19,7 +30,7 @@ const Product = () => {
       .then((game) => {
         setGame(game.data);
       });
-    console.log(game);
+    ;
   }, []);
   /* 
 if(login){
@@ -28,6 +39,13 @@ if(login){
 */
   const handleCart = (e) => {
     //pedido a axios para agregar al carrito
+    
+    dispatch(addToCart({
+      userId:user.id,
+      quantity:1,
+      productId:game.id,
+          
+  }))
     alert("The videogame was succesfully added at the cart");
   };
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Button, Drawer, Paper, Typography } from '@mui/material'
 import { useState } from 'react'
 import CartProducts from './CartProducts'
-import { addToCart } from '../state/cart'
+import { getCart, addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -13,22 +13,12 @@ const Cart = () => {
     
 
     const [showCart, toggleShowCart] = useState(false)
-    const [productId, setProductId] = useState(1)
+    
 
     const handleCart = () => showCart?toggleShowCart(false):toggleShowCart(true)
-    const handleaAdd = () => {
+    
         
-        setProductId(productId+1)
-        dispatch(addToCart(
-            {
-            userId:user.id,
-            quantity:1,
-            productId:productId,
-            totalPrice:100
-            }
-        ))
-        
-    }
+    
 
 
 
@@ -39,7 +29,6 @@ const Cart = () => {
   return (
         <>
         <Button onClick={handleCart}>Cart</Button>
-        <Button onClick={handleaAdd}>ADDTOCART</Button>
         <Drawer 
         open={showCart}
         onClose={handleCart}
