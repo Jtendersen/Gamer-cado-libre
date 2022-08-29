@@ -33,11 +33,7 @@ export default function SignUp() {
   }= useForm()
 
   
-  async function onSubmit (data){
-    
-
-    let admin = false;
-    
+  async function onSubmit (data){    
   
     const secret = data.secret
     if(secret === 'admin123') data.admin = true;
@@ -48,7 +44,6 @@ export default function SignUp() {
 
     navigate('/')
 
-    
   };
 
   return (
