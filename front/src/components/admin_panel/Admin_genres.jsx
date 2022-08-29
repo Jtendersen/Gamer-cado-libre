@@ -26,7 +26,7 @@ const Admin_genres=()=>{
         axios.create(`http://localhost:3001/api/genres`,{genre:genreName})
         .then((data)=>{
             if(data.status===404)alert('syntax error')
-            alert(`The genre ${genreName} was created`)
+            alert(`The genre ${genreName} created`)
         })
     }
     return(
