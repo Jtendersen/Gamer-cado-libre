@@ -7,6 +7,10 @@ const router = express.Router();
 
 // Ruta para visualizar el carrito completo, cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending".
 router.get("/:userId", (req, res, next) => {
+
+console.log("ESTA ES LA COOKIE DE PEDIR EL CART", req.cookies.token)
+
+  
   Cart.findAll({
     where: {
       [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
@@ -19,15 +23,17 @@ router.get("/:userId", (req, res, next) => {
 });
 
 
-// Ruta para agregar un producto al carrito.
-router.post("/add/:userId", (req, res, next) => {
-  const usuario = req.params.userId;
 
+
+// Ruta para agregar un producto al carrito.
+router.post("/", (req, res, next) => {
+
+  const usuario = req.body.userId;
   Cart.findOne({
     where: {
       [Op.and]: [
-        { userId: userId },
-        { productId: productId },
+        { userId: usuario },
+        { productId: req.body.productId },
         { state: "pending" },
       ],
     },
@@ -37,16 +43,39 @@ router.post("/add/:userId", (req, res, next) => {
         const actualQuantity = findedCart.quantity;
         findedCart
           .update({ quantity: actualQuantity + req.body.quantity })
-          .then((productUpdated) => {
+          .then(() => {
             //VER QUE DATOS REQUIERE EL FRONT ANTE LA ACTUALIZACION DE LA CANT.
-            res.send(productUpdated.dataValues);
+            Cart.findAll({
+              where: {
+                [Op.and]: [{ userId: usuario }, { state: "pending" }],
+              },
+            })
+              .then((cartOrder) => {
+                console.log("CARRO COMPLETO",cartOrder)
+                res.send(cartOrder);
+              })
+
+            
           });
       } else {
-        Cart.create(req.body).then((resp) => {
-          Cart.findByPk(resp.dataValues.userId).then((cart) => {
+        Cart.create({
+          quantity: req.body.quantity,
+          productId: req.body.productId,
+        }).then((resp) => {
+          Cart.findByPk(resp.dataValues.id).then((cart) => {
             cart
-              .setUser(userId)
-              .then((newCart) => res.status(201).send(newCart));
+              .setUser(usuario)
+              .then(() => {
+                Cart.findAll({
+                  where: {
+                    [Op.and]: [{ userId: usuario }, { state: "pending" }],
+                  },
+                })
+                  .then((cartOrder) => {
+                    
+                    res.send(cartOrder);
+                  })
+              });
           });
         });
       }
@@ -62,6 +91,7 @@ router.delete("/delete/:userId", (req, res, next) => {
     where: {
       userId: req.params.userId,
       productId: req.body.productId,
+
     },
   })
     .then(() => {

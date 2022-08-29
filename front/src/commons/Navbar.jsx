@@ -118,7 +118,7 @@ export default function PrimarySearchAppBar() {
 
   const handleSearch = (e)=>{
     setSearch(e.target.value)
-    console.log(search)
+    
   }
   const handleSubmit = ()=>{
     navigate(`/products/search/${search}`)

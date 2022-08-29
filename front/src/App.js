@@ -26,7 +26,7 @@ function App() {
 
     let storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) dispatch(setUser(storedUser));
-    let storedCart = JSON.parse(localStorage.getItem("cart"))
+    //let storedCart = JSON.parse(localStorage.getItem("cart"))
      //if(storedCart) dispatch(setCart(storedCart))
 
   }, []);

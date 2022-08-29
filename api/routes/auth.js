@@ -6,7 +6,15 @@ const { generateToken } = require("../middlewares/tokens");
 // Ruta para registrar un usuario.
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
-    res.status(201).send(user);
+    
+    const payload = {
+      id:user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      admin: user.admin,
+    };
+    res.status(201).send(payload);
   });
 });
 
