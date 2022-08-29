@@ -62,6 +62,7 @@ function App() {
       <Route path="/products/search/:name" element={<Search />} />
       <Route path="/product/:name" element={<Product />} />
       <Route path="/admin" element={<Admin_panel/>} />
+      <Route path='/admin/allUsers' element={<Admin_users/>}/>
       <Route path="/admin/genres" element={<Admin_genres/>} />
       <Route path="/admin/products" element={<Admin_products/>}/>
     </Routes>
