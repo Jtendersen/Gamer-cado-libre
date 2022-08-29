@@ -23,6 +23,7 @@ router.post("/login", (req, res) => {
       
       
       const payload = {
+        id:user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -42,6 +43,7 @@ router.post("/login", (req, res) => {
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
       const payload = {
+        id:user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -60,6 +62,7 @@ router.post("/register", (req, res) => {
   
   User.create(req.body).then((user) => {
     res.status(201).send(user);
+    
   });
 });
 

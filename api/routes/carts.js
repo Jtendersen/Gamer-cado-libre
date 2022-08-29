@@ -6,7 +6,9 @@ const router = express.Router();
 
 //ruta para visualizar el carrito completo:
 //cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending"
-router.get("/:userId", (req, res, next) => {
+router.get("/", (req, res, next) => {
+  
+  
   Cart.findAll({
     where: {
       [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
@@ -18,13 +20,14 @@ router.get("/:userId", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/add/:userId", (req, res, next) => {
-  const usuario = req.params.userId;
+router.post("/", (req, res, next) => {
+  
+  const {userId, productId, totalPrice } = req.body
   Cart.findOne({
     where: {
       [Op.and]: [
-        { userId: usuario },
-        { productId: req.body.productId },
+        { userId: userId },
+        { productId: productId },
         { state: "pending" },
       ],
     },
@@ -40,9 +43,9 @@ router.post("/add/:userId", (req, res, next) => {
           });
       } else {
         Cart.create(req.body).then((resp) => {
-          Cart.findByPk(resp.dataValues.id).then((cart) => {
+          Cart.findByPk(resp.dataValues.userId).then((cart) => {
             cart
-              .setUser(usuario)
+              .setUser(userId)
               .then((newCart) => res.status(201).send(newCart));
           });
         });

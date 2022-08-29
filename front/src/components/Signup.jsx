@@ -12,7 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import {useForm} from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
-import {sendSigninRequest} from "../state/user"
+import {sendSignUpRequest} from "../state/user"
 
 
 const theme = createTheme();
@@ -42,7 +42,7 @@ export default function SignUp() {
     const secret = data.secret
     if(secret === 'admin123') admin = true;
 
-    dispatch(sendSigninRequest(data))&& navigate('/')
+    dispatch(sendSignUpRequest(data))&& navigate('/signin')
 
     await user
 

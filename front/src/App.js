@@ -11,6 +11,7 @@ import Cart from './components/Cart';
 import Genre from './components/Genre';
 import { useDispatch } from "react-redux";
 import {setUser} from "./state/user"
+import {setCart} from "./state/cart"
 
 
 
@@ -21,7 +22,9 @@ function App() {
   useEffect(() => {
 
     let storedUser = JSON.parse(localStorage.getItem("user"))
+    let storedCart = JSON.parse(localStorage.getItem("cart"))
     if(storedUser) dispatch(setUser(storedUser))
+    //if(storedCart) dispatch(setCart(storedCart))
    
   }, []);
 
