@@ -203,7 +203,7 @@ export default function PrimarySearchAppBar() {
                 </Button>
             </>
   } else{
-    if(user.admin == 'true'){
+    if(user.admin == 'false'){
     Auth =<>  
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
                 {user.name}

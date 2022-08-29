@@ -21,7 +21,9 @@ const Admin_panel=()=>{
             <Button onClick={()=>sendTo('admin/allUsers')}>
                 Users
             </Button>
-
+            <Button onClick={()=>sendTo('admin/products')}>
+                Products
+            </Button>
         </ButtonGroup>
         </Stack>
         
