@@ -16,6 +16,7 @@ import { setUser } from "./state/user";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_panel from "./components/admin_panel";
 import Admin_genres from "./components/admin_panel/Admin_genres";
+import Admin_products from "./components/admin_panel/Admin_products";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +56,8 @@ function App() {
       <Route path="/products/search/:name" element={<Search />} />
       <Route path="/product/:name" element={<Product />} />
       <Route path="/admin" element={<Admin_panel/>} />
-      <Route path='/admin/genres' element={<Admin_genres/>} />
+      <Route path="/admin/genres" element={<Admin_genres/>} />
+      <Route path="/admin/products" element={<Admin_products/>}/>
     </Routes>
   );
 }

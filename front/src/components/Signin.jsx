@@ -17,13 +17,6 @@ import {useForm} from 'react-hook-form'
 
 import GoogleLogin from "./GoogleLogin"
 
-
-
-
-
-
-
-
 export default function SignIn() {
 
 const navigate = useNavigate()
