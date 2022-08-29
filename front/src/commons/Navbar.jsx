@@ -76,6 +76,9 @@ export default function PrimarySearchAppBar() {
                 <Button color='inherit' onClick={()=>{sendTo('signup')}}>
                   Signup
                 </Button>
+                <Button color='inherit' onClick={()=>{sendTo('admin')}}>
+                  Panel admin
+                </Button>
             </>
   } else{
     Auth =<>  
