@@ -18,7 +18,7 @@ const Admin_genres=()=>{
     }
     const edit_genre=(genreID,newGenreName)=>{
         axios.put(`http://localhost:3001/api/genres/${genreID}`,{genre:newGenreName})
-        .then(()=>{
+        .then((data)=>{
             if(data.status===404) alert('syntax error')
             alert(`The name genre was changed to "${newGenreName}"`)})
     }
