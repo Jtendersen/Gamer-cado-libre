@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 export default function ActionAreaCard({ game }) {
-  console.log("ESTE ES EL GAME QUE LLEGA A CARD", game);
   const baseURL = "https://images.igdb.com/igdb/image/upload/t_720p/";
   return (
     <div id="card">

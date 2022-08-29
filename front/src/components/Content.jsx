@@ -9,15 +9,11 @@ const Content = () => {
   useEffect(()=>{
     axios.get('http://localhost:3001/api/products/allProducts').then((games)=>{setGames(games.data)})
   },[])
-  console.log(games)
 
   return (
-    <div id='content'>
-      <Sidebar/>
       <div id='grid'>
         <Grid games={games}/>
       </div>
-    </div>
   )
 }
 
