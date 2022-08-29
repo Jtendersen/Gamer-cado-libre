@@ -56,6 +56,7 @@ function App() {
       <Route path="/product/:name" element={<Product />} />
       <Route path="/admin" element={<Admin_panel/>} />
       <Route path='/admin/genres' element={<Admin_genres/>} />
+      <Route path='/admin/allUsers' element={<Admin_users/>}/>
     </Routes>
   );
 }
