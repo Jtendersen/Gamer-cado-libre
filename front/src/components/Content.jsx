@@ -1,7 +1,6 @@
 import Grid  from '../commons/Grid'
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../commons/Sidebar'
-const axios = require('axios')
+import axios from 'axios'
 
 const Content = () => {
 

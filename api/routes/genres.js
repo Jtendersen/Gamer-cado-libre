@@ -24,4 +24,12 @@ router.post('/',(req,res,next)=>{
 
 })
 
+router.delete('/:id',(req,res,next)=>{
+    console.log(req.params)
+    Genre.destroy({where:{id:req.params.id}})
+    .then((data)=>{
+        if(!data)res.sendStatus(404)
+        res.sendStatus(204)})
+})
+
 module.exports=router

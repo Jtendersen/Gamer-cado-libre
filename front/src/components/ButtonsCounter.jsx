@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { ButtonGroup, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
-//import {cartPlus, cartMinus, } from "../state/cart"
+import {cartItemQuantity} from "../state/cart"
 
-const ButtonsCounter = (prop) => {
+const ButtonsCounter = (itemId) => {
 
     const dispatch = useDispatch()
 
@@ -15,14 +15,14 @@ return (
 
         <Button onClick={()=> 
         {setCounter(counter+1)
-        //dispatch(cartPlus(prop))
+        dispatch(cartItemQuantity(itemId))
         }}>+</Button>
 
      {<Button disabled>{counter}</Button>}
 
       {<Button disabled={counter <= 1} onClick={() => {
         setCounter(counter - 1)
-        // dispatch(cartMinus(prop))
+        dispatch(cartItemQuantity(itemId,counter))
         }}>-</Button>}
 
   </ButtonGroup>

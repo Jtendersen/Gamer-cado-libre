@@ -2,14 +2,25 @@ import React from 'react'
 import { Box, Button, Drawer, Paper, Typography } from '@mui/material'
 import { useState } from 'react'
 import CartProducts from './CartProducts'
+import { getCart, addToCart } from '../state/cart'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const Cart = () => {
+
+    const dispatch = useDispatch()
+    const user = useSelector((state)=>state.user)
     
 
     const [showCart, toggleShowCart] = useState(false)
+    
 
     const handleCart = () => showCart?toggleShowCart(false):toggleShowCart(true)
+    
+        
+    
+
+
 
 
     

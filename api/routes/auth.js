@@ -6,7 +6,15 @@ const { generateToken } = require("../middlewares/tokens");
 // Ruta para registrar un usuario.
 router.post("/register", (req, res) => {
   User.create(req.body).then((user) => {
-    res.status(201).send(user);
+    
+    const payload = {
+      id:user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      admin: user.admin,
+    };
+    res.status(201).send(payload);
   });
 });
 
@@ -31,6 +39,7 @@ router.post("/login", (req, res) => {
       
       
       const payload = {
+        id:user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -50,6 +59,7 @@ router.post("/login", (req, res) => {
     user.validatePassword(password).then((isValid) => {
       if (!isValid) return res.sendStatus(401);
       const payload = {
+        id:user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -64,7 +74,9 @@ router.post("/login", (req, res) => {
   })};
 });
 
+
 // Ruta para desologuear un usuario.
+
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
