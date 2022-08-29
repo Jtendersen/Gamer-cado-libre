@@ -14,6 +14,8 @@ import Search from "./components/Search";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
+import Admin_panel from "./components/admin_panel";
+import Admin_genres from "./components/admin_panel/Admin_genres";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,8 @@ function App() {
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
       <Route path="/product/:name" element={<Product />} />
+      <Route path="/admin" element={<Admin_panel/>} />
+      <Route path='/admin/genres' element={<Admin_genres/>} />
     </Routes>
   );
 }
