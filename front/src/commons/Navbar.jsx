@@ -217,9 +217,6 @@ export default function PrimarySearchAppBar() {
                 }}>
                 Logout
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                Panel admin
-              </Button>
           </>
     }else{
     Auth=   <>
@@ -235,10 +232,12 @@ export default function PrimarySearchAppBar() {
                 }}>
                 Logout
               </Button>
+              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
+                Panel admin
+              </Button>
             </>
     }
   }
-  console.log(user.admin)
   
 
   return (

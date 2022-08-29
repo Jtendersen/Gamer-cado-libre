@@ -18,6 +18,7 @@ import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_panel from "./components/admin_panel";
 import Admin_genres from "./components/admin_panel/Admin_genres";
 import Admin_products from "./components/admin_panel/Admin_products";
+import Admin_users from "./components/admin_panel/Admin_users";
 
 
 function App() {

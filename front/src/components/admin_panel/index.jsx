@@ -18,6 +18,9 @@ const Admin_panel=()=>{
             <Button onClick={()=>sendTo('admin/genres')}>
                 Genres
             </Button>
+            <Button onClick={()=>sendTo('admin/allUsers')}>
+                Users
+            </Button>
 
         </ButtonGroup>
         </Stack>

@@ -40,7 +40,7 @@ export default function SignUp() {
     
   
     const secret = data.secret
-    if(secret === 'admin123') admin = true;
+    if(secret === 'admin123') data.admin = true;
 
     dispatch(sendSignUpRequest(data))&& navigate('/signin')
 
