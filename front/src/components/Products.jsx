@@ -9,7 +9,24 @@ export const Products = () => {
   let addView;
   const [add, setAdd] = useState(false)
   const [products, setProducts] = useState([])
+  const [description, setDescription] = useState('')
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState(0)
+  const [urlId, setUrlId] = useState('')
 
+
+  const handleDescription = function (){
+
+  }
+  const handleName = function (){
+
+  }
+  const handlePrice = function (){
+
+  }
+  const handleUrlId = function (){
+
+  }
   const handleAdd = function (){
     if(add) setAdd(true)
     else setAdd(false)
@@ -31,7 +48,8 @@ export const Products = () => {
                       <TextField
                         required
                         fullWidth
-                        label='Title'
+                        label='name'
+                        onChange={handleName}
                       >
 
                       </TextField>
@@ -42,6 +60,7 @@ export const Products = () => {
                         fullWidth
                         label='Description'
                         defaultValue={'New Game Description'}
+                        onChange={handleDescription}
                       />
                     </Grid>
                   </Grid>
@@ -51,6 +70,7 @@ export const Products = () => {
                         required
                         fullWidth
                         label='Price'
+                        onChange={handlePrice}
                       />
                     </Grid>
                     
@@ -60,6 +80,7 @@ export const Products = () => {
                         fullWidth
                         label='Image URL'
                         defaultValue={'https://cdn.cloudflare.steamstatic.com/steam/apps/681040/header.jpg?t=1504857051'}
+                        onChange={handleUrlId}
                       />
                     </Grid>
                   </Grid>

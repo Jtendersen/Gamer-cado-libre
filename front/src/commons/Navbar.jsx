@@ -238,7 +238,6 @@ export default function PrimarySearchAppBar() {
             </>
     }
   }
-  console.log(user.admin)
   
 
   return (
