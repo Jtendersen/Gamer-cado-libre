@@ -24,9 +24,9 @@ router.post('/',(req,res,next)=>{
 
 })
 
-router.delete('/',(req,res,next)=>{
-    console.log(req.body)
-    Genre.destroy({where:{id:req.body.id}})
+router.delete('/:id',(req,res,next)=>{
+    console.log(req.params)
+    Genre.destroy({where:{id:req.params.id}})
     .then((data)=>{
         if(!data)res.sendStatus(404)
         res.sendStatus(204)})
