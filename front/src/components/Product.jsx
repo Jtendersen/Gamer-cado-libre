@@ -5,13 +5,12 @@ import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router";
 import Footer from "../commons/Footer";
 import Navbar from "../commons/Navbar";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
 import Cart from "./Cart/Cart";
-
-
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 
 const Product = () => {
@@ -21,7 +20,7 @@ const Product = () => {
   const [value, setValue] = React.useState(null);
   const params = useLocation();
   const [game, setGame] = React.useState({});
-
+  const [reviews, setReviews] = React.useState([])
 
   React.useEffect(() => {
     axios
@@ -31,7 +30,8 @@ const Product = () => {
       .then((game) => {
         setGame(game.data);
       });
-    ;
+    axios
+      .get('http://localhost:3001/api/reviews')
   }, []);
   /* 
 if(login){
@@ -55,39 +55,47 @@ if(login){
   return (
     <>
       <Navbar />
+
       <Cart/>
-      <div id="product">
-        <div className="content">
-          <div id="img">
-            <img src={baseURL + game.urlId + ".jpg"} alt="Imagen del juego" />
-          </div>
-          <div id="gameInfo">
-            <h1>{game.name}</h1>
-            <Box sx={{ "& > legend": { mt: 2 } }}>
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </Box>
-            <h2>${game.price}</h2>
-            <Button variant="contained" onClick={handleCart}>
-              Add to cart
-            </Button>
-            <div id="digitalText">
-              <Typography color="text.secondary">
-                Este producto se vende en formato digital, el stock es ilimitado
-              </Typography>
+      <Box>
+        <div id="product">
+          <div className="content">
+            <div id="img">
+              <img src={baseURL + game.urlId + ".jpg"} alt="Imagen del juego" />
+            </div>
+            <div id="gameInfo">
+              <Typography variant="h1" marginTop={'1%'}>{game.name}</Typography>
+              <Box sx={{ "& > legend": { mt: 2 } }}>
+                <Rating
+                  name="half-rating"
+                  precision={0.5}
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue*2)
+                  }}
+                />
+              </Box>
+              <Typography variant="h2" marginTop={'1%'} marginBottom={'1%'}>${game.price}</Typography>
+              <Button variant="contained" onClick={handleCart}>
+                Add to cart
+              </Button>
+              <div id="digitalText">
+                <Typography color="text.secondary">
+                  Este producto se vende en formato digital, el stock es ilimitado
+                </Typography>
+              </div>
             </div>
           </div>
+            <Typography variant="h6">Description: <br/></Typography>
+            <Typography variant="body1">{game.description}</Typography>
+            <br/>
+            <Typography variant="h6">Reviews: <br/></Typography>
+            <TextField
+            disabled
+            fullWidth
+            />
         </div>
-        <div id="text">
-          <h4>Descripcion:</h4>
-          <p>{game.description}</p>
-        </div>
-      </div>
+      </Box>
       <Footer />
     </>
   );

@@ -23,6 +23,8 @@ import axios from "axios";
 import {toggleCart} from "../state/handleCart"
 
 import { useLocation, useNavigate } from 'react-router';
+import Admin_panel from "../components/admin_panel";
+import CustomizedMenus from "../components/test";
 
 
 
@@ -82,6 +84,7 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+
   if (!user) {
     Auth = (
       <>
@@ -139,6 +142,7 @@ export default function PrimarySearchAppBar() {
       </>
     );
   }
+
 
   let Genres;
   const {pathname} = useLocation()
@@ -296,7 +300,7 @@ export default function PrimarySearchAppBar() {
             </>
   }else Genres = <></>
 
-  if(!user){
+  if(!user.id){
     Auth =  <>  
                 <Button color='inherit' onClick={()=>{sendTo('signin')}}>
                   Login
@@ -309,7 +313,7 @@ export default function PrimarySearchAppBar() {
     if(user.admin == 'false'){
     Auth =<>  
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.name}
+                {user.firstName}
               </Button>
               <Button color='inherit' onClick={()=>dispatch(toggleCart())}>
                 Cart
@@ -324,7 +328,7 @@ export default function PrimarySearchAppBar() {
     }else{
     Auth=   <>
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.name}
+                {user.firstName}
               </Button>
               <Button color='inherit' onClick={()=>dispatch(toggleCart())}>
                 Cart
@@ -335,13 +339,10 @@ export default function PrimarySearchAppBar() {
                 }}>
                 Logout
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                Panel admin
-              </Button>
+              <Admin_panel/>
             </>
     }
   }
-  
 
   return (
     <Box sx={{ flexGrow: 1 }}>

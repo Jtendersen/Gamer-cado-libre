@@ -7,6 +7,9 @@ const router = express.Router();
 
 // Ruta para visualizar el carrito completo, cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending".
 router.get("/:userId", (req, res, next) => {
+
+//console.log("ESTA ES LA COOKIE DE PEDIR EL CART", req.cookies.token)
+
   Cart.findAll({
     include: {
       model: Product,

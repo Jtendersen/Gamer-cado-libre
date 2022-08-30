@@ -1,8 +1,9 @@
 const express= require('express')
+const { validateToken } = require('../middlewares/tokens')
 const router = express.Router()
 const {Product,User,Genre}= require('../models')
 
-// Rauta para devolver todos los generos.
+// Ruta para devolver todos los generos.
 router.get('/',(req,res,next)=>{
     Genre.findAll()
     .then(genres=>res.status(200).send(genres))
@@ -25,7 +26,6 @@ router.post('/',(req,res,next)=>{
 })
 
 router.delete('/:id',(req,res,next)=>{
-    console.log(req.params)
     Genre.destroy({where:{id:req.params.id}})
     .then((data)=>{
         if(!data)res.sendStatus(404)
