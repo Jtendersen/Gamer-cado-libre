@@ -116,10 +116,6 @@
   margin-left: 20%;
 }
 
-#link {
-  text-decoration: none;
-}
-
 #adminGrid {
   display: flex;
   flex-direction: row;
