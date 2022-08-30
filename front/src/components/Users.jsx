@@ -4,8 +4,8 @@ import ComplexGrid  from './admin_panel/Admin_grid'
 export const Users = ({users}) => {
   return (
     <div>
-    {users.map((users)=>{
-        return <ComplexGrid product = {users}/>
+    {users?.map((user)=>{
+        return <ComplexGrid product = {user}/>
     })}
     </div>
   )

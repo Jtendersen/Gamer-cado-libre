@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
+import { maxWidth } from "@mui/system";
 
 
 
@@ -54,38 +55,41 @@ if(login){
   return (
     <>
       <Navbar />
-      <div id="product">
-        <div className="content">
-          <div id="img">
-            <img src={baseURL + game.urlId + ".jpg"} alt="Imagen del juego" />
-          </div>
-          <div id="gameInfo">
-            <h1>{game.name}</h1>
-            <Box sx={{ "& > legend": { mt: 2 } }}>
-              <Rating
-                name="simple-controlled"
-                value={value}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </Box>
-            <h2>${game.price}</h2>
-            <Button variant="contained" onClick={handleCart}>
-              Add to cart
-            </Button>
-            <div id="digitalText">
-              <Typography color="text.secondary">
-                Este producto se vende en formato digital, el stock es ilimitado
-              </Typography>
+      <Box>
+        <div id="product">
+          <div className="content">
+            <div id="img">
+              <img src={baseURL + game.urlId + ".jpg"} alt="Imagen del juego" />
+            </div>
+            <div id="gameInfo">
+              <Typography variant="h1" marginTop={'1%'}>{game.name}</Typography>
+              <Box sx={{ "& > legend": { mt: 2 } }}>
+                <Rating
+                  name="half-rating"
+                  precision={0.5}
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue*2)
+                  }}
+                />
+              </Box>
+              <Typography variant="h2" marginTop={'1%'} marginBottom={'1%'}>${game.price}</Typography>
+              <Button variant="contained" onClick={handleCart}>
+                Add to cart
+              </Button>
+              <div id="digitalText">
+                <Typography color="text.secondary">
+                  Este producto se vende en formato digital, el stock es ilimitado
+                </Typography>
+              </div>
             </div>
           </div>
+            <Typography variant="h6">Description: <br/></Typography>
+            <Typography variant="body1">{game.description}</Typography>
+            <br/>
+            <Typography variant="h6">Reviews: <br/></Typography>
         </div>
-        <div id="text">
-          <h4>Descripcion:</h4>
-          <p>{game.description}</p>
-        </div>
-      </div>
+      </Box>
       <Footer />
     </>
   );

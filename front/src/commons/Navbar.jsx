@@ -298,7 +298,6 @@ export default function PrimarySearchAppBar() {
             </>
   }else Genres = <></>
 
-  console.log(user)
   if(!user){
     Auth =  <>  
                 <Button color='inherit' onClick={()=>{sendTo('signin')}}>
