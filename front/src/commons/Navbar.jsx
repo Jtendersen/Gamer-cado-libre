@@ -80,67 +80,7 @@ export default function PrimarySearchAppBar() {
   };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
-  if (!user) {
-    Auth = (
-      <>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("signin");
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("signup");
-          }}
-        >
-          Signup
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("admin");
-          }}
-        >
-          Panel admin
-        </Button>
-      </>
-    );
-  } else {
-    Auth = (
-      <>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("user");
-          }}
-        >
-          {user.firstName} {user.lastName}
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("cart");
-          }}
-        >
-          Cart
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            dispatch(sendLogoutRequest());
-            sendTo("");
-          }}
-        >
-          Logout
-        </Button>
-      </>
-    );
-  }
+  
 
   let Genres;
   const {pathname} = useLocation()
@@ -298,7 +238,7 @@ export default function PrimarySearchAppBar() {
             </>
   }else Genres = <></>
 
-  if(!user){
+  if(!user.id){
     Auth =  <>  
                 <Button color='inherit' onClick={()=>{sendTo('signin')}}>
                   Login
@@ -343,7 +283,7 @@ export default function PrimarySearchAppBar() {
             </>
     }
   }
-  
+  console.log(user)
 
   return (
     <Box sx={{ flexGrow: 1 }}>

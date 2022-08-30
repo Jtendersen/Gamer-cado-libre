@@ -26,9 +26,6 @@ const theme = createTheme();
 const emailRe =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const user = useSelector((state)=>state.user)
 
-
-
-
 const {
   register,
   handleSubmit,
@@ -36,8 +33,7 @@ const {
 }= useForm()
 
 async function onSubmit(data){
-  
-  if(user) return alert("User already logged in")
+  if(user.id) return alert("User already logged in")
   
   dispatch(sendLoginRequest(data))
    
