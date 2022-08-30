@@ -1,8 +1,11 @@
 # Para seedear la base de datos:
 
 **Desde la carpeta /api ejecutar el comando:**
+**Para seedear toda la db completa**
+//$ npx sequelize-cli db:seed:all
 
-$ npx sequelize-cli db:seed:all
+**para seedear una tabla en particular**
+//$ npx sequelize-cli db:seed --seed (nombreDeArchivoParaSeedear)
 
 # Base URL para images
 

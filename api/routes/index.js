@@ -2,11 +2,10 @@ const express = require("express");
 const users = require("./users.js");
 const products = require("./products.js");
 const carts = require("./carts.js");
-const auth = require("./auth.js")
+const auth = require("./auth.js");
 const genres = require("./genres");
 const orders = require("./orders");
 const gamefinder = require("./gamefinder");
-
 
 const router = express.Router();
 
