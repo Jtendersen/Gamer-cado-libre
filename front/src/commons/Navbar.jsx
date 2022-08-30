@@ -80,7 +80,6 @@ export default function PrimarySearchAppBar() {
   };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  
 
   let Genres;
   const {pathname} = useLocation()

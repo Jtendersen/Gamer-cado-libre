@@ -27,7 +27,7 @@ export const cartItemQuantity = createAsyncThunk(
     return axios
       .put("http://localhost:3001/api/cart", itemId, counter)
       .then((r) => {
-        localStorage.setItem("cart", JSON.stringify(r.data));
+        // localStorage.setItem("cart", JSON.stringify(r.data));
         return r.data;
       });
   }
