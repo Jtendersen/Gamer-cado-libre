@@ -22,6 +22,8 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { useLocation, useNavigate } from 'react-router';
+import Admin_panel from "../components/admin_panel";
+import CustomizedMenus from "../components/test";
 
 
 
@@ -80,6 +82,7 @@ export default function PrimarySearchAppBar() {
   };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
 
   let Genres;
   const {pathname} = useLocation()
@@ -276,13 +279,10 @@ export default function PrimarySearchAppBar() {
                 }}>
                 Logout
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                Panel admin
-              </Button>
+              <Admin_panel/>
             </>
     }
   }
-  console.log(user)
 
   return (
     <Box sx={{ flexGrow: 1 }}>
