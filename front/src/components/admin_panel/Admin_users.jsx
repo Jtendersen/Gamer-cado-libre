@@ -6,6 +6,7 @@ import { Users } from "../Users"
 const Admin_users = () => {
 
   const [user, setUser] = useState([])
+
 useEffect(() => {
   axios.get("http://localhost:3000/api/users/allUsers")
   .then(users=>{
@@ -13,8 +14,6 @@ setUser(users)
   })
 }, [])
 
-  
-  
   return (
     <>
     <Navbar/>

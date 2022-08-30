@@ -6,7 +6,9 @@ import Navbar from '../../commons/Navbar'
 import Input_handler from "../../hooks/inputHandler";
 
 const Admin_genres=()=>{
+
     const [genres,setGenre]=useState([])
+
     const input_add=Input_handler()
     useEffect(()=>{
         axios.get("http://localhost:3001/api/genres").then(data=>{

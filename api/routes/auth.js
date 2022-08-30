@@ -2,6 +2,12 @@ const express = require("express");
 const User = require("../models/Users");
 const router = express.Router();
 const { generateToken } = require("../middlewares/tokens");
+const { validateAuth } = require("../middlewares/auth");
+
+//Ruta para persistencia
+router.get("/me", validateAuth, (req, res) => {
+  res.send(req.user);
+});
 
 // Ruta para registrar un usuario.
 router.post("/register", (req, res) => {
@@ -44,6 +50,7 @@ router.post("/login", (req, res) => {
       const token = generateToken(payload);
       res.cookie("token", token);
       res.send(payload);
+
     });
   } else {
     User.findOne({ where: { email } }).then((user) => {
