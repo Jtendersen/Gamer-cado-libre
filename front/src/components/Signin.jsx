@@ -1,57 +1,46 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
-import {sendLoginRequest} from "../state/user"
-import {useNavigate} from 'react-router-dom'
-import {useForm} from 'react-hook-form'
+import { sendLoginRequest } from "../state/user";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-import GoogleLogin from "./GoogleLogin"
-
-
-
-
-
-
-
+import GoogleLogin from "./GoogleLogin";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const navigate = useNavigate()
-const dispatch = useDispatch()
+  const theme = createTheme();
+  const emailRe =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  const user = useSelector((state) => state.user);
 
-const theme = createTheme();
-const emailRe =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const user = useSelector((state)=>state.user)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+  async function onSubmit(data) {
+    if (user.id) return alert("User already logged in");
 
+    dispatch(sendLoginRequest(data));
 
+    await user;
 
-const {
-  register,
-  handleSubmit,
-  formState: {errors},
-}= useForm()
-
-async function onSubmit(data){
-  
-  if(user) return alert("User already logged in")
-  
-  dispatch(sendLoginRequest(data))
-   
-  await user 
-  
-   navigate('/')
- };
+    navigate("/");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -60,18 +49,23 @@ async function onSubmit(data){
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               fullWidth
@@ -80,16 +74,17 @@ async function onSubmit(data){
               name="email"
               autoComplete="email"
               autoFocus
-              {...register("email",{required:"Required",
-              pattern:{
-                value: emailRe,
-                message: "invalid email adress"
-              }
-            })}
+              {...register("email", {
+                required: "Required",
+                pattern: {
+                  value: emailRe,
+                  message: "invalid email adress",
+                },
+              })}
               error={!!errors?.email}
-              helperText={errors?.email? errors.email.message:null}
+              helperText={errors?.email ? errors.email.message : null}
             />
-          <TextField
+            <TextField
               margin="normal"
               fullWidth
               name="password"
@@ -97,20 +92,21 @@ async function onSubmit(data){
               type="password"
               id="password"
               autoComplete="current-password"
-              {...register("password",{required:"Required",
-              minLength:{
-                value:6,
-                message: "password should have 6 characters min"
-              },
-              maxLength:{
-                value:8,
-                message: "password should have 8 characters max"
-              }
-            })}
+              {...register("password", {
+                required: "Required",
+                minLength: {
+                  value: 6,
+                  message: "password should have 6 characters min",
+                },
+                maxLength: {
+                  value: 8,
+                  message: "password should have 8 characters max",
+                },
+              })}
               error={!!errors?.password}
-              helperText={errors?.password? errors.password.message:null}
-            /> 
-            
+              helperText={errors?.password ? errors.password.message : null}
+            />
+
             <Button
               type="submit"
               fullWidth
@@ -119,13 +115,12 @@ async function onSubmit(data){
             >
               Sign In
             </Button>
-            
-            <GoogleLogin/>
-          
 
-           <Grid container>
+            <GoogleLogin />
+
+            <Grid container>
               <Grid item>
-                <Link id='link' href='/signup' variant="body2">
+                <Link id="link" href="/signup" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

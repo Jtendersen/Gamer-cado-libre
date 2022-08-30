@@ -76,7 +76,9 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  if (!user) {
+  console.log("ESTE ES EL USUARIO LOGUEADO", user);
+
+  if (!user.id) {
     Auth = (
       <>
         <Button
