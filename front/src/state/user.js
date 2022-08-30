@@ -27,7 +27,7 @@ export const sendSignUpRequest = createAsyncThunk("SIGNUP", (input) => {
 });
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", () => {
-  return axios.post("/api/auth/logout");
+  return axios.post("/api/auth/logout")
 });
 
 export const setUser = createAsyncThunk("SETUSER", (input) => {
