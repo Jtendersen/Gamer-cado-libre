@@ -1,6 +1,6 @@
 import React from 'react'
 import ComplexGrid  from './admin_panel/Admin_grid'
-import { Box, Grid } from "@material-ui/core"
+import { Box, Grid } from "@mui/material"
 
 export const Users = ({users}) => {
   return (

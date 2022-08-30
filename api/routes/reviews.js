@@ -2,7 +2,8 @@ const express= require('express')
 const router = express.Router()
 const { Review }= require('../models')
 
-router.get('/', (req, res, next)=>{
+//Traer todas las reviews
+router.get('/:id', (req, res, next)=>{
     Review.findAll()
     .then(reviews=>res.status(200).send(reviews))
     .catch(next)

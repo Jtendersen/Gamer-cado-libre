@@ -5,14 +5,11 @@ import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router";
 import Footer from "../commons/Footer";
 import Navbar from "../commons/Navbar";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
-import { maxWidth } from "@mui/system";
-
-
-
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 
 const Product = () => {
 
@@ -21,7 +18,7 @@ const Product = () => {
   const [value, setValue] = React.useState(null);
   const params = useLocation();
   const [game, setGame] = React.useState({});
-
+  const [reviews, setReviews] = React.useState([])
 
   React.useEffect(() => {
     axios
@@ -31,7 +28,8 @@ const Product = () => {
       .then((game) => {
         setGame(game.data);
       });
-    ;
+    axios
+      .get('http://localhost:3001/api/reviews')
   }, []);
   /* 
 if(login){
@@ -88,6 +86,10 @@ if(login){
             <Typography variant="body1">{game.description}</Typography>
             <br/>
             <Typography variant="h6">Reviews: <br/></Typography>
+            <TextField
+            disabled
+            fullWidth
+            />
         </div>
       </Box>
       <Footer />
