@@ -22,6 +22,8 @@ import { useEffect } from "react";
 import axios from "axios";
 
 import { useLocation, useNavigate } from 'react-router';
+import Admin_panel from "../components/admin_panel";
+import CustomizedMenus from "../components/test";
 
 
 
@@ -84,12 +86,13 @@ export default function PrimarySearchAppBar() {
   if (!user) {
     Auth = (
       <>
+      
         <Button
           color="inherit"
           onClick={() => {
             sendTo("signin");
           }}
-        >
+          >
           Login
         </Button>
         <Button
@@ -97,9 +100,10 @@ export default function PrimarySearchAppBar() {
           onClick={() => {
             sendTo("signup");
           }}
-        >
+          >
           Signup
         </Button>
+          
         <Button
           color="inherit"
           onClick={() => {
@@ -338,12 +342,12 @@ export default function PrimarySearchAppBar() {
                 }}>
                 Logout
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                Panel admin
-              </Button>
+              <Admin_panel/>
             </>
     }
   }
+  
+  
   
 
   return (
