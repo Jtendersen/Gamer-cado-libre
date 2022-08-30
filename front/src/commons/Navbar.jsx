@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -13,13 +14,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useNavigate } from "react-router";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { useEffect } from "react";
 import axios from "axios";
+
+import { useLocation, useNavigate } from 'react-router';
+
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,6 +73,7 @@ export default function PrimarySearchAppBar() {
   // }, []);
 
   let Auth;
+
   const navigate = useNavigate();
   const sendTo = (string) => {
     navigate(`/${string}`);
@@ -136,6 +141,10 @@ export default function PrimarySearchAppBar() {
       </>
     );
   }
+
+  let Genres;
+  const {pathname} = useLocation()
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [search, setSearch] = React.useState("");
@@ -271,6 +280,71 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  if(pathname != '/'){
+    Genres =<>
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <IconButton
+                  size="small"
+                  edge="end"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                  id='margin'
+                >
+                  Genres
+                </IconButton>
+              </Box>
+            </>
+  }else Genres = <></>
+
+  if(!user){
+    Auth =  <>  
+                <Button color='inherit' onClick={()=>{sendTo('signin')}}>
+                  Login
+                </Button>
+                <Button color='inherit' onClick={()=>{sendTo('signup')}}>
+                  Signup
+                </Button>
+            </>
+  } else{
+    if(user.admin == 'false'){
+    Auth =<>  
+              <Button color='inherit' onClick={()=>{sendTo('user')}}>
+                {user.name}
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+                Cart
+              </Button>
+              <Button color='inherit' onClick={()=>{
+                dispatch(sendLogoutRequest())
+                sendTo('')
+                }}>
+                Logout
+              </Button>
+          </>
+    }else{
+    Auth=   <>
+              <Button color='inherit' onClick={()=>{sendTo('user')}}>
+                {user.name}
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+                Cart
+              </Button>
+              <Button color='inherit' onClick={()=>{
+                dispatch(sendLogoutRequest())
+                sendTo('')
+                }}>
+                Logout
+              </Button>
+              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
+                Panel admin
+              </Button>
+            </>
+    }
+  }
+  
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -285,6 +359,7 @@ export default function PrimarySearchAppBar() {
               Gamer-cado Libre
             </Link>
           </Typography>
+
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="small"
@@ -295,9 +370,12 @@ export default function PrimarySearchAppBar() {
               color="inherit"
               id="margin"
             >
-              Genres
+             
             </IconButton>
           </Box>
+
+          {Genres}
+
           <Box sx={{ flexGrow: 1 }} />
           <form onSubmit={handleSubmit}>
             <Search>

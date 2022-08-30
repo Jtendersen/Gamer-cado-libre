@@ -116,10 +116,29 @@
   margin-left: 20%;
 }
 
-link :link {
+#link {
   text-decoration: none;
 }
 
-link :visited {
-  text-decoration: none;
+#adminGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 4%;
+}
+
+.paper {
+  width: 30%;
+  margin: 1%;
+}
+
+#addButton {
+  margin: 0px auto;
+}
+
+#viewAdded {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  justify-content: center;
 }

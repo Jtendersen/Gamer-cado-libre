@@ -49,6 +49,7 @@ router.post("/login", (req, res) => {
       const token = generateToken(payload);
       res.cookie("token", token);
       res.send(payload);
+
     });
   } else {
     User.findOne({ where: { email } }).then((user) => {
