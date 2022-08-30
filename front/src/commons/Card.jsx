@@ -22,7 +22,7 @@ export default function ActionAreaCard({ game }) {
               {game.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {game.description}
+              {game.description && `${game.description.substring(0,100)}...`}
             </Typography>
             <Typography>{`$${game.price}`}</Typography>
           </CardContent>
