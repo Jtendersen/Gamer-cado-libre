@@ -6,6 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Grid } from "@mui/material";
 import axios from "axios";
+import { maxHeight, Stack } from "@mui/system";
+import { Link } from "react-router-dom";
 
 // async function getNavGenres() {
 //   let navGenres = await axios.get("/api/genres");
@@ -17,72 +19,58 @@ import axios from "axios";
 // console.log(navbarGenres);
 
 export default function SimpleSlider() {
-  const [navGenres, setNavGenres] = useState([]);
+  const [navbarGenres, setNavbarGenres] = useState([]);
   useEffect(() => {
-    axios.get("/api/genres").then((response) => setNavGenres(response.data));
+    axios.get("/api/genres").then((res) => setNavbarGenres(res.data));
   }, []);
+  console.log("ESTOS SON LOS GENRERS", navbarGenres);
+
+  const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
   var settings = {
-    className: "center",
-    centerPadding: "1%",
     dots: true,
     infinite: true,
-    // speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 7,
-    initialSlide: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-    afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
+    speed: 500,
+    slidesToShow: 10,
+    slidesToScroll: 9,
   };
   return (
     <Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
+      {navbarGenres.map((genre) => (
+        <div>
+          <h3 key={genre.id}>
+            <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={baseUrl + genre.products[0].urlId + ".jpg"}
+                  alt="Genre_img"
+                />
+                <Link to={`/products/${genre.genre}`}>
+                  <CardContent
+                    component={Stack}
+                    direction="column"
+                    justifyContent="center"
+                    sx={{
+                      bgcolor: "info.main",
+                      height: 80,
+                    }}
+                  >
+                    <Typography
+                      gutterBottom
+                      variant="subtitle2"
+                      component="div"
+                    >
+                      {genre.genre}
+                    </Typography>
+                  </CardContent>
+                </Link>
+              </CardActionArea>
+            </Card>
+          </h3>
+        </div>
+      ))}
     </Slider>
   );
 }
@@ -133,194 +121,196 @@ export default function SimpleSlider() {
 
 //     return (
 
-//       <div>
-//         <Slider {...settings}>
-//           <Grid container spacing={2}>
-//             <Grid item xs={6} md={8}></Grid>
+// {
+/* <div>
+  <Slider {...settings}>
+    <Grid container spacing={2}>
+      <Grid item xs={6} md={8}></Grid>
 
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://cdn.windowsreport.com/wp-content/uploads/2016/12/deponia-windows-game.jpg"
-//                   alt="PandC img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     POINT AND CLICK
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://ftw.usatoday.com/wp-content/uploads/sites/90/2021/12/street-fighter-5-zeku-header.png?w=1000&h=576&crop=1"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     FIGHTING
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://trotons.com/wp-content/uploads/2019/12/Best-Android-Offline-Shooting-Games-1000x600.jpg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     SHOOTER
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDl-CvPuPuc7o1oHM7_mkqfh6hMSjR-Vag3Q&usqp=CAU"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     MUSIC
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://static.independent.co.uk/s3fs-public/thumbnails/image/2020/02/05/12/spelunky.jpg?quality=75&width=640&height=614&fit=bounds&format=pjpg&crop=16%3A9%2Coffset-y0.5&auto=webp"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     PLATFORM
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="http://wp.appadvice.com/wp-content/uploads/2010/01/Picture-001.png"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     PUZZLE
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://www.carlogos.org/uploads/2021/best-sim-racing-games-for-2022.jpg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     RACING
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://ftw.usatoday.com/wp-content/uploads/sites/90/2021/12/cc-red-alert-remaster.png"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     RTS
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://hitechgazette.com/wp-content/uploads/2020/01/images-6.jpg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     SIMULATION
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://media.dragonblogger.com/wp-content/uploads/2021/01/05095333/sports-video-games.jpeg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     SPORTS
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://60fps.in/wp-content/uploads/2021/06/strategy-games-for-pc.jpg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     STRATEGY
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//             <Card sx={{ maxWidth: 345 }}>
-//               <CardActionArea>
-//                 <CardMedia
-//                   component="img"
-//                   height="140"
-//                   image="https://cosmosgroup.sgp1.cdn.digitaloceanspaces.com/thumbnail/lead/news/8614433_Game.jpg"
-//                   alt="fighting_img"
-//                 />
-//                 <CardContent>
-//                   <Typography gutterBottom variant="h5" component="div">
-//                     ADVENTURE
-//                   </Typography>
-//                 </CardContent>
-//               </CardActionArea>
-//             </Card>
-//           </Grid>
-//         </Slider>
-//       </div>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://cdn.windowsreport.com/wp-content/uploads/2016/12/deponia-windows-game.jpg"
+            alt="PandC img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              POINT AND CLICK
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://ftw.usatoday.com/wp-content/uploads/sites/90/2021/12/street-fighter-5-zeku-header.png?w=1000&h=576&crop=1"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              FIGHTING
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://trotons.com/wp-content/uploads/2019/12/Best-Android-Offline-Shooting-Games-1000x600.jpg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              SHOOTER
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDl-CvPuPuc7o1oHM7_mkqfh6hMSjR-Vag3Q&usqp=CAU"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              MUSIC
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://static.independent.co.uk/s3fs-public/thumbnails/image/2020/02/05/12/spelunky.jpg?quality=75&width=640&height=614&fit=bounds&format=pjpg&crop=16%3A9%2Coffset-y0.5&auto=webp"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              PLATFORM
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="http://wp.appadvice.com/wp-content/uploads/2010/01/Picture-001.png"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              PUZZLE
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://www.carlogos.org/uploads/2021/best-sim-racing-games-for-2022.jpg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              RACING
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://ftw.usatoday.com/wp-content/uploads/sites/90/2021/12/cc-red-alert-remaster.png"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              RTS
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://hitechgazette.com/wp-content/uploads/2020/01/images-6.jpg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              SIMULATION
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://media.dragonblogger.com/wp-content/uploads/2021/01/05095333/sports-video-games.jpeg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              SPORTS
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://60fps.in/wp-content/uploads/2021/06/strategy-games-for-pc.jpg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              STRATEGY
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://cosmosgroup.sgp1.cdn.digitaloceanspaces.com/thumbnail/lead/news/8614433_Game.jpg"
+            alt="fighting_img"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              ADVENTURE
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
+  </Slider>
+</div> */
+// }
 //     );
 //   }
 // }

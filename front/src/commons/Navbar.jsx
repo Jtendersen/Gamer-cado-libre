@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -20,10 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { useEffect } from "react";
 import axios from "axios";
+import imagen from "../assets/version1.jpg";
 
-import { useLocation, useNavigate } from 'react-router';
-
-
+import { useLocation, useNavigate } from "react-router";
+import { Container } from "@mui/system";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -82,7 +81,7 @@ export default function PrimarySearchAppBar() {
   const user = useSelector((state) => state.user);
 
   let Genres;
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -219,70 +218,119 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
-  if(pathname != '/'){
-    Genres =<>
-              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <IconButton
-                  size="small"
-                  edge="end"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                  id='margin'
-                >
-                  Genres
-                </IconButton>
-              </Box>
-            </>
-  }else Genres = <></>
+  if (pathname != "/") {
+    Genres = (
+      <>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <IconButton
+            size="small"
+            edge="end"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+            id="margin"
+          >
+            Genres
+          </IconButton>
+        </Box>
+      </>
+    );
+  } else Genres = <></>;
 
-  if(!user.id){
-    Auth =  <>  
-                <Button color='inherit' onClick={()=>{sendTo('signin')}}>
-                  Login
-                </Button>
-                <Button color='inherit' onClick={()=>{sendTo('signup')}}>
-                  Signup
-                </Button>
-            </>
-  } else{
-    if(user.admin == 'false'){
-    Auth =<>  
-              <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.firstName}
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
-                Cart
-              </Button>
-              <Button color='inherit' onClick={()=>{
-                dispatch(sendLogoutRequest())
-                sendTo('')
-                }}>
-                Logout
-              </Button>
-          </>
-    }else{
-    Auth=   <>
-              <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.firstName}
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
-                Cart
-              </Button>
-              <Button color='inherit' onClick={()=>{
-                dispatch(sendLogoutRequest())
-                sendTo('')
-                }}>
-                Logout
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('admin')}}>
-                Panel admin
-              </Button>
-            </>
+  if (!user.id) {
+    Auth = (
+      <>
+        <Button
+          color="inherit"
+          onClick={() => {
+            sendTo("signin");
+          }}
+        >
+          Login
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => {
+            sendTo("signup");
+          }}
+        >
+          Signup
+        </Button>
+      </>
+    );
+  } else {
+    if (user.admin == "false") {
+      Auth = (
+        <>
+          <Button
+            color="inherit"
+            onClick={() => {
+              sendTo("user");
+            }}
+          >
+            {user.firstName}
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              sendTo("cart");
+            }}
+          >
+            Cart
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              dispatch(sendLogoutRequest());
+              sendTo("");
+            }}
+          >
+            Logout
+          </Button>
+        </>
+      );
+    } else {
+      Auth = (
+        <>
+          <Button
+            color="inherit"
+            onClick={() => {
+              sendTo("user");
+            }}
+          >
+            {user.firstName}
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              sendTo("cart");
+            }}
+          >
+            Cart
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              dispatch(sendLogoutRequest());
+              sendTo("");
+            }}
+          >
+            Logout
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              sendTo("admin");
+            }}
+          >
+            Panel admin
+          </Button>
+        </>
+      );
     }
   }
-  console.log(user)
+  console.log(user);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -295,7 +343,16 @@ export default function PrimarySearchAppBar() {
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <Link to="/" id="link" style={{ textDecoration: "none" }}>
-              Gamer-cado Libre
+              <Box sx={{ width: 0.5, height: 0.1 }}>
+                <div id="loguito">
+                  <img
+                    id="loguitoPosta"
+                    src={imagen}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </div>
+              </Box>
             </Link>
           </Typography>
 
@@ -308,9 +365,7 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
               id="margin"
-            >
-             
-            </IconButton>
+            ></IconButton>
           </Box>
 
           {Genres}
