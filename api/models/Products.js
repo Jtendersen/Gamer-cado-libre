@@ -17,7 +17,7 @@ Product.init(
       allowNull: false,
     },
     valoration: {
-      type: S.INTEGER,
+      type: S.FLOAT,
       // defaultValue: 0,
     },
     esrb: {
