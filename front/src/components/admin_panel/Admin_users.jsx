@@ -10,7 +10,8 @@ const Admin_users = () => {
 useEffect(() => {
   axios.get("http://localhost:3000/api/users/allUsers")
   .then(users=>{
-setUser(users)
+   console.log(users.data)
+    //setUser(users.data)
   })
 }, [])
 

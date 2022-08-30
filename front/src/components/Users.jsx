@@ -8,8 +8,8 @@ export const Users = ({users}) => {
      <Grid container>
         <Grid item xs = {12}>
           <Box border = {2}>
-            {users.map((users)=>{
-              return <ComplexGrid product = {users}/>
+            {users.map((user)=>{
+              return <ComplexGrid product = {user}/>
             })}
           </Box>
         </Grid>
