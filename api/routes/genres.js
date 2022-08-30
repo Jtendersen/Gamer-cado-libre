@@ -2,7 +2,7 @@ const express= require('express')
 const router = express.Router()
 const {Product,User,Genre}= require('../models')
 
-// Rauta para devolver todos los generos.
+// Ruta para devolver todos los generos.
 router.get('/',(req,res,next)=>{
     Genre.findAll()
     .then(genres=>res.status(200).send(genres))

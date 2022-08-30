@@ -18,11 +18,10 @@ router.get('/allProducts',(req,res,next)=>{
 router.get('/:productID',(req,res,next)=>{
     try {
         Product.findByPk(req.params.productID)
-    .then(productMatched=>res.status(200).send(productMatched))
+        .then(productMatched=>res.status(200).send(productMatched))
     } catch (error) {
         console.log(error)
     }
-    
 })
 
 //BUSCA TODOS LOS JUEGOS CON TITULO SIMILAR A EL INPUT DEL USER EN LA BUSQUEDA
@@ -45,8 +44,8 @@ router.get('/allGenres/:genre',(req,res,next)=>{
 
 // Ruta para eliminar un producto.
 router.delete('/:productID',(req,res,next)=>{
-        Product.destroy(productMatched,{where:{id:req.params.productID}})
-        .then(()=>res.sendStatus(201))
+        Product.destroy({where:{id:req.params.productID}})
+        .then(()=>res.sendStatus(204))
         .catch(next)
 })
 

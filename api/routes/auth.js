@@ -25,8 +25,9 @@ router.post("/register", (req, res) => {
 
 // Ruta para loguear un usuario.
 router.post("/login", (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
 
+  const { email, password, firstName, lastName } = req.body;
+  
   if (req.body.google) {
     User.findOrCreate({
       where: { email },
@@ -49,6 +50,7 @@ router.post("/login", (req, res) => {
       const token = generateToken(payload);
       res.cookie("token", token);
       res.send(payload);
+
     });
   } else {
     User.findOne({ where: { email } }).then((user) => {
@@ -71,7 +73,6 @@ router.post("/login", (req, res) => {
 });
 
 // Ruta para desologuear un usuario.
-
 router.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
