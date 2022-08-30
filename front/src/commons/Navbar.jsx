@@ -95,14 +95,6 @@ export default function PrimarySearchAppBar() {
         >
           Signup
         </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("admin");
-          }}
-        >
-          Panel admin
-        </Button>
       </>
     );
   } else {
@@ -132,6 +124,14 @@ export default function PrimarySearchAppBar() {
           }}
         >
           Logout
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => {
+            sendTo("admin");
+          }}
+        >
+          Panel admin
         </Button>
       </>
     );
