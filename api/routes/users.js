@@ -40,7 +40,7 @@ router.put("/admin/:id", validateADM, (req, res, next) => {
 });
 
 // Ruta para borrar un usuario.
-router.delete("/delete/:id", validateADM,(req, res) => {
+router.delete("/delete/:id", validateADM, (req, res) => {
   User.destroy({
     where: {
       id: req.params.id,
@@ -51,10 +51,9 @@ router.delete("/delete/:id", validateADM,(req, res) => {
 });
 
 // Ruta para mostrar todos los usuarios.
-router.get('/allUsers', validateADM,(req,res)=>{
-  User.findAll()
-  .then(products=>res.status(200).send(products))
-})
+router.get("/allUsers", validateADM, (req, res) => {
+  User.findAll().then((products) => res.status(200).send(products));
+});
 
 // Ruta, en caso de que las anteriores fallen entonces se devolvera un error 404.
 router.use("/", function (req, res) {
