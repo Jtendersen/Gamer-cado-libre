@@ -2,11 +2,11 @@ import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const getCart = createAsyncThunk("GETCART", (user) => {
-  return axios.get(`/api/cart/${user}`).then((r) => {
+  return axios.get(`/api/cart/${user}`).then((r)=>  r.data )
     // localStorage.setItem("cart",JSON.stringify(r.data));
-    setCart(r.data);
+   
     // return r.data;
-  });
+ 
 });
 
 export const addToCart = createAsyncThunk("ADDTOCART", (itemId) => {
@@ -15,15 +15,19 @@ export const addToCart = createAsyncThunk("ADDTOCART", (itemId) => {
   });
 });
 
-export const removeFromCart = createAsyncThunk("REMOVEFROMCART", (itemId) => {
-  return axios.delete("http://localhost:3001/api/cart", itemId).then((r) => {
+export const removeFromCart = createAsyncThunk("REMOVEFROMCART", ({userId, itemId}) => {
+  console.log(userId, itemId)
+
+  return axios.delete(`http://localhost:3001/api/cart/delete/${userId}`,{ data: {itemId:itemId}}).then((r) => {
+    console.log(r.data)
     return r.data;
   });
 });
 
 export const cartItemQuantity = createAsyncThunk(
   "CARTITEMQUANTITY",
-  (itemId, counter) => {
+  (recibido) => {
+    //console.log("CARTITEMQUANTITY",recibido)
     return axios
       .put("http://localhost:3001/api/cart", itemId, counter)
       .then((r) => {

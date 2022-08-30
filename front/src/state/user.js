@@ -14,8 +14,10 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", (input) => {
       credentials: "include",
     })
     .then((resp) => {
+      
       return resp.data;
-    });
+    })
+    
   // .then((r) => {
   // localStorage.setItem("user", JSON.stringify(r.data));
   //       // return r.data;

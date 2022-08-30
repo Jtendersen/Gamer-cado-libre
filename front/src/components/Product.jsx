@@ -9,6 +9,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
+import Cart from "./Cart/Cart";
 
 
 
@@ -54,6 +55,7 @@ if(login){
   return (
     <>
       <Navbar />
+      <Cart/>
       <div id="product">
         <div className="content">
           <div id="img">

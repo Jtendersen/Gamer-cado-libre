@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router'
 import Navbar from '../commons/Navbar'
 import { Button } from '@mui/material';
 import Grid from '../commons/Grid';
+import Cart from "./Cart/Cart";
 import axios from 'axios';
 
 const Genre = () => {
@@ -20,6 +21,7 @@ const Genre = () => {
   return (
     <>
       <Navbar/>
+      <Cart/>
       <div id='genre'>
         <Grid games={games}/>
       </div>

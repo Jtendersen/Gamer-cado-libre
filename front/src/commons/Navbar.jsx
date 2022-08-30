@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { useEffect } from "react";
 import axios from "axios";
+import {toggleCart} from "../state/handleCart"
 
 import { useLocation, useNavigate } from 'react-router';
 
@@ -123,10 +124,7 @@ export default function PrimarySearchAppBar() {
         </Button>
         <Button
           color="inherit"
-          onClick={() => {
-            sendTo("cart");
-          }}
-        >
+          onClick={()=>dispatch(toggleCart())}>
           Cart
         </Button>
         <Button
@@ -313,7 +311,7 @@ export default function PrimarySearchAppBar() {
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
                 {user.name}
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+              <Button color='inherit' onClick={()=>dispatch(toggleCart())}>
                 Cart
               </Button>
               <Button color='inherit' onClick={()=>{
@@ -328,7 +326,7 @@ export default function PrimarySearchAppBar() {
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
                 {user.name}
               </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
+              <Button color='inherit' onClick={()=>dispatch(toggleCart())}>
                 Cart
               </Button>
               <Button color='inherit' onClick={()=>{

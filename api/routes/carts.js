@@ -78,12 +78,13 @@ router.post("/", (req, res, next) => {
 
 // Ruta para borrar un producto del carrito
 router.delete("/delete/:userId", (req, res, next) => {
-  //VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
+
+//VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
   //ver de levantar el usuario por req.cookies
   Cart.destroy({
     where: {
       userId: req.params.userId,
-      productId: req.body.productId,
+      productId: req.body.itemId,
     },
   })
     .then(() => {
@@ -92,7 +93,7 @@ router.delete("/delete/:userId", (req, res, next) => {
           model: Product,
         },
         where: {
-          [Op.and]: [{ userId: usuario }, { state: "pending" }],
+          [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
         },
       }).then((cartOrder) => {
         res.send(cartOrder);
