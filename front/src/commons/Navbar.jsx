@@ -298,6 +298,7 @@ export default function PrimarySearchAppBar() {
             </>
   }else Genres = <></>
 
+  console.log(user)
   if(!user){
     Auth =  <>  
                 <Button color='inherit' onClick={()=>{sendTo('signin')}}>
@@ -311,7 +312,7 @@ export default function PrimarySearchAppBar() {
     if(user.admin == 'false'){
     Auth =<>  
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.name}
+                {user.firstName}
               </Button>
               <Button color='inherit' onClick={()=>{sendTo('cart')}}>
                 Cart
@@ -326,7 +327,7 @@ export default function PrimarySearchAppBar() {
     }else{
     Auth=   <>
               <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.name}
+                {user.firstName}
               </Button>
               <Button color='inherit' onClick={()=>{sendTo('cart')}}>
                 Cart
