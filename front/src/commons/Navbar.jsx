@@ -17,14 +17,22 @@ import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
+
 import { useEffect } from "react";
 import axios from "axios";
 import imagen from "../assets/version1.png";
 import { yellow } from "@mui/material/colors";
 import { useLocation, useNavigate } from "react-router";
 import { Container } from "@mui/system";
+import Admin_panel from "../components/admin_panel";
 
 const color = yellow[500];
+
+
+
+
+
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -77,28 +85,16 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+
   let Genres;
   const { pathname } = useLocation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const {pathname} = useLocation()
+
   const [search, setSearch] = React.useState("");
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -106,6 +102,7 @@ export default function PrimarySearchAppBar() {
   const handleSubmit = () => {
     navigate(`/products/search/${search}`);
   };
+
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -329,21 +326,13 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                sendTo("admin");
-              }}
-            >
-              Panel admin
-            </Button>
+           <Admin_panel/>
           </Stack>
         </>
       );
     }
   }
-  console.log(user);
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -352,6 +341,7 @@ export default function PrimarySearchAppBar() {
         position="static"
       >
         <Toolbar>
+
           <Typography
             variant="h6"
             noWrap
@@ -386,6 +376,7 @@ export default function PrimarySearchAppBar() {
 
           {Genres}
 
+
           <Box sx={{ flexGrow: 1 }} />
           <form onSubmit={handleSubmit}>
             <Search>
@@ -402,8 +393,6 @@ export default function PrimarySearchAppBar() {
           {Auth}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }

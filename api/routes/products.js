@@ -1,6 +1,8 @@
 const express= require('express')
+const { validateToken } = require('../middlewares/tokens')
 const router = express.Router()
 const {Product,User, Genre}= require('../models')
+const {Op}=require('sequelize')
 
 
 //DEVUELVE TODOS LOS PRODUCTOS
@@ -27,8 +29,14 @@ router.get('/:productID',(req,res,next)=>{
 //BUSCA TODOS LOS JUEGOS CON TITULO SIMILAR A EL INPUT DEL USER EN LA BUSQUEDA
 router.get('/search/:input',(req,res,next)=>{
     if(!req.params.input)res.status(404).send('empty input')
-    Product.findAll({where:{name:req.params.input}})
+    Product.findAll({where:{
+        [Op.or]:
+    [{name:{[Op.iLike]:`%${req.params.input}%`}},
+    {description:{[Op.iLike]:`%${req.params.input}%`}}
+    ]
+    }})
     .then(productMatches=>{
+        //console.log(productMatches)
         if(!productMatches)res.status(201).send('NO MATCHES')
         res.status(200).send(productMatches)})
         .catch(next)

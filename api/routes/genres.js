@@ -1,6 +1,10 @@
+
 const express = require("express");
 const router = express.Router();
 const { Product, User, Genre } = require("../models");
+const { validateToken } = require('../middlewares/tokens')
+
+
 
 // Ruta para devolver todos los generos.
 router.get("/", (req, res, next) => {
@@ -35,4 +39,6 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
+
 module.exports = router;
+
