@@ -1,5 +1,5 @@
 import React from 'react'
-import ComplexGrid  from './admin_panel/Admin_grid'
+import {GridAllUsers}  from './admin_panel/Admin_users'
 import { Box, Grid,  } from "@mui/material"
 
 export const Users = ({users}) => {
@@ -9,7 +9,7 @@ export const Users = ({users}) => {
         <Grid item xs = {12}>
           <Box border = {2}>
             {users?.map((user)=>{
-              return <ComplexGrid product = {user}/>
+              return <GridAllUsers user = {user}/>
             })}
           </Box>
         </Grid>
