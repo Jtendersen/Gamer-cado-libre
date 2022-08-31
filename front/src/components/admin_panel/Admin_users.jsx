@@ -1,3 +1,4 @@
+import { Box, Grid, Table } from '@mui/material'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Navbar from "../../commons/Navbar"
@@ -22,6 +23,9 @@ setUser(users.data)
   )
 }
 
+export function AllUsers({product}) {
+
+}
 
 
 export default Admin_users
