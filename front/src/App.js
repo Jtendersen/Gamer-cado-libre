@@ -13,11 +13,11 @@ import { setUser } from "./state/user";
 import { getCart } from "./state/cart";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_genres from "./components/admin_panel/Admin_genres";
-
+import { useEffect } from 'react';
 import axios from "axios";
-
 import Admin_products from "./components/admin_panel/Admin_products";
 import Admin_users from "./components/admin_panel/Admin_users";
+import { Route, Routes } from "react-router";
 
 axios.defaults.withCredentials = true;
 
