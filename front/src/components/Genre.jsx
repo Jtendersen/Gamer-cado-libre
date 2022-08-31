@@ -1,10 +1,7 @@
-
-import * as React from 'react';
-import { useLocation, useNavigate } from 'react-router'
+import * as React from "react";
 import { useParams } from "react-router";
-import Navbar from '../commons/Navbar'
-import { Button } from '@mui/material';
-import Grid from '../commons/Grid';
+import Navbar from "../commons/Navbar";
+import Grid from "../commons/Grid";
 import Cart from "./Cart/Cart";
 import SubNavbarGenre from "../commons/SubNavbarGenre";
 import axios from 'axios';
@@ -26,12 +23,11 @@ const Genre = () => {
 
   return (
     <>
-
-      <Navbar/>
-      <Cart/>
+      <Navbar />
+      <Cart />
       <SubNavbarGenre />
-      <div id='genre'>
-        <Grid games={games}/>
+      <div id="genre">
+        <Grid games={games} />
       </div>
       <Footer/>
     </>
