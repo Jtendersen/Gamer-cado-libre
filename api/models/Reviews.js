@@ -10,7 +10,7 @@ Review.init(
       type: DataTypes.TEXT,
     },
     rating: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       validate: {
         min: 1,
         max: 10,
@@ -33,7 +33,7 @@ Review.addHook('afterCreate',(review)=>{
     var avgRating=0
     allReviews.forEach((userReview,i)=>{
       if(userReview.rating)avgRating+=userReview.rating
-      if(!allReviews[i+1])avgRating/=i
+      if(!allReviews[i+1])avgRating/=i+1
     })
     Product.update({valoration:avgRating},{where:{id:allReviews[0].product.id}})
   })

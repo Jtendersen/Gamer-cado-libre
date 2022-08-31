@@ -36,7 +36,7 @@ router.get('/search/:input',(req,res,next)=>{
     ]
     }})
     .then(productMatches=>{
-        console.log(productMatches)
+        //console.log(productMatches)
         if(!productMatches)res.status(201).send('NO MATCHES')
         res.status(200).send(productMatches)})
         .catch(next)
