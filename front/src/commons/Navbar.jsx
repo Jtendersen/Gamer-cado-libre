@@ -10,10 +10,7 @@ import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
-import { useEffect } from "react";
-import axios from "axios";
-import {toggleCart} from "../state/handleCart"
-
+import { toggleCart } from "../state/handleCart";
 
 import imagen from "../assets/version1.png";
 import { yellow } from "@mui/material/colors";
@@ -82,7 +79,6 @@ export default function PrimarySearchAppBar() {
     navigate(`/products/search/${search}`);
   };
 
-
   if (!user.id) {
     Auth = (
       <>
@@ -127,7 +123,7 @@ export default function PrimarySearchAppBar() {
               variant="outlined"
               color="primary"
               onClick={() => {
-                sendTo("cart");
+                dispatch(toggleCart());
               }}
             >
               Cart
@@ -162,7 +158,7 @@ export default function PrimarySearchAppBar() {
               variant="outlined"
               color="primary"
               onClick={() => {
-                sendTo("cart");
+                dispatch(toggleCart());
               }}
             >
               Cart
@@ -181,7 +177,6 @@ export default function PrimarySearchAppBar() {
           </Stack>
         </>
       );
-
     }
   }
 
