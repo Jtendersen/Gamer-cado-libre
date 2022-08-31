@@ -18,7 +18,7 @@ router.post("/", (req, res, next) => {
     data: query,
   })
     .then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       res.send(response.data);
     })
     .catch((err) => {
