@@ -9,6 +9,9 @@ import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
+import Cart from "./Cart/Cart";
+
+
 
 const Product = () => {
 
@@ -77,6 +80,8 @@ const Product = () => {
   return (
     <>
       <Navbar />
+
+      <Cart/>
       <Box>
         <div id="product">
           <div className="content">

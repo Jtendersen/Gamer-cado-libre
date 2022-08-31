@@ -1,32 +1,39 @@
 import React from "react";
 import { Box, Button, Drawer, Paper, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartProducts from "./CartProducts";
-import { getCart, addToCart, setCart } from "../state/cart";
+import { getCart, addToCart, setCart } from "../../state/cart";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import {toggleCart} from "../../state/handleCart"
+import Checkout from "./Checkout";
+
+
+
+
+
+
+
+
 
 const Cart = () => {
+
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  
+  const handleCart = useSelector((state)=>state.handleCart.open)
+  const onCloseCart = () => { dispatch(toggleCart())}
 
-  const [showCart, toggleShowCart] = useState(false);
+  const [checkout, setCheckout] = useState(false)
 
-  const handleCart = () => {
-    showCart ? toggleShowCart(false) : toggleShowCart(true);
-    axios.get(`/api/cart/${user.id}`).then((r) => {
-      // localStorage.setItem("cart",JSON.stringify(r.data));
-      dispatch(setCart(r.data));
-      // return r.data
-    });
-  };
+  const handleCheckoutBtn = () => setCheckout(!checkout)
 
-  return (
+
+return (
     <>
-      <Button onClick={handleCart}>Cart</Button>
+
       <Drawer
-        open={showCart}
-        onClose={handleCart}
+        open={handleCart}
+        onClose={onCloseCart}
         anchor="right"
         PaperProps={{ sx: { width: 700 } }}
       >
@@ -37,7 +44,8 @@ const Cart = () => {
           flexDirection="column"
           alignItems={"center"}
         >
-          <Typography variant="h3">Your cart</Typography>
+          
+          {!checkout?<><Typography variant="h3">Your cart</Typography>
           <Typography variant="body1">Start gaming today!</Typography>
           <Paper
             elevation={0}
@@ -49,6 +57,9 @@ const Cart = () => {
           >
             <CartProducts />
           </Paper>
+          </> : <Checkout/>}
+          <Button onClick={handleCheckoutBtn} variant="contained">{checkout?`cart`:`checkout`}</Button>
+          
         </Box>
       </Drawer>
     </>

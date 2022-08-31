@@ -4,6 +4,7 @@ import { useLocation } from 'react-router'
 import Footer from '../commons/Footer'
 import Grid from '../commons/Grid'
 import Navbar from '../commons/Navbar'
+import Cart from "./Cart/Cart";
 
 const Search = () => {
 
@@ -23,6 +24,7 @@ const Search = () => {
   return (
     <>
         <Navbar/>
+        <Cart/>
         <Grid games={games}/>
         <Footer/>
     </>

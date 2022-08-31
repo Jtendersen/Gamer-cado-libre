@@ -8,12 +8,12 @@ import SignIn from "./components/Signin";
 import Content from "./components/Content";
 import { Products } from "./components/Products";
 import Product from "./components/Product";
-import Cart from "./components/Cart";
+import Cart from "./components/Cart/Cart";
 import Genre from "./components/Genre";
 import Search from "./components/Search";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { setUser } from "./state/user";
-import { setCart } from "./state/cart";
+import { getCart } from "./state/cart";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_panel from "./components/admin_panel";
 import Admin_genres from "./components/admin_panel/Admin_genres";
@@ -28,10 +28,17 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   useEffect(() => {
-    axios.get("/api/auth/me").then((resp) => dispatch(setUser(resp.data)));
+    axios.get("/api/auth/me").then((resp) => {
+    dispatch(setUser(resp.data))
+    return resp.data})
+    .then((user)=>{
+      dispatch(getCart(user.id)) })
   }, []);
 
+  
   // useEffect(() => {
 
   // let storedUser = JSON.parse(localStorage.getItem("user"));
@@ -56,7 +63,6 @@ function App() {
         }
       />
       <Route path="/user" element={""} />
-      <Route path="/cart" element={""} />
       <Route
         path="/signup"
         element={
