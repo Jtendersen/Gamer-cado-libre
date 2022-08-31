@@ -74,11 +74,11 @@
   height: 380px;
 }
 
-#img > img{
+#img > img {
   height: 100%;
 }
 
-#gameInfo{
+#gameInfo {
   width: 70%;
   margin: 2%;
 }
@@ -94,7 +94,7 @@
   font-size: larger;
 }
 
-#text{
+#text {
   font-size: 110%;
 }
 
@@ -107,7 +107,7 @@
 }
 
 #genre {
-  margin: 5%;
+  margin: 4%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -137,4 +137,13 @@
   margin-right: 10%;
   width: 80%;
   justify-content: center;
+}
+
+#loguito {
+  margin-top: 3%;
+  width: 70%;
+}
+
+#loguitoPosta {
+  width: 100%;
 }
