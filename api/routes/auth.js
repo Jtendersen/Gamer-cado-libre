@@ -25,9 +25,8 @@ router.post("/register", (req, res) => {
 
 // Ruta para loguear un usuario.
 router.post("/login", (req, res) => {
-
   const { email, password, firstName, lastName } = req.body;
-  
+
   if (req.body.google) {
     User.findOrCreate({
       where: { email },
@@ -45,12 +44,11 @@ router.post("/login", (req, res) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        admin: user.admin,
+        admin: false,
       };
       const token = generateToken(payload);
       res.cookie("token", token);
       res.send(payload);
-
     });
   } else {
     User.findOne({ where: { email } }).then((user) => {
