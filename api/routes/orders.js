@@ -1,6 +1,7 @@
 const express = require("express");
 const { Op } = require("sequelize");
 const { Cart, Order } = require("../models");
+const sendEmail = require("../utils/index.js");
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ router.post("/:userId", (req, res, next) => {
   //recibe un req.body con el sig formato:
   /*
         {
+          nombre: nombrecompleto
             paymentMethod: pMethod,
             sendingAddress: sAddress
         }
@@ -38,8 +40,16 @@ router.post("/:userId", (req, res, next) => {
     });
   });
   //aca habria que hacer querys para enviar el pedido completo al front y por mail
+  sendEmail(
+    "jtendersen@hotmail.com",
+    "jtendersen@gmail.com",
+    "Amiguito",
+    "99565446546",
+    "<p>Superlujo1</p><p>SuperLujo2</p><p>Superlujo3</p>",
+    `${req.body.recieverName}`
+  );
+
   res.sendStatus(201);
 });
-// });
 
 module.exports = router;
