@@ -3,36 +3,20 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 
-import { useEffect } from "react";
-import axios from "axios";
 import imagen from "../assets/version1.png";
 import { yellow } from "@mui/material/colors";
-import { useLocation, useNavigate } from "react-router";
-import { Container } from "@mui/system";
+import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
 
 const color = yellow[500];
-
-
-
-
-
-
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,15 +69,6 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-
-  let Genres;
-  const { pathname } = useLocation();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const {pathname} = useLocation()
-
   const [search, setSearch] = React.useState("");
 
   const handleSearch = (e) => {
@@ -102,135 +77,6 @@ export default function PrimarySearchAppBar() {
   const handleSubmit = () => {
     navigate(`/products/search/${search}`);
   };
-
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          id="link"
-          to="/products/action"
-          style={{ textDecoration: "none" }}
-        >
-          Action
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          id="link"
-          to="/products/adventure"
-          style={{ textDecoration: "none" }}
-        >
-          Adventure
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          id="link"
-          to="/products/strategy"
-          style={{ textDecoration: "none" }}
-        >
-          Strategy
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link
-          id="link"
-          to="/products/shooter"
-          style={{ textDecoration: "none" }}
-        >
-          Shooter
-        </Link>
-      </MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="primary">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
-
-  if (pathname != "/") {
-    Genres = (
-      <>
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <IconButton
-            size="small"
-            edge="end"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-            id="margin"
-          >
-            Genres
-          </IconButton>
-        </Box>
-      </>
-    );
-  } else Genres = <></>;
 
   if (!user.id) {
     Auth = (
@@ -259,7 +105,7 @@ export default function PrimarySearchAppBar() {
       </>
     );
   } else {
-    if (user.admin == false) {
+    if (user.admin === false) {
       Auth = (
         <>
           <Stack direction="row" spacing={2}>
@@ -326,13 +172,12 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-           <Admin_panel/>
+            <Admin_panel />
           </Stack>
         </>
       );
     }
   }
-
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -341,7 +186,6 @@ export default function PrimarySearchAppBar() {
         position="static"
       >
         <Toolbar>
-
           <Typography
             variant="h6"
             noWrap
@@ -361,21 +205,6 @@ export default function PrimarySearchAppBar() {
               </Box>
             </Link>
           </Typography>
-
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="primary"
-              id="margin"
-            ></IconButton>
-          </Box>
-
-          {Genres}
-
 
           <Box sx={{ flexGrow: 1 }} />
           <form onSubmit={handleSubmit}>

@@ -1,11 +1,9 @@
 import * as React from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import Navbar from "../commons/Navbar";
 import SubNavbarGenre from "../commons/SubNavbarGenre";
-import { Button } from "@mui/material";
 import Grid from "../commons/Grid";
 import axios from "axios";
-import { Stack } from "@mui/system";
 
 const Genre = () => {
   const { genre } = useParams();
