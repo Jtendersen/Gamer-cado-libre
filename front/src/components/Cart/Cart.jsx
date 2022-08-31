@@ -30,12 +30,14 @@ return (
     <>
 
       <Drawer
+       
         open={opencart}
         onClose={onCloseCart}
         anchor="right"
-        PaperProps={{ sx: { width: 700 } }}
+        PaperProps={{ sx: {backgroundColor: "secondary.main", width: 700 } }}
       >
         <Box
+        
           sx={{ p: 5 }}
           display="flex"
           justifyContent={"center"}
@@ -43,9 +45,10 @@ return (
           alignItems={"center"}
         >
           
-          {step===0?<><Typography variant="h3">Your cart</Typography>
-          <Typography variant="body1">Start gaming today!</Typography>
+          {step===0?<><Typography color="primary" variant="h3">your cart</Typography>
+          <Typography color="info" variant="body1">Start gaming today!</Typography>
           <Paper
+          color="secondary"
             elevation={0}
             sx={{
               mt: 2,
