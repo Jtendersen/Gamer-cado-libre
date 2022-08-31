@@ -1,38 +1,36 @@
 import React from "react";
 import { Box, Button, Drawer, Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import CartProducts from "./CartProducts";
-import { getCart, addToCart, setCart } from "../../state/cart";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import {toggleCart} from "../../state/handleCart"
 import Checkout from "./Checkout";
-
-
-
-
-
-
-
+import { next, reset} from "../../state/handleCart";
 
 
 const Cart = () => {
 
   const dispatch = useDispatch();
   
-  const handleCart = useSelector((state)=>state.handleCart.open)
-  const onCloseCart = () => { dispatch(toggleCart())}
+  const opencart = useSelector((state)=>state.handleCart.open)
+  const step = useSelector((state)=>state.handleCart.step)
+  const cart = useSelector((state) => state.cart);
 
-  const [checkout, setCheckout] = useState(false)
+  const onCloseCart = () => { 
+  dispatch(toggleCart())
+  step===4&& setTimeout(()=>{dispatch(reset())}, 500);
+}
 
-  const handleCheckoutBtn = () => setCheckout(!checkout)
+  const handleCheckoutBtn = () => cart.length===0? alert("No hay nada en tu carrillo!!") : dispatch(next())
+  
+  
+  
 
 
 return (
     <>
 
       <Drawer
-        open={handleCart}
+        open={opencart}
         onClose={onCloseCart}
         anchor="right"
         PaperProps={{ sx: { width: 700 } }}
@@ -45,7 +43,7 @@ return (
           alignItems={"center"}
         >
           
-          {!checkout?<><Typography variant="h3">Your cart</Typography>
+          {step===0?<><Typography variant="h3">Your cart</Typography>
           <Typography variant="body1">Start gaming today!</Typography>
           <Paper
             elevation={0}
@@ -55,10 +53,25 @@ return (
               padding: 3,
             }}
           >
-            <CartProducts />
+            {cart.length===0? 
+            <Box
+          sx={{ p: 5 }}
+          display="flex"
+          justifyContent={"center"}
+          flexDirection="column"
+          alignItems={"center"}
+        >
+        <Typography variant="body4">no products yet</Typography>
+      </Box> 
+      :<CartProducts />  }
           </Paper>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button onClick={handleCheckoutBtn} variant="contained" sx={{ mt: 3, ml: 1 }}>checkout</Button>
+
+          </Box>
           </> : <Checkout/>}
-          <Button onClick={handleCheckoutBtn} variant="contained">{checkout?`cart`:`checkout`}</Button>
+
+          
           
         </Box>
       </Drawer>
@@ -67,3 +80,4 @@ return (
 };
 
 export default Cart;
+      

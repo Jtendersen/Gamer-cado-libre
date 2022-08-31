@@ -17,7 +17,7 @@ export default function SimpleSlider() {
   useEffect(() => {
     axios.get("/api/genres").then((res) => setNavbarGenres(res.data));
   }, []);
-  console.log("ESTOS SON LOS GENRERS", navbarGenres);
+  
 
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
