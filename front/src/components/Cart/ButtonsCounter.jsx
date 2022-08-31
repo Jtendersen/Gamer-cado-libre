@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { ButtonGroup, Button } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import {cartItemQuantity} from "../../state/cart"
+//import { useDispatch } from 'react-redux';
+//import {cartItemQuantity} from "../../state/cart"
 
 const ButtonsCounter = (props) => {
 
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
 
     const [counter, setCounter] = useState(1);
 

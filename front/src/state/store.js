@@ -3,7 +3,8 @@ import logger from "redux-logger"
 import cartReducer from "./cart";
 import searchReducer from "./search";
 import userReducer from "./user";
-import openCartReducer from "./handleCart"
+import handleCartReducer from "./handleCart"
+
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
@@ -11,7 +12,8 @@ const store = configureStore({
       cart: cartReducer,
       user: userReducer,
       search:searchReducer,
-      handleCart: openCartReducer,
+      handleCart: handleCartReducer,
+      
       },
   });
 
