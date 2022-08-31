@@ -19,6 +19,7 @@ export const removeFromCart = createAsyncThunk(
   ({ userId, itemId }) => {
     console.log(userId, itemId);
 
+
     return axios
       .delete(`http://localhost:3001/api/cart/delete/${userId}`, {
         data: { itemId: itemId },

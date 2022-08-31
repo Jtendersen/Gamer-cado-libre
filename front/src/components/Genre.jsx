@@ -4,7 +4,9 @@ import Navbar from "../commons/Navbar";
 import Grid from "../commons/Grid";
 import Cart from "./Cart/Cart";
 import SubNavbarGenre from "../commons/SubNavbarGenre";
-import axios from "axios";
+import axios from 'axios';
+import Footer from '../commons/Footer';
+
 
 const Genre = () => {
   const { genre } = useParams();
@@ -27,6 +29,7 @@ const Genre = () => {
       <div id="genre">
         <Grid games={games} />
       </div>
+      <Footer/>
     </>
   );
 };
