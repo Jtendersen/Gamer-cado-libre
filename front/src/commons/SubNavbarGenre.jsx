@@ -8,6 +8,9 @@ import { CardActionArea, Grid } from "@mui/material";
 import axios from "axios";
 import { maxHeight, Stack } from "@mui/system";
 import { Link } from "react-router-dom";
+import { yellow } from "@mui/material/colors";
+
+const color = yellow[500];
 
 // async function getNavGenres() {
 //   let navGenres = await axios.get("/api/genres");
@@ -53,7 +56,7 @@ export default function SimpleSlider() {
                     direction="column"
                     justifyContent="center"
                     sx={{
-                      bgcolor: "info.main",
+                      bgcolor: color,
                       height: 80,
                     }}
                   >

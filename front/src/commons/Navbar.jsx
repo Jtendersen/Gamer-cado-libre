@@ -13,25 +13,27 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { useEffect } from "react";
 import axios from "axios";
-import imagen from "../assets/version1.jpg";
-
+import imagen from "../assets/version1.png";
+import { yellow } from "@mui/material/colors";
 import { useLocation, useNavigate } from "react-router";
 import { Container } from "@mui/system";
+
+const color = yellow[500];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.25),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.55),
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(10),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -48,6 +50,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "primary",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -65,12 +68,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/api/auth/me")
-  //     .then((resp) => console.log(resp));
-  // }, []);
-
   let Auth;
 
   const navigate = useNavigate();
@@ -184,7 +181,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton size="large" aria-label="show 4 new mails" color="primary">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -241,91 +238,107 @@ export default function PrimarySearchAppBar() {
   if (!user.id) {
     Auth = (
       <>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("signin");
-          }}
-        >
-          Login
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => {
-            sendTo("signup");
-          }}
-        >
-          Signup
-        </Button>
+        <Stack direction="row" spacing={2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              sendTo("signin");
+            }}
+          >
+            Login
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              sendTo("signup");
+            }}
+          >
+            Signup
+          </Button>
+        </Stack>
       </>
     );
   } else {
-    if (user.admin == "false") {
+    if (user.admin == false) {
       Auth = (
         <>
-          <Button
-            color="inherit"
-            onClick={() => {
-              sendTo("user");
-            }}
-          >
-            {user.firstName}
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              sendTo("cart");
-            }}
-          >
-            Cart
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              dispatch(sendLogoutRequest());
-              sendTo("");
-            }}
-          >
-            Logout
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("cart");
+              }}
+            >
+              Cart
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                dispatch(sendLogoutRequest());
+                sendTo("");
+              }}
+            >
+              Logout
+            </Button>
+          </Stack>
         </>
       );
     } else {
       Auth = (
         <>
-          <Button
-            color="inherit"
-            onClick={() => {
-              sendTo("user");
-            }}
-          >
-            {user.firstName}
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              sendTo("cart");
-            }}
-          >
-            Cart
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              dispatch(sendLogoutRequest());
-              sendTo("");
-            }}
-          >
-            Logout
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => {
-              sendTo("admin");
-            }}
-          >
-            Panel admin
-          </Button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("cart");
+              }}
+            >
+              Cart
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                dispatch(sendLogoutRequest());
+                sendTo("");
+              }}
+            >
+              Logout
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("admin");
+              }}
+            >
+              Panel admin
+            </Button>
+          </Stack>
         </>
       );
     }
@@ -334,7 +347,10 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        style={{ backgroundColor: color, color: "primary" }}
+        position="static"
+      >
         <Toolbar>
           <Typography
             variant="h6"
@@ -358,12 +374,12 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
-              size="small"
+              size="large"
               edge="end"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
-              color="inherit"
+              color="primary"
               id="margin"
             ></IconButton>
           </Box>
