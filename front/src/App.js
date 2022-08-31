@@ -1,12 +1,11 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./commons/Navbar";
 import Footer from "./commons/Footer";
 import SignUp from "./components/Signup";
 import SignIn from "./components/Signin";
 import Content from "./components/Content";
-import { Products } from "./components/Products";
 import Product from "./components/Product";
 import Cart from "./components/Cart/Cart";
 import Genre from "./components/Genre";
@@ -15,7 +14,6 @@ import { useDispatch, useSelector} from "react-redux";
 import { setUser } from "./state/user";
 import { getCart } from "./state/cart";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
-import Admin_panel from "./components/admin_panel";
 import Admin_genres from "./components/admin_panel/Admin_genres";
 
 import axios from "axios";
@@ -62,7 +60,6 @@ function App() {
           </div>
         }
       />
-      <Route path="/user" element={""} />
       <Route
         path="/signup"
         element={
@@ -75,8 +72,6 @@ function App() {
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
       <Route path="/product/:name" element={<Product />} />
-
-      <Route path="/admin" element={<Admin_panel/>} />
       <Route path='/admin/allUsers' element={<Admin_users/>}/>
       <Route path="/admin/genres" element={<Admin_genres/>} />
       <Route path="/admin/products" element={<Admin_products/>}/>

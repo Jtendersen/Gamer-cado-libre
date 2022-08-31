@@ -24,18 +24,18 @@ export const removeFromCart = createAsyncThunk("REMOVEFROMCART", ({userId, itemI
   });
 });
 
-export const cartItemQuantity = createAsyncThunk(
-  "CARTITEMQUANTITY",
-  (recibido) => {
-    //console.log("CARTITEMQUANTITY",recibido)
-    return axios
-      .put("http://localhost:3001/api/cart", itemId, counter)
-      .then((r) => {
-        // localStorage.setItem("cart", JSON.stringify(r.data));
-        return r.data;
-      });
-  }
-);
+// export const cartItemQuantity = createAsyncThunk(
+//   "CARTITEMQUANTITY",
+//   (recibido) => {
+//     //console.log("CARTITEMQUANTITY",recibido)
+//     return axios
+//       .put("http://localhost:3001/api/cart", itemId, counter)
+//       .then((r) => {
+//         // localStorage.setItem("cart", JSON.stringify(r.data));
+//         return r.data;
+//       });
+//   }
+// );
 
 export const setCart = createAsyncThunk("SETCART", (input) => {
   return input;
@@ -45,7 +45,7 @@ const cartReducer = createReducer([], {
   [getCart.fulfilled]: (state, action) => action.payload,
   [addToCart.fulfilled]: (state, action) => action.payload,
   [removeFromCart.fulfilled]: (state, action) => action.payload,
-  [cartItemQuantity.fulfilled]: (state, action) => action.payload,
+  //[cartItemQuantity.fulfilled]: (state, action) => action.payload,
   [setCart.fulfilled]: (state, action) => action.payload,
 });
 
