@@ -1,6 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./commons/Navbar";
 import Footer from "./commons/Footer";
 import SignUp from "./components/Signup";
@@ -40,16 +40,17 @@ function App() {
   //if(storedCart) dispatch(setCart(storedCart))
 
   // }, []);
+ 
 
   return (
     <Routes>
       <Route
-        path="/"
+        path="*"
         element={
           <div className="App">
             <Navbar />
             <SubNavbarGenre />
-            <Content />
+            <Content/>
             <Footer />
             <Cart />
           </div>
