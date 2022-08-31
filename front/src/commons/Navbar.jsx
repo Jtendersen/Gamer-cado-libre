@@ -13,24 +13,35 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 
-import { useLocation, useNavigate } from 'react-router';
+import { useEffect } from "react";
+import axios from "axios";
+import imagen from "../assets/version1.png";
+import { yellow } from "@mui/material/colors";
+import { useLocation, useNavigate } from "react-router";
+import { Container } from "@mui/system";
 import Admin_panel from "../components/admin_panel";
+
+const color = yellow[500];
+
+
+
+
 
 
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.25),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.55),
   },
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(10),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
@@ -47,6 +58,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "primary",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -64,12 +76,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/api/auth/me")
-  //     .then((resp) => console.log(resp));
-  // }, []);
-
   let Auth;
 
   const navigate = useNavigate();
@@ -79,7 +85,15 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+
+  let Genres;
+  const { pathname } = useLocation();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
   const {pathname} = useLocation()
+
   const [search, setSearch] = React.useState("");
 
   const handleSearch = (e) => {
@@ -89,57 +103,280 @@ export default function PrimarySearchAppBar() {
     navigate(`/products/search/${search}`);
   };
 
-  if(!user.id){
-    Auth =  <>  
-                <Button color='inherit' onClick={()=>{sendTo('signin')}}>
-                  Login
-                </Button>
-                <Button color='inherit' onClick={()=>{sendTo('signup')}}>
-                  Signup
-                </Button>
-            </>
-  } else{
-    if(user.admin == false){
-    Auth =<>  
-              <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.firstName}
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
-                Cart
-              </Button>
-              <Button color='inherit' onClick={()=>{
-                dispatch(sendLogoutRequest())
-                sendTo('')
-                }}>
-                Logout
-              </Button>
-          </>
-    }else{
-    Auth=   <>
-              <Button color='inherit' onClick={()=>{sendTo('user')}}>
-                {user.firstName}
-              </Button>
-              <Button color='inherit' onClick={()=>{sendTo('cart')}}>
-                Cart
-              </Button>
-              <Button color='inherit' onClick={()=>{
-                dispatch(sendLogoutRequest())
-                sendTo('')
-                }}>
-                Logout
-              </Button>
-              <Admin_panel/>
-            </>
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          id="link"
+          to="/products/action"
+          style={{ textDecoration: "none" }}
+        >
+          Action
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          id="link"
+          to="/products/adventure"
+          style={{ textDecoration: "none" }}
+        >
+          Adventure
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          id="link"
+          to="/products/strategy"
+          style={{ textDecoration: "none" }}
+        >
+          Strategy
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link
+          id="link"
+          to="/products/shooter"
+          style={{ textDecoration: "none" }}
+        >
+          Shooter
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="primary">
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
+
+  if (pathname != "/") {
+    Genres = (
+      <>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <IconButton
+            size="small"
+            edge="end"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+            id="margin"
+          >
+            Genres
+          </IconButton>
+        </Box>
+      </>
+    );
+  } else Genres = <></>;
+
+  if (!user.id) {
+    Auth = (
+      <>
+        <Stack direction="row" spacing={2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              sendTo("signin");
+            }}
+          >
+            Login
+          </Button>
+
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              sendTo("signup");
+            }}
+          >
+            Signup
+          </Button>
+        </Stack>
+      </>
+    );
+  } else {
+    if (user.admin == false) {
+      Auth = (
+        <>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("cart");
+              }}
+            >
+              Cart
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                dispatch(sendLogoutRequest());
+                sendTo("");
+              }}
+            >
+              Logout
+            </Button>
+          </Stack>
+        </>
+      );
+    } else {
+      Auth = (
+        <>
+          <Stack direction="row" spacing={2}>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("cart");
+              }}
+            >
+              Cart
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                dispatch(sendLogoutRequest());
+                sendTo("");
+              }}
+            >
+              Logout
+            </Button>
+           <Admin_panel/>
+          </Stack>
+        </>
+      );
     }
   }
 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        style={{ backgroundColor: color, color: "primary" }}
+        position="static"
+      >
         <Toolbar>
-          <Button color='inherit' onClick={()=>{navigate('/')}}>
-                Gamer-cado Libre
-          </Button>
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ display: { xs: "none", sm: "block" } }}
+          >
+            <Link to="/" id="link" style={{ textDecoration: "none" }}>
+              <Box sx={{ width: 0.5, height: 0.1 }}>
+                <div id="loguito">
+                  <img
+                    id="loguitoPosta"
+                    src={imagen}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </div>
+              </Box>
+            </Link>
+          </Typography>
+
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="primary"
+              id="margin"
+            ></IconButton>
+          </Box>
+
+          {Genres}
+
+
           <Box sx={{ flexGrow: 1 }} />
           <form onSubmit={handleSubmit}>
             <Search>
