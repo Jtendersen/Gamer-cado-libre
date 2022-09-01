@@ -105,6 +105,7 @@ router.delete("/delete/:userId", (req, res, next) => {
 
 // Ruta para actializar la cantidad de productos en el carrito.
 router.put("/:userId", (req, res, next) => {
+  console.log(req.body)
   /*REQ BODY TIPO
     {
         quantity: cant,
@@ -117,8 +118,10 @@ router.put("/:userId", (req, res, next) => {
       userId: req.params.userId,
     },
   })
+
     .then((productToUpdate) => {
       console.log(productToUpdate);
+
       productToUpdate.update({ quantity: req.body.quantity }).then(() => {
         //VER QUE DATOS REQUIERE EL FRONT ANTE LA ACTUALIZACION DE LA CANT.
         Cart.findAll({

@@ -1,11 +1,6 @@
 import axios from "axios";
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const sendLoginRequest = createAsyncThunk("LOGIN_USER", (userObj) => {
-//   return axios
-//     .post("/api/auth/login", userObj, { withCredentials: true })
-//     .catch((err) => err.response.data);
-// });
 
 export const sendLoginRequest = createAsyncThunk("LOGIN", (input) => {
   return axios
@@ -13,19 +8,13 @@ export const sendLoginRequest = createAsyncThunk("LOGIN", (input) => {
       withCredentials: true,
       credentials: "include",
     })
-    .then((resp) => {
-      
-      return resp.data;
-    })
+    .then(({data}) => data);
     
-  // .then((r) => {
-  // localStorage.setItem("user", JSON.stringify(r.data));
-  //       // return r.data;
-  // });
 });
 
 export const sendSignUpRequest = createAsyncThunk("SIGNUP", (input) => {
-  return axios.post("/api/auth/register", input);
+  return axios.post("/api/auth/register", input)
+  .then(({data})=> data);
 });
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", () => {
@@ -36,7 +25,10 @@ export const setUser = createAsyncThunk("SETUSER", (input) => {
   return input;
 });
 
-// const user = JSON.parse(window.localStorage.getItem("user"));
+export const changeUserInfo = createAsyncThunk("SETUSER", (input) => {
+  return input;
+});
+
 
 const userReducer = createReducer(
   {},

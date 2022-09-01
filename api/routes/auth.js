@@ -18,6 +18,7 @@ router.post("/register", (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       admin: user.admin,
+      age:user.age
     };
     res.status(201).send(payload);
   });
@@ -25,7 +26,7 @@ router.post("/register", (req, res) => {
 
 // Ruta para loguear un usuario.
 router.post("/login", (req, res) => {
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password, firstName, lastName, age} = req.body;
 
   if (req.body.google) {
     User.findOrCreate({
@@ -35,6 +36,7 @@ router.post("/login", (req, res) => {
         lastName,
         firstName,
         password: "sarasa",
+        age:18
       },
     }).then((data) => {
       const user = data[0].dataValues;
@@ -45,6 +47,7 @@ router.post("/login", (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         admin: false,
+        age: user.age
       };
       const token = generateToken(payload);
       res.cookie("token", token);
@@ -61,6 +64,7 @@ router.post("/login", (req, res) => {
           firstName: user.firstName,
           lastName: user.lastName,
           admin: user.admin,
+          age: user.age
         };
         const token = generateToken(payload);
         res.cookie("token", token);

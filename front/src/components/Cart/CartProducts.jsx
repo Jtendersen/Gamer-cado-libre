@@ -48,7 +48,7 @@ const CartProducts = () => {
                 $ {item.totalPrice}
               </Typography>
 
-              {/* <ButtonsCounter itemId={item.id} quantity={item.quantity} /> */}
+              <ButtonsCounter itemId={item.id} quantity={item.quantity} />
             </Box>
             <Box
               onClick={() => {

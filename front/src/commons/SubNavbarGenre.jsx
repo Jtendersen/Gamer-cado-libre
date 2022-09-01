@@ -7,17 +7,18 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import axios from "axios";
 import { Stack } from "@mui/system";
-import { Link } from "react-router-dom";
-import { yellow } from "@mui/material/colors";
+import { Link  } from "react-router-dom";
 
-const color = yellow[500];
+
+
+
+
 
 export default function SimpleSlider() {
   const [navbarGenres, setNavbarGenres] = useState([]);
   useEffect(() => {
     axios.get("/api/genres").then((res) => setNavbarGenres(res.data));
   }, []);
-  
 
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
@@ -27,41 +28,49 @@ export default function SimpleSlider() {
     speed: 500,
     slidesToShow: 10,
     slidesToScroll: 9,
+    
   };
   return (
     <Slider {...settings}>
       {navbarGenres.map((genre) => (
         <div>
-          <h3 key={genre.id}>
+          <h3 key={genre.id} id="CardActionArea">
             <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
               <CardActionArea>
                 <CardMedia
+      
                   component="img"
                   height="200"
                   image={baseUrl + genre.products[0].urlId + ".jpg"}
                   alt="Genre_img"
                 />
-                <Link to={`/products/${genre.genre}`}>
+                
+                
+                <Link style={{ textDecoration: "none" }}  to={`/products/${genre.genre}`}>
                   <CardContent
                     component={Stack}
                     direction="column"
                     justifyContent="center"
                     sx={{
-                      bgcolor: color,
+                      bgcolor: "secondary.main",
                       height: 80,
                     }}
                   >
                     <Typography
+                      color="text.main"
                       gutterBottom
                       variant="subtitle2"
                       component="div"
+                      borderRadius={5}
                     >
-                      {genre.genre}
+                      {(genre.genre).toUpperCase()}
                     </Typography>
                   </CardContent>
-                </Link>
+                  </Link>
+                
               </CardActionArea>
             </Card>
+           
           </h3>
         </div>
       ))}

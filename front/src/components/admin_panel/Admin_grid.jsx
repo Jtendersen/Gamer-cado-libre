@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import ButtonBase from '@mui/material/ButtonBase';
 import { Button } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleProduct, productData } from '../../state/product';
 
 
 const Img = styled('img')({
@@ -18,7 +19,7 @@ const Img = styled('img')({
 
 export default function ComplexGrid({product}) {
 
-    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleRemove = function (){
         axios.delete(`http://localhost:3001/api/products/${product.id}`)
@@ -31,7 +32,8 @@ export default function ComplexGrid({product}) {
     }
 
     const handleEdit = function (){
-        navigate(`/product/${product.id}`)
+        dispatch(toggleProduct())
+        dispatch(productData(product))
     }
 
   return (
@@ -49,7 +51,7 @@ export default function ComplexGrid({product}) {
         <Grid container spacing={2}>
             <Grid item>
             <ButtonBase sx={{ width: 128, height: 128 }}>
-                <Img alt="complex" src={`https://images.igdb.com/igdb/image/upload/t_cover_small/${product.urlId}.jpg`} />
+                <Img alt="complex" src={`https://images.igdb.com/igdb/image/upload/t_cover_small/${product.urlId}.jpg`}/>
             </ButtonBase>
             </Grid>
             <Grid item xs={12} sm container>

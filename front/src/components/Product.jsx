@@ -25,6 +25,7 @@ const Product = () => {
   const [alreadyPostedReview, setAlreadyPostedReview] = React.useState(false)
 
   let commentary;
+  let valoration;
   React.useEffect(() => {
     axios
       .get(`http://localhost:3001/api/products/${params.pathname.split("/")[2]}`)
@@ -48,20 +49,22 @@ const Product = () => {
   }
   const handleCart = (e) => {
     //pedido a axios para agregar al carrito
-    
-    dispatch(addToCart({
+    if(!user.id) alert('You are not logued')
+    else{
+      dispatch(addToCart({
       userId:user.id,
       quantity:1,
       productId:game.id,
-          
-  }))
+      }))
     alert("The videogame was succesfully added at the cart");
+    }
+    
   };
 
   const baseURL = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
   
-    if(alreadyPostedReview === false){
+    if(alreadyPostedReview === false && user.id){
       commentary =<>
                     <TextField onChange={handleReview}/>
                     <Rating
@@ -74,8 +77,11 @@ const Product = () => {
                     <Button onClick={handleAdd}>Add review</Button>
                   </>
     }else{
-      commentary = <Typography>You already have voted</Typography>
+      if(!user.id) {commentary = <Typography>You are not logued</Typography>}
+      else {commentary = <Typography>You already have voted</Typography>}
     }
+    
+    
   
   return (
     <>

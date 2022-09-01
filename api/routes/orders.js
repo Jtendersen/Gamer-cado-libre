@@ -58,6 +58,7 @@ router.post("/", validateAuth, (req, res, next) => {
   });
 });
 
+
 //ruta para historial de ordenes
 router.get("/", (req, res, next) => {
   const userId = req.user.id;
@@ -74,5 +75,7 @@ router.get("/", (req, res, next) => {
     })
     .catch(next);
 });
+
+
 
 module.exports = router;

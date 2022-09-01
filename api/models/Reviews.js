@@ -12,9 +12,10 @@ Review.init(
     rating: {
       type: DataTypes.FLOAT,
       validate: {
-        min: 1,
+        min: 0,
         max: 10,
       },
+      defaultValue: 0,
     },
   },
   {
