@@ -14,7 +14,7 @@ router.get("/", getAllGenres);
 router.put("/:genreID", nameChange);
 
 // Ruta para agregar un genero al modelo genres.
-router.post("/", router.post("/", addGenre););
+router.post("/", addGenre);
 
 router.delete("/:id", deleteGenre);
 

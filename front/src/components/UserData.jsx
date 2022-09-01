@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const UserData = () => {
+export const UserData = () => {
   const user = useSelector((state) => state.user);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);

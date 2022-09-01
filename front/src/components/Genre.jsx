@@ -3,9 +3,8 @@ import { useParams } from "react-router";
 import Grid from "../commons/Grid";
 import Cart from "./Cart/Cart";
 import SubNavbarGenre from "../commons/SubNavbarGenre";
-import axios from 'axios';
-import Footer from '../commons/Footer';
-
+import axios from "axios";
+import Footer from "../commons/Footer";
 
 const Genre = () => {
   const { genre } = useParams();
@@ -18,17 +17,15 @@ const Genre = () => {
         setGames(games.data);
       });
   }, [genre]);
-  //console.log(games);
 
   return (
     <>
-      
       <SubNavbarGenre />
       <Cart />
       <div id="genre">
         <Grid games={games} />
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

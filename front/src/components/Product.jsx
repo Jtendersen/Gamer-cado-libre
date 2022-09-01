@@ -9,6 +9,7 @@ import axios from "axios";
 import { addToCart } from "../state/cart";
 import { useDispatch, useSelector } from "react-redux";
 import Cart from "./Cart/Cart";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Product = () => {
   const dispatch = useDispatch();
