@@ -5,6 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -49,6 +50,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 function Admin_panel() {
+  const dispatch=useDispatch()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -85,7 +87,7 @@ function Admin_panel() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem value={"genres"} onClick={() => sendTo("admin/genres")}>
+        <MenuItem value={"genres"} onClick={() =>sendTo("admin/genres")}>
           Genres
         </MenuItem>
         <MenuItem value={"Adventure"} onClick={() => sendTo("admin/allUsers")}>

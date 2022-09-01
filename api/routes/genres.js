@@ -18,8 +18,9 @@ router.get("/", (req, res, next) => {
 });
 // Ruta para cambiar el nombre de un genero.
 router.put("/:genreID", (req, res, next) => {
-  if (!req.params.genreID) res.sendStatus(404);
-  Genre.update(req.body, { where: { id: req.params.genreID } })
+  if (!req.params.genreID) return res.sendStatus(404);
+  const {input}=req.body
+  Genre.update({genre:input}, { where: { id: req.params.genreID } })
     .then(() => res.sendStatus(201))
     .catch(next);
 });
@@ -34,9 +35,9 @@ router.post("/", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   console.log(req.params);
   Genre.destroy({ where: { id: req.params.id } }).then((data) => {
-    if (!data) res.sendStatus(404);
+    if(!data)return res.sendStatus(404)
     res.sendStatus(204);
-  });
+  })
 });
 
 

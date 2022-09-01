@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useParams } from "react-router";
-import Navbar from "../commons/Navbar";
 import Grid from "../commons/Grid";
 import Cart from "./Cart/Cart";
 import SubNavbarGenre from "../commons/SubNavbarGenre";
@@ -23,9 +22,9 @@ const Genre = () => {
 
   return (
     <>
-      <Navbar />
-      <Cart />
+      
       <SubNavbarGenre />
+      <Cart />
       <div id="genre">
         <Grid games={games} />
       </div>
