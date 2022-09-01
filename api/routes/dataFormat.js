@@ -1405,5 +1405,3 @@ let formateado = unformated.map((game) => {
 
   return result;
 });
-
-console.log(formateado);

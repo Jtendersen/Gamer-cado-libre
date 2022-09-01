@@ -23,8 +23,6 @@ router.delete("/delete/", validateAuth, deleteItem);
 
 // Ruta para actializar la cantidad de productos en el carrito.
 router.put("/:userId", (req, res, next) => {
-  console.log(req.body);
-
   Cart.findOne({
     where: {
       productId: req.body.productId,
@@ -33,8 +31,6 @@ router.put("/:userId", (req, res, next) => {
   })
 
     .then((productToUpdate) => {
-      console.log(productToUpdate);
-
       productToUpdate.update({ quantity: req.body.quantity }).then(() => {
         Cart.findAll({
           include: {

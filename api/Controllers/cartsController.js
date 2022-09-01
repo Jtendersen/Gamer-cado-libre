@@ -51,7 +51,7 @@ const addProduct = (req, res, next) => {
           productId: req.body.productId,
         }).then((resp) => {
           Cart.findByPk(resp.dataValues.id).then((cart) => {
-            cart.setUser(usuario).then(() => {
+            cart.setUser(userId).then(() => {
               Cart.findAll({
                 include: {
                   model: Product,
