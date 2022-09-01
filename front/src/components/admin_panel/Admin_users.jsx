@@ -26,9 +26,7 @@ const Admin_users = () => {
   )
 }
 
-export function GridAllUsers({user}) {
-  console.log(user)
-  const navigate = useNavigate()
+
 
 
 export function GridAllUsers({ user }) {
@@ -103,4 +101,4 @@ export function GridAllUsers({ user }) {
   );
 }
 
-export default Admin_users;
+export default Admin_users

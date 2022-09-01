@@ -45,22 +45,7 @@ export default function SignIn() {
 
   return (
     <>
-    <AppBar color="secondary" position="static">
 
-     <Box display="flex"justifyContent={"center"}alignItems={"center"}>
-        <Box  display="flex" justifyContent={"center"}alignItems={"center"}sx={{width: 0.25}}>
-
-                <div id="loguito">
-                  <img
-                    id="loguitoPosta"
-                    src={imagen}
-                    alt="logo"
-                    loading="lazy"
-                  />
-                </div>
-        </Box>
-      </Box>
-    </AppBar>
 
 
     

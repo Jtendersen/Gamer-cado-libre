@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { toggleCart } from "../state/handleCart";
-import imagen from "../assets/version1.png";
+import imagen from "../assets/version2.png";
 import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
 import UserButton from "../components/UserButton";
