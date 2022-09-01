@@ -7398,7 +7398,7 @@ let formateado = unformated.map((game) => {
     genreId: game.genres[0].id,
     name: game.name,
     description: game.summary,
-    valoration: Math.floor(Math.random() * (10 - 0)),
+    valoration: 0,
     price: Math.floor(Math.random() * (10000 - 2000) + 2000),
     updatedAt: "2022-08-23T22:40:23.479Z",
     createdAt: "2022-08-23T22:40:23.479Z",

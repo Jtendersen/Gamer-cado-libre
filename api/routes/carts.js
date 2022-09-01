@@ -7,8 +7,7 @@ const router = express.Router();
 
 // Ruta para visualizar el carrito completo, cuando clickea en el carrito hace este pedido get y el back devuelve todo lo que este en "pending".
 router.get("/:userId", (req, res, next) => {
-
-//console.log("ESTA ES LA COOKIE DE PEDIR EL CART", req.cookies.token)
+  //console.log("ESTA ES LA COOKIE DE PEDIR EL CART", req.cookies.token)
 
   Cart.findAll({
     include: {
@@ -81,8 +80,7 @@ router.post("/", (req, res, next) => {
 
 // Ruta para borrar un producto del carrito
 router.delete("/delete/:userId", (req, res, next) => {
-
-//VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
+  //VER SI EL FRONT REQUIERE EL PRODUCTO ELIMINADO
   //ver de levantar el usuario por req.cookies
   Cart.destroy({
     where: {
@@ -107,6 +105,7 @@ router.delete("/delete/:userId", (req, res, next) => {
 
 // Ruta para actializar la cantidad de productos en el carrito.
 router.put("/:userId", (req, res, next) => {
+ 
   /*REQ BODY TIPO
     {
         quantity: cant,
@@ -119,7 +118,10 @@ router.put("/:userId", (req, res, next) => {
       userId: req.params.userId,
     },
   })
+
     .then((productToUpdate) => {
+      
+
       productToUpdate.update({ quantity: req.body.quantity }).then(() => {
         //VER QUE DATOS REQUIERE EL FRONT ANTE LA ACTUALIZACION DE LA CANT.
         Cart.findAll({
@@ -127,7 +129,7 @@ router.put("/:userId", (req, res, next) => {
             model: Product,
           },
           where: {
-            [Op.and]: [{ userId: usuario }, { state: "pending" }],
+            [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
           },
         }).then((cartOrder) => {
           res.send(cartOrder);

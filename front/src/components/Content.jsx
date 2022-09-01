@@ -3,7 +3,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useLocation } from 'react-router-dom';
 import UsePagination from './Pagination';
+
 import SubNavbarGenre from "../commons/SubNavbarGenre";
+
+import { Box } from '@mui/system';
+
+
 
 
 
@@ -37,6 +42,20 @@ const Content = () => {
          <SubNavbarGenre />
       <div id='grid'>
         <Grid games={actualGames} />
+
+        <Box display="flex" justifyContent={"center"} alignItems={"center"}
+        sx={{
+        py: 3,
+        px: 2,
+        mt: 'auto',
+        width: 1
+        
+      }}
+      >
+        <UsePagination games={games} />
+        </Box>
+        
+
       </div>
         <UsePagination games={games} />
       </>

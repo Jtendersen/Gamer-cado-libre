@@ -6,18 +6,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack,Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
 import { toggleCart } from "../state/handleCart";
-
 import imagen from "../assets/version1.png";
-import { yellow } from "@mui/material/colors";
 import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
+import UserButton from "../components/UserButton";
 
-const color = yellow[500];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,6 +67,8 @@ export default function PrimarySearchAppBar() {
   };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+
 
   const [search, setSearch] = React.useState("");
 
@@ -84,8 +84,8 @@ export default function PrimarySearchAppBar() {
       <>
         <Stack direction="row" spacing={2}>
           <Button
-            variant="outlined"
-            color="primary"
+            variant="text"
+            color="text"
             onClick={() => {
               sendTo("signin");
             }}
@@ -94,8 +94,8 @@ export default function PrimarySearchAppBar() {
           </Button>
 
           <Button
-            variant="outlined"
-            color="primary"
+            variant="text"
+            color="text"
             onClick={() => {
               sendTo("signup");
             }}
@@ -111,32 +111,43 @@ export default function PrimarySearchAppBar() {
         <>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outlined"
-              color="primary"
+              variant="text"
+              color="text"
               onClick={() => {
                 sendTo("user");
               }}
             >
               {user.firstName}
             </Button>
+            <Badge badgeContent={cart.length} color="primary" overlap="circular">
             <Button
-              variant="outlined"
-              color="primary"
+              variant="text"
+              color="text"
               onClick={() => {
                 dispatch(toggleCart());
               }}
             >
               Cart
             </Button>
+            </Badge>
             <Button
-              variant="outlined"
-              color="primary"
+              variant="text"
+              color="text"
               onClick={() => {
                 dispatch(sendLogoutRequest());
                 sendTo("");
               }}
             >
               Logout
+            </Button>
+            <Button
+              variant="text"
+              color="text"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
             </Button>
           </Stack>
         </>
@@ -146,17 +157,8 @@ export default function PrimarySearchAppBar() {
         <>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                sendTo("user");
-              }}
-            >
-              {user.firstName}
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
+              variant="text"
+              color="text"
               onClick={() => {
                 dispatch(toggleCart());
               }}
@@ -164,8 +166,8 @@ export default function PrimarySearchAppBar() {
               Cart
             </Button>
             <Button
-              variant="outlined"
-              color="primary"
+              variant="text"
+              color="text"
               onClick={() => {
                 dispatch(sendLogoutRequest());
                 sendTo("");
@@ -173,6 +175,7 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
+            <UserButton  user={user}/>
             <Admin_panel />
           </Stack>
         </>
@@ -181,11 +184,8 @@ export default function PrimarySearchAppBar() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        style={{ backgroundColor: color, color: "primary" }}
-        position="static"
-      >
+    <Box  sx={{ flexGrow: 1 }}>
+      <AppBar color="secondary" position="static" >
         <Toolbar>
           <Typography
             variant="h6"
@@ -194,7 +194,7 @@ export default function PrimarySearchAppBar() {
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <Link to="/" id="link" style={{ textDecoration: "none" }}>
-              <Box sx={{ width: 0.5, height: 0.1 }}>
+              <Box sx={{ width: 0.25}}>
                 <div id="loguito">
                   <img
                     id="loguitoPosta"

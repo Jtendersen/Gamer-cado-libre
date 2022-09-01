@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import axios from "axios";
 import { Stack } from "@mui/system";
+
 import { Link } from "react-router-dom";
 import { yellow } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,7 @@ export default function SimpleSlider() {
     dispatch(get_genres())
   },[])
   const genres=useSelector(state=>state.genre)
+
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
   var settings = {
@@ -27,9 +29,11 @@ export default function SimpleSlider() {
     speed: 500,
     slidesToShow: 10,
     slidesToScroll: 9,
+    
   };
   return (
     <Slider {...settings}>
+
       {!genres.length? <div>Loading...</div>:genres.map((genre) =>{console.log('SLIDER')
        return(
         <div key={genre.id} >
@@ -37,32 +41,40 @@ export default function SimpleSlider() {
             <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
               <CardActionArea>
                 {genre.products[0] && <CardMedia
+
                   component="img"
                   height="200"
                   image={baseUrl + genre.products[0].urlId + ".jpg"}
                   alt="Genre_img"
-                />}
-                <Link to={`/products/${genre.genre}`}>
+                />
+                
+                
+                <Link style={{ textDecoration: "none" }}  to={`/products/${genre.genre}`}>
+
                   <CardContent
                     component={Stack}
                     direction="column"
                     justifyContent="center"
                     sx={{
-                      bgcolor: color,
+                      bgcolor: "secondary.main",
                       height: 80,
                     }}
                   >
                     <Typography
+                      color="text.main"
                       gutterBottom
                       variant="subtitle2"
                       component="div"
+                      borderRadius={5}
                     >
-                      {genre.genre}
+                      {(genre.genre).toUpperCase()}
                     </Typography>
                   </CardContent>
-                </Link>
+                  </Link>
+                
               </CardActionArea>
             </Card>
+           
           </h3>
         </div>
       )})}

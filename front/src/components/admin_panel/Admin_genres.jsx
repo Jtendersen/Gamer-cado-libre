@@ -7,10 +7,12 @@ import Grid_genres from "./Admin_Grid_genres";
 import Input_base from "../../commons/Base_input";
 
 
+
 const Admin_genres=()=>{
     const dispatch=useDispatch()
     useEffect(()=>{dispatch(get_genres())},[])
     const genres=useSelector((state)=>state.genre)
+
     return(
         <Box boxShadow={3} >
             <Divider orientation='vertical' />

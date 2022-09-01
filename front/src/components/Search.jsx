@@ -14,7 +14,6 @@ const Search = () => {
         try {
             axios.get(`http://localhost:3001/api/products/search/${pathname.split('/')[3]}`)
             .then((games)=>{setGames(games.data)})
-            .then(()=>{console.log(games)})
         } catch (error) {
             console.log(error)
         }

@@ -9,23 +9,25 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
-
+import { getCart } from "../state/cart";
+import imagen from "../assets/version1.png";
 import { sendLoginRequest } from "../state/user";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
 import GoogleLogin from "./GoogleLogin";
+import { AppBar} from "@mui/material";
+
 
 
 export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const theme = createTheme();
+ 
   const emailRe =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
   const user = useSelector((state) => state.user);
 
   const {
@@ -34,18 +36,36 @@ export default function SignIn() {
     formState: { errors },
   } = useForm();
 
-  async function onSubmit(data) {
-    if (user.id) return alert("User already logged in");
+  const onSubmit = (data) => dispatch(sendLoginRequest(data));
+    
 
-    dispatch(sendLoginRequest(data));
-
-    await user;
-
-    navigate("/");
-  }
+   user.id&&dispatch(getCart(user.id));
+   user.id&&navigate("/");
+ 
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+    <AppBar color="secondary" position="static">
+
+     <Box display="flex"justifyContent={"center"}alignItems={"center"}>
+        <Box  display="flex" justifyContent={"center"}alignItems={"center"}sx={{width: 0.25}}>
+
+                <div id="loguito">
+                  <img
+                    id="loguitoPosta"
+                    src={imagen}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </div>
+        </Box>
+      </Box>
+    </AppBar>
+
+
+    
+    
+    
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -130,6 +150,8 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+      </>
+      
+      
   );
 }

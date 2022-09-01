@@ -3,8 +3,12 @@ import logger from "redux-logger"
 import cartReducer from "./cart";
 import searchReducer from "./search";
 import userReducer from "./user";
-import openCartReducer from "./handleCart"
+
 import genreReducer from "./genre";
+
+import productReducer from "./product";
+import handleCartReducer from "./handleCart"
+
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
@@ -13,7 +17,8 @@ const store = configureStore({
       user: userReducer,
       genre:genreReducer,
       search:searchReducer,
-      handleCart: openCartReducer,
+      product: productReducer,
+      handleCart: handleCartReducer,
       },
   });
 
