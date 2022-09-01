@@ -42,24 +42,11 @@ export const Products = () => {
             })
       }
     }else{
-      if(name == '') setName(productData.game.name)
-      if(price == '') setPrice(productData.game.price)
-      if(description == '') setDescription(productData.game.description)
-      if(urlId == '') setUrlId(productData.game.urlId)
-      const newProduct = {
-        name: name, 
-        price: price, 
-        description: description, 
-        urlId: urlId
-      }
-      if(newProduct.name == '' || newProduct.price == '') return alert('Name and Price are inputs does we need')
-      else{
-      axios.put(`http://localhost:3001/api/products/${productData.game.genreId}`, newProduct)
+      axios.put(`http://localhost:3001/api/products/${productData.game.id}`, {name, price, description, urlId})
             .then((res)=>{
               if(res.status < 300) alert('The game was added succesfully')
               if(res.status > 399) alert("The game wasn't be added")
             })
-      }
     }
   }
   const handleAdd = function (){
@@ -70,6 +57,15 @@ export const Products = () => {
   useEffect(()=>{
     axios.get('http://localhost:3001/api/products/allProducts').then((products)=>{setProducts(products.data)})
   },[])
+
+  useEffect(()=>{
+    if(productData.open == true){
+      setName(productData.game.name)
+      setPrice(productData.game.price)
+      setDescription(productData.game.description)
+      setUrlId(productData.game.urlId)
+    }
+  }, [productData.open])
 
   if(productData.open == false){  
     if(add == false){
