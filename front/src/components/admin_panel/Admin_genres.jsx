@@ -1,69 +1,40 @@
-import { Button, ButtonGroup, FormControl, InputLabel, Stack, TextField } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import LongMenu from "../../commons/LongMenu";
-import Navbar from '../../commons/Navbar'
+import { Box, Divider, FormControl, Stack, Container } from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Input_handler from "../../hooks/inputHandler";
+import { add_genre, edit_genre, get_genres, remove_genre } from "../../state/genre";
+import Grid_genres from "./Admin_Grid_genres";
+import Input_base from "../../commons/Base_input";
+
 
 const Admin_genres=()=>{
-
-    const [genres,setGenre]=useState([])
-
-    const input_add=Input_handler()
-    useEffect(()=>{
-        axios.get("http://localhost:3001/api/genres").then(data=>{
-        console.log(data.data)
-        setGenre(data.data)})
-    },[])
-    const remove_genre=(genreID,genreName,i)=>{
-        axios.delete(`http://localhost:3001/api/genres/${genreID}`)
-        .then((data)=>{
-            genres.splice(i,1)
-            if(data.status===404)alert("The selected genre wasn't finded")
-            alert(`The genre ${genreName} was deleted`)
-        })
-    }
-    const edit_genre=(genreID)=>{
-        const input= window.prompt('New name')
-        if(!input)return
-        console.log(input)
-        axios.put(`http://localhost:3001/api/genres/${genreID}`,{genre:input})
-        .then((data)=>{
-            if(data.status===404) alert('syntax error')
-            alert(`The name genre was changed to "${input}"`)})
-    }
-    const add_genre=(genreName)=>{
-        if(!genreName)return
-        axios.post(`http://localhost:3001/api/genres`,{genre:genreName})
-        .then((data)=>{
-            if(data.status===404)alert('syntax error')
-            alert(`The genre ${genreName} created`)
-        })
-    }
+    const dispatch=useDispatch()
+    useEffect(()=>{dispatch(get_genres())},[])
+    const genres=useSelector((state)=>state.genre)
     return(
-        <>
-        <Navbar/>
+        <Box boxShadow={3} >
+            <Divider orientation='vertical' />
+    
+        <br/>
+            <Container>
         <FormControl >
-        <Stack spacing={4} >
-            <InputLabel  >ADD NEW GENRE:</InputLabel>
-            <TextField fullWidth={false} size='small' onChange={input_add.onChange} value={input_add.value} />
-            <Button onClick={()=>{add_genre(input_add.value)}} >ADD</Button>
-        {
-            genres.map((genre,i)=>{
-                return (genre &&
-                    <ul key={i}>
-                {genre.genre}
-            <ButtonGroup size='small'>
-                <br/>
-                <Button onClick={()=>{edit_genre(genre.id)}} >EDIT</Button>
-                <Button color='error' onClick={()=>{remove_genre(genre.id,genre.genre)}} >REMOVE</Button>
-            </ButtonGroup>
-            
-            </ul>)
-        })}
+            <Input_base/>
+            <Stack direction='row' spacing={2} margin={4} >
+
+            </Stack>
+            <Stack direction='row' flexWrap={'wrap'} spacing ={4}
+            divider={<Divider orientation="vertical" flexItem />}
+            alignItems="center"
+            justifyContent="space-between"
+
+            >
+                <br />
+                <Grid_genres/>
+     
         </Stack>
         </FormControl>
-        </>
+        </Container>
+        </Box>
     )
 }
 

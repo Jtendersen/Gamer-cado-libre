@@ -1,7 +1,6 @@
 import {  Grid } from '@mui/material'
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import Navbar from "../../commons/Navbar"
 import { Users } from "../Users"
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -21,7 +20,6 @@ setUser(users.data)
 
   return (
     <>
-    <Navbar/>
     <Users users = {user}/>
 </>
   )

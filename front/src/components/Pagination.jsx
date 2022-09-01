@@ -11,6 +11,7 @@ export default function PaginationControlled(games) {
   const sendTo = (string) => {
     console.log(string)
     navigate(`/${string}`);
+    window.scrollTo(0, 0);
   };
     let gamesPageQuantity
 if(games.games.length) gamesPageQuantity=games.games[games.games.length-1].page

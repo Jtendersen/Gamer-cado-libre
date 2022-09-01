@@ -1,12 +1,9 @@
 import Grid  from '../commons/Grid'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import PaginationControlled from './Pagination'
-import { Link, MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
+import { useLocation } from 'react-router-dom';
 import UsePagination from './Pagination';
-
+import SubNavbarGenre from "../commons/SubNavbarGenre";
 
 
 
@@ -32,17 +29,17 @@ const Content = () => {
         setGames(oldArray => [...oldArray,game] );
         if(!dbGames.data[i+1])setGames(oldArray => [page,...oldArray] )
         if(game.page==thisPath )setActualGames(oldArray => [...oldArray,game])
-       // else setGames(this.state.limitPerPage.push(game))
-        //console.log(games,limitPerPage)
       })
-      console.log(actualGames)
     })
   },[thisPath])
   return (
+    <>
+         <SubNavbarGenre />
       <div id='grid'>
         <Grid games={actualGames} />
-        <UsePagination games={games} />
       </div>
+        <UsePagination games={games} />
+      </>
   )
 }
 

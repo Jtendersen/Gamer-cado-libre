@@ -18,12 +18,12 @@ import axios from "axios";
 import Admin_products from "./components/admin_panel/Admin_products";
 import Admin_users from "./components/admin_panel/Admin_users";
 import { Route, Routes } from "react-router";
+import { get_genres } from "./state/genre";
 
 axios.defaults.withCredentials = true;
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     axios
       .get("/api/auth/me")
@@ -36,21 +36,15 @@ function App() {
       });
   }, []);
 
-
   return (
-    <Routes>
-      <Route
-        path="*"
-        element={
-          <div className="App">
+    <>
             <Navbar />
-            <SubNavbarGenre />
-            <Content/>
-            <Footer />
             <Cart />
-          </div>
-        }
-      />
+            
+           
+            
+    <Routes>
+
       <Route
         path="/signup"
         element={
@@ -59,6 +53,7 @@ function App() {
           </>
         }
       />
+      <Route path='/*' element={<Content/>} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
@@ -67,6 +62,8 @@ function App() {
       <Route path="/admin/genres" element={<Admin_genres />} />
       <Route path="/admin/products" element={<Admin_products />} />
     </Routes>
+    <Footer />
+    </>
   );
 }
 

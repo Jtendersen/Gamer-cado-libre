@@ -9,16 +9,16 @@ import axios from "axios";
 import { Stack } from "@mui/system";
 import { Link } from "react-router-dom";
 import { yellow } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { get_genres } from "../state/genre";
 
 const color = yellow[500];
-
 export default function SimpleSlider() {
-  const [navbarGenres, setNavbarGenres] = useState([]);
-  useEffect(() => {
-    axios.get("/api/genres").then((res) => setNavbarGenres(res.data));
-  }, []);
-  console.log("ESTOS SON LOS GENRERS", navbarGenres);
-
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    dispatch(get_genres())
+  },[])
+  const genres=useSelector(state=>state.genre)
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
   var settings = {
@@ -30,17 +30,18 @@ export default function SimpleSlider() {
   };
   return (
     <Slider {...settings}>
-      {navbarGenres.map((genre) => (
-        <div>
+      {!genres.length? <div>Loading...</div>:genres.map((genre) =>{console.log('SLIDER')
+       return(
+        <div key={genre.id} >
           <h3 key={genre.id}>
             <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
               <CardActionArea>
-                <CardMedia
+                {genre.products[0] && <CardMedia
                   component="img"
                   height="200"
                   image={baseUrl + genre.products[0].urlId + ".jpg"}
                   alt="Genre_img"
-                />
+                />}
                 <Link to={`/products/${genre.genre}`}>
                   <CardContent
                     component={Stack}
@@ -64,7 +65,7 @@ export default function SimpleSlider() {
             </Card>
           </h3>
         </div>
-      ))}
+      )})}
     </Slider>
   );
 }
