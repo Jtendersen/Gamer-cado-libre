@@ -1,17 +1,9 @@
 import Grid from "../commons/Grid";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import PaginationControlled from "./Pagination";
-import {
-  Link,
-  MemoryRouter,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
-import Pagination from "@mui/material/Pagination";
-import PaginationItem from "@mui/material/PaginationItem";
+import { useLocation } from "react-router-dom";
 import UsePagination from "./Pagination";
+import SubNavbarGenre from "../commons/SubNavbarGenre";
 
 const Content = () => {
   const [lastIndex, setIndex] = useState(0);
@@ -43,10 +35,13 @@ const Content = () => {
       });
   }, [thisPath]);
   return (
-    <div id="grid">
-      <Grid games={actualGames} />
+    <>
+      <SubNavbarGenre />
+      <div id="grid">
+        <Grid games={actualGames} />
+      </div>
       <UsePagination games={games} />
-    </div>
+    </>
   );
 };
 
