@@ -12,7 +12,7 @@ Genre.hasMany(Product);
 Order.belongsTo(User, { foreignKey: "userId" });
 User.hasMany(Order);
 Cart.belongsTo(Order, { foreignKey: "orderId" });
-Order.hasMany(Cart);
+// Cart.hasOne(Order);
 Cart.belongsTo(Product, { foreignKey: "productId" });
 Cart.belongsTo(User);
 User.hasMany(Cart);
