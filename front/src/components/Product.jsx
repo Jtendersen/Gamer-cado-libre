@@ -56,7 +56,7 @@ const Product = () => {
       quantity:1,
       productId:game.id,
       }))
-    alert("The videogame was succesfully added at the cart");
+    
     }
     
   };

@@ -39,7 +39,7 @@ export const makeOrder = createAsyncThunk(
   (orderDetails) => {
     return axios
       .post(`http://localhost:3001/api/order`, orderDetails)
-      .then((r)=>r.data)
+      .then(()=>[])
   
   }
 );
@@ -48,7 +48,7 @@ const cartReducer = createReducer([], {
   [getCart.fulfilled]: (state, action) => action.payload,
   [addToCart.fulfilled]: (state, action) => action.payload,
   [removeFromCart.fulfilled]: (state, action) => action.payload,
-  // [cartItemQuantity.fulfilled]: (state, action) => action.payload,
+ [cartItemQuantity.fulfilled]: (state, action) => action.payload,
   [makeOrder.fulfilled]: (state, action) => action.payload,
   
 });

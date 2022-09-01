@@ -45,7 +45,7 @@ return (
           alignItems={"center"}
         >
           
-          {step===0?<><Typography color="primary" variant="h3">your cart</Typography>
+          {step===0?<><Typography color="text.main" variant="h3">your cart</Typography>
           <Typography color="info" variant="body1">Start gaming today!</Typography>
           <Paper
           color="secondary"
