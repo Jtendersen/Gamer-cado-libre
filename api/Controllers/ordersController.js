@@ -1,4 +1,6 @@
 const { Order, Cart } = require("../models");
+const { Op } = require("sequelize");
+const sendEmail = require("../utils/index");
 
 const postOrder = (req, res, next) => {
   Order.create({

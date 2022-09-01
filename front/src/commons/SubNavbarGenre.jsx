@@ -70,9 +70,9 @@ export default function SimpleSlider() {
       {!genres.length ? (
         <div>Loading...</div>
       ) : (
-        genres.map((genre) => {
+        genres.map((genre, i) => {
           return (
-            <Box spacing={2}>
+            <Box key={i} spacing={2}>
               <div key={genre.id}>
                 <h3 key={genre.id}>
                   <Card sx={{ maxWidth: 150, maxHeight: 280 }}>

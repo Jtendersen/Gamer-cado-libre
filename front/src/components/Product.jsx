@@ -139,7 +139,7 @@ const Product = () => {
           {reviews.map((data, i) => {
             return (
               <>
-                <Box border={1} borderRadius={1} marginTop={1}>
+                <Box key={i} border={1} borderRadius={1} marginTop={1}>
                   <Typography paddingTop={1} paddingLeft={1}>
                     {data.review}
                   </Typography>
