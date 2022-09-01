@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router";
-import Footer from "../commons/Footer";
 import Navbar from "../commons/Navbar";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
@@ -51,9 +50,14 @@ const Product = () => {
   const handleReview = (e) => {
     setReview(e.target.value);
   };
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/api/reviews/${id}`).then((resp) => {
+      if (resp.status == 204) alert("The review was deleted succesfully");
+    });
+  };
   const handleCart = (e) => {
     //pedido a axios para agregar al carrito
-    if (!user.id) alert("You are not logued");
+    if (!user.id) alert("You are not logged");
     else {
       dispatch(
         addToCart({
@@ -92,8 +96,6 @@ const Product = () => {
 
   return (
     <>
-      <Navbar />
-
       <Cart />
       <Box>
         <div id="product">
@@ -147,13 +149,24 @@ const Product = () => {
                     name="simple-controlled"
                     value={data.rating}
                   />
+                  {data.userId == user.id || user.admin == true ? (
+                    <Button
+                      variant="text"
+                      onClick={() => {
+                        handleDelete(data.id);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                 </Box>
               </>
             );
           })}
         </div>
       </Box>
-      <Footer />
     </>
   );
 };

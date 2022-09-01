@@ -6,9 +6,9 @@ const Grid = ({games}) => {
   return (
     <>
         {games.map((game, i)=>{
-            return  <Link to={`/product/${game.id}`} style={{ textDecoration: 'none' }} id='link'  key={i}>
+            return  <div key={i}><Link to={`/product/${game.id}`} style={{ textDecoration: 'none' }} id='link'  key={i}>
                       <ActionAreaCard game={game} key={i}/>
-                    </Link>
+                    </Link></div>
         })}
     </>
   )

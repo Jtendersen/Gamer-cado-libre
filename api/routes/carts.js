@@ -22,6 +22,33 @@ router.post("/", validateAuth, addProduct);
 router.delete("/delete/", validateAuth, deleteItem);
 
 // Ruta para actializar la cantidad de productos en el carrito.
-router.put("/", validateAuth, updateProduct);
+router.put("/:userId", (req, res, next) => {
+  console.log(req.body);
+
+  Cart.findOne({
+    where: {
+      productId: req.body.productId,
+      userId: req.params.userId,
+    },
+  })
+
+    .then((productToUpdate) => {
+      console.log(productToUpdate);
+
+      productToUpdate.update({ quantity: req.body.quantity }).then(() => {
+        Cart.findAll({
+          include: {
+            model: Product,
+          },
+          where: {
+            [Op.and]: [{ userId: req.params.userId }, { state: "pending" }],
+          },
+        }).then((cartOrder) => {
+          res.send(cartOrder);
+        });
+      });
+    })
+    .catch(next);
+});
 
 module.exports = router;

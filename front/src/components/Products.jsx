@@ -32,37 +32,34 @@ export const Products = () => {
   };
   const handleAddProduct = function (e) {
     e.preventDefault();
-    if (productData.open === false) {
+    if (productData.open == false) {
       const newProduct = { name, price, description, urlId };
-      if (name === "" || price === "")
+      if (name == "" || price == "")
         return alert("Name and Price are inputs does we need");
       else {
         axios
           .post("http://localhost:3001/api/products", newProduct)
           .then((res) => {
-            if (res.status === 204) alert("The game was added succesfully");
+            if (res.status == 204) alert("The game was added succesfully");
             if (res.status > 399) alert("The game wasn't be added");
           });
       }
     } else {
-      if (name === "") setName(productData.game.name);
-      if (price === "") setPrice(productData.game.price);
-      if (description === "") setDescription(productData.game.description);
-      if (urlId === "") setUrlId(productData.game.urlId);
+      if (name == "") setName(productData.game.name);
+      if (price == "") setPrice(productData.game.price);
+      if (description == "") setDescription(productData.game.description);
+      if (urlId == "") setUrlId(productData.game.urlId);
       const newProduct = {
         name: name,
         price: price,
         description: description,
         urlId: urlId,
       };
-      if (newProduct.name === "" || newProduct.price === "")
+      if (newProduct.name == "" || newProduct.price == "")
         return alert("Name and Price are inputs does we need");
       else {
         axios
-          .put(
-            `http://localhost:3001/api/products/${productData.game.genreId}`,
-            newProduct
-          )
+          .put(`/api/products/${productData.game.genreId}`, newProduct)
           .then((res) => {
             if (res.status < 300) alert("The game was added succesfully");
             if (res.status > 399) alert("The game wasn't be added");
@@ -76,15 +73,22 @@ export const Products = () => {
   };
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/products/allProducts")
-      .then((products) => {
-        setProducts(products.data);
-      });
+    axios.get("/api/products/allProducts").then((products) => {
+      setProducts(products.data);
+    });
   }, []);
 
-  if (productData.open === false) {
-    if (add === false) {
+  useEffect(() => {
+    if (productData.open == true) {
+      setName(productData.game.name);
+      setPrice(productData.game.price);
+      setDescription(productData.game.description);
+      setUrlId(productData.game.urlId);
+    }
+  }, [productData.open]);
+
+  if (productData.open == false) {
+    if (add == false) {
       addView = (
         <div id="addButton">
           <Button onClick={handleAdd}>Add Product</Button>

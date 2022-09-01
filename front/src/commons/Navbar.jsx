@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack,Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
@@ -66,6 +66,8 @@ export default function PrimarySearchAppBar() {
   };
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+
 
   const [search, setSearch] = React.useState("");
 
@@ -116,6 +118,7 @@ export default function PrimarySearchAppBar() {
             >
               {user.firstName}
             </Button>
+            <Badge badgeContent={cart.length} color="primary" overlap="circular">
             <Button
               variant="text"
               color="text"
@@ -125,6 +128,7 @@ export default function PrimarySearchAppBar() {
             >
               Cart
             </Button>
+            </Badge>
             <Button
               variant="text"
               color="text"

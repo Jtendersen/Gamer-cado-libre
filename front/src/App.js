@@ -20,7 +20,11 @@ import Admin_users from "./components/admin_panel/Admin_users";
 import SingularUser from "./components/SingularUser";
 import Settings from "./components/Settings";
 import { Route, Routes } from "react-router";
+
+import { get_genres } from "./state/genre";
+
 import { createTheme, ThemeProvider } from "@mui/material";
+
 
 axios.defaults.withCredentials = true;
 
@@ -49,7 +53,6 @@ const theme = createTheme({
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     axios
       .get("/api/auth/me")
@@ -62,25 +65,30 @@ function App() {
       });
   }, []);
 
-
   return (
+
+
+
     <ThemeProvider theme={theme}>
-    <Routes>
-      <Route
-        path="*"
-        element={
-          <div className="App">
-            <Navbar />
-            <SubNavbarGenre />
-            <Content/>
-            <Footer />
+     <Navbar />
             <Cart />
-          </div>
-        }
-      />
+    <Routes>
+   
+
+           
+
+            
+           
+            
+  
+
+   
+      
+
       <Route path="/signup"element={<SignUp />}/>
       <Route path="/user/history" element={<SingularUser/>}/>
       <Route path="/user/settings" element={<Settings/>}/>
+<Route path='/*' element={<Content/>} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
@@ -89,7 +97,12 @@ function App() {
       <Route path="/admin/genres" element={<Admin_genres />} />
       <Route path="/admin/products" element={<Admin_products />} />
     </Routes>
+
+   
+    <Footer />
+
     </ThemeProvider>
+
   );
 }
 

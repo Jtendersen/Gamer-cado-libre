@@ -4,14 +4,16 @@ import { ButtonGroup, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import {cartItemQuantity} from "../../state/cart"
 
+
 const ButtonsCounter = (props) => {
 
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user);
 
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(props.quantity);
     
     useEffect(() => {
+      
       dispatch(cartItemQuantity({
         userId:user.id,
         productId:props.itemId,

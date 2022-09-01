@@ -26,15 +26,12 @@ const UserData = () => {
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
-    console.log(firstName);
   };
   const handleLastName = (e) => {
     setLastName(e.target.value);
-    console.log(lastName);
   };
   const handleAge = (e) => {
     setAge(e.target.value);
-    console.log(age);
   };
   const handleChanges = () => {
     axios
@@ -44,7 +41,6 @@ const UserData = () => {
         age,
       })
       .then((res) => {
-        console.log(res.data.userUpdate);
         const userChanged = {
           admin: res.data.userUpdate.admin,
           age: res.data.userUpdate.age,
@@ -104,5 +100,3 @@ const UserData = () => {
     </>
   );
 };
-
-export default UserData;

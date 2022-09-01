@@ -20,7 +20,7 @@ export default function Review() {
 
   const handleNext = () => {
     dispatch(next());
-    console.log("ESTE ES EL CART DENTRO DEL REVIEW", cart);
+    //console.log("ESTE ES EL CART DENTRO DEL REVIEW", cart);
     dispatch(makeOrder({ recieverName, sendingAddress, paymentMethod, cart }));
   };
 
@@ -37,7 +37,7 @@ export default function Review() {
         {cart.map((item) => (
           <ListItem key={item.product.name} sx={{ py: 1, px: 0 }}>
             <ListItemText primary={item.product.name} />
-            <Typography variant="body2">{item.totalPrice}</Typography>
+            <Typography variant="body2">{`X${item.quantity} . . . ${item.totalPrice}`}</Typography>
           </ListItem>
         ))}
 
