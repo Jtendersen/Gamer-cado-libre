@@ -22,7 +22,6 @@ const Search = () => {
 
   return (
     <>
-        <Navbar/>
         <Cart/>
         <div id="genre">
         <Grid games={games}/>
