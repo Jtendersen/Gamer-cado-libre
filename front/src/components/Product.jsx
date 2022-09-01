@@ -85,7 +85,7 @@ const Product = () => {
   
   return (
     <>
-      <Navbar />
+      
 
       <Cart/>
       <Box>

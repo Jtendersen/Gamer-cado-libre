@@ -67,7 +67,7 @@ function App() {
 
   return (
 
-    <>
+
 
     <ThemeProvider theme={theme}>
      <Navbar />
@@ -98,8 +98,8 @@ function App() {
       <Route path="/admin/products" element={<Admin_products />} />
     </Routes>
 
+   
     <Footer />
-    </>
 
     </ThemeProvider>
 
