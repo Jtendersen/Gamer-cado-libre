@@ -1,13 +1,10 @@
-
-import {  Grid } from '@mui/material'
-import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import { Users } from "../Users"
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router';
-
+import { Grid } from "@mui/material";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Users } from "../Users";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 
 const Admin_users = () => {
   const [user, setUser] = useState([]);
@@ -20,14 +17,10 @@ const Admin_users = () => {
 
   return (
     <>
-
-    <Users users = {user}/>
-</>
-  )
-}
-
-
-
+      <Users users={user} />
+    </>
+  );
+};
 
 export function GridAllUsers({ user }) {
   const handleRemove = function () {
@@ -101,4 +94,4 @@ export function GridAllUsers({ user }) {
   );
 }
 
-export default Admin_users
+export default Admin_users;
