@@ -12,7 +12,7 @@ const Admin_genres=()=>{
     const input_add=Input_handler()
     useEffect(()=>{
         axios.get("http://localhost:3001/api/genres").then(data=>{
-        console.log(data.data)
+        //console.log(data.data)
         setGenre(data.data)})
     },[])
     const remove_genre=(genreID,genreName,i)=>{
@@ -26,7 +26,7 @@ const Admin_genres=()=>{
     const edit_genre=(genreID)=>{
         const input= window.prompt('New name')
         if(!input)return
-        console.log(input)
+        //console.log(input)
         axios.put(`http://localhost:3001/api/genres/${genreID}`,{genre:input})
         .then((data)=>{
             if(data.status===404) alert('syntax error')

@@ -36,7 +36,6 @@ const Content = () => {
        // else setGames(this.state.limitPerPage.push(game))
         //console.log(games,limitPerPage)
       })
-      
     })
   },[thisPath])
   return (

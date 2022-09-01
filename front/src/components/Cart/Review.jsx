@@ -20,7 +20,7 @@ export default function Review() {
 
   const handleNext = () => {
     dispatch(next());
-    console.log("ESTE ES EL CART DENTRO DEL REVIEW", cart);
+    //console.log("ESTE ES EL CART DENTRO DEL REVIEW", cart);
     dispatch(makeOrder({ recieverName, sendingAddress, paymentMethod, cart }));
   };
 
