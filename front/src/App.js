@@ -1,6 +1,4 @@
 import "./App.css";
-import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import Navbar from "./commons/Navbar";
 import Footer from "./commons/Footer";
 import SignUp from "./components/Signup";
@@ -15,15 +13,39 @@ import { setUser } from "./state/user";
 import { getCart } from "./state/cart";
 import SubNavbarGenre from "./commons/SubNavbarGenre";
 import Admin_genres from "./components/admin_panel/Admin_genres";
-
+import { useEffect } from 'react';
 import axios from "axios";
-
 import Admin_products from "./components/admin_panel/Admin_products";
 import Admin_users from "./components/admin_panel/Admin_users";
 import SingularUser from "./components/SingularUser";
 import Settings from "./components/Settings";
+import { Route, Routes } from "react-router";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 axios.defaults.withCredentials = true;
+
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#0e2998',
+    },
+    secondary: {
+      main: '#f7de41',
+    },
+    error: {
+      main: '#ff1b1b',
+    },
+    info: {
+      main: '#0024d8',
+    },
+    text: {
+      main: 'rgba(0, 0, 0, 0.54)',
+    },
+  },
+}
+  
+)
 
 function App() {
   const dispatch = useDispatch();
@@ -40,15 +62,17 @@ function App() {
       });
   }, []);
 
+
   return (
+    <ThemeProvider theme={theme}>
     <Routes>
       <Route
-        path="/"
+        path="*"
         element={
           <div className="App">
             <Navbar />
             <SubNavbarGenre />
-            <Content />
+            <Content/>
             <Footer />
             <Cart />
           </div>
@@ -65,6 +89,7 @@ function App() {
       <Route path="/admin/genres" element={<Admin_genres />} />
       <Route path="/admin/products" element={<Admin_products />} />
     </Routes>
+    </ThemeProvider>
   );
 }
 

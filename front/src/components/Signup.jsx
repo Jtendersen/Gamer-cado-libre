@@ -8,14 +8,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import {useForm} from 'react-hook-form'
 import { useDispatch, useSelector } from "react-redux";
 import {sendSignUpRequest} from "../state/user"
+import imagen from "../assets/version1.png";
+import { AppBar } from "@mui/material";
 
 
-const theme = createTheme();
+
 
 export default function SignUp() {
 
@@ -33,21 +34,33 @@ export default function SignUp() {
   }= useForm()
 
   
-  async function onSubmit (data){    
-  
-    const secret = data.secret
-    if(secret === 'admin123') data.admin = true;
-
-    dispatch(sendSignUpRequest(data))&& navigate('/signin')
-
-    await user
-
-    navigate('/')
-
+  const onSubmit = (data) =>{  
+  const secret = data.secret
+  if(secret === 'admin123') data.admin = true;
+  dispatch(sendSignUpRequest(data))
   };
 
+  user.id&&navigate('/')
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
+    <AppBar color="secondary" position="static">
+
+     <Box display="flex"justifyContent={"center"}alignItems={"center"}>
+        <Box  display="flex" justifyContent={"center"}alignItems={"center"}sx={{width: 0.25}}>
+
+                <div id="loguito">
+                  <img
+                    id="loguitoPosta"
+                    src={imagen}
+                    alt="logo"
+                    loading="lazy"
+                  />
+                </div>
+        </Box>
+      </Box>
+    </AppBar>
+   
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -212,6 +225,7 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+      </>
+   
   );
 }

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleProduct, productData } from '../../state/product';
 
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',

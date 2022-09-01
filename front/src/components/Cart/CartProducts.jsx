@@ -6,13 +6,19 @@ import ButtonsCounter from "./ButtonsCounter";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { removeFromCart } from "../../state/cart";
 import { useDispatch } from "react-redux";
+import { totalPrice } from "../../state/handleCart";
+import { useEffect } from "react";
 
 const CartProducts = () => {
   const baseURL = "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/";
 
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
+
+  useEffect(() => {dispatch(totalPrice(CartTotalPrice))}, [cart]);
+  
+  
+  const CartTotalPrice = cart.reduce(((total,item)=> total +item.totalPrice),0);
 
   return (
     <>
