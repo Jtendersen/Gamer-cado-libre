@@ -1,6 +1,6 @@
 import { Box, Divider, FormControl, Stack, Container } from "@mui/material";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { get_genres } from "../../state/genre";
 import Grid_genres from "./Admin_Grid_genres";
 import Input_base from "../../commons/Base_input";
@@ -10,7 +10,6 @@ const Admin_genres = () => {
   useEffect(() => {
     dispatch(get_genres());
   }, []);
-  const genres = useSelector((state) => state.genre);
 
   return (
     <Box boxShadow={3}>

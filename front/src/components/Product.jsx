@@ -52,7 +52,7 @@ const Product = () => {
   };
   const handleDelete = (id) => {
     axios.delete(`http://localhost:3001/api/reviews/${id}`).then((resp) => {
-      if (resp.status == 204) alert("The review was deleted succesfully");
+      if (resp.status === 204) alert("The review was deleted succesfully");
     });
   };
   const handleCart = (e) => {
@@ -148,7 +148,7 @@ const Product = () => {
                     name="simple-controlled"
                     value={data.rating}
                   />
-                  {data.userId == user.id || user.admin == true ? (
+                  {data.userId === user.id || user.admin === true ? (
                     <Button
                       variant="text"
                       onClick={() => {

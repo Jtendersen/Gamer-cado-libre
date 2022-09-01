@@ -11,12 +11,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useSelector, useDispatch } from "react-redux";
 import { getCart } from "../state/cart";
-import imagen from "../assets/version1.png";
 import { sendLoginRequest } from "../state/user";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "./GoogleLogin";
-import { AppBar } from "@mui/material";
 
 export default function SignIn() {
   const navigate = useNavigate();
