@@ -19,7 +19,7 @@ const Genre = () => {
         setGames(games.data);
       });
   }, [genre]);
-  console.log(games);
+  //console.log(games);
 
   return (
     <>

@@ -9,14 +9,14 @@ import { useNavigate } from 'react-router';
 export default function PaginationControlled(games) {
     const navigate = useNavigate();
   const sendTo = (string) => {
-    console.log(string)
+    //console.log(string)
     navigate(`/${string}`);
   };
     let gamesPageQuantity
 if(games.games.length) gamesPageQuantity=games.games[games.games.length-1].page
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
-    console.log(value)
+    //console.log(value)
     if(value == 1){
      return setPage(value) , sendTo('')
     }

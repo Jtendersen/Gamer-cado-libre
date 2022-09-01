@@ -60,7 +60,7 @@ router.post("/", validateAuth, (req, res, next) => {
 
 
 //ruta para historial de ordenes
-router.get("/", (req, res, next) => {
+router.get("/", validateAuth,(req, res, next) => {
   const userId = req.user.id;
   Order.findAll({
     include: {
