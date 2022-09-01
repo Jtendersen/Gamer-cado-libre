@@ -6,31 +6,26 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Box } from "@mui/material";
-import { next, back } from '../../state/handleCart';
+import { next, back } from "../../state/handleCart";
 import { makeOrder } from "../../state/cart";
-
-
-
-
 
 export default function Review() {
   const cart = useSelector((state) => state.cart);
-  const sendingAddress = useSelector((state)=>state.handleCart.address)
-  const recieverName = useSelector((state)=>state.handleCart.reciever)
-  const paymentMethod = useSelector((state)=>state.handleCart.paymentMethod)
-  const totalPrice = useSelector((state)=>state.handleCart.totalPrice)
+
+  const sendingAddress = useSelector((state) => state.handleCart.address);
+  const recieverName = useSelector((state) => state.handleCart.reciever);
+  const paymentMethod = useSelector((state) => state.handleCart.paymentMethod);
+  const totalPrice = useSelector((state) => state.handleCart.totalPrice);
   const dispatch = useDispatch();
- 
-  
+
   const handleNext = () => {
-    dispatch(next())
-    dispatch(makeOrder({recieverName,sendingAddress,paymentMethod}))
-  
+    dispatch(next());
+    console.log("ESTE ES EL CART DENTRO DEL REVIEW", cart);
+    dispatch(makeOrder({ recieverName, sendingAddress, paymentMethod, cart }));
   };
 
   const handleBack = () => {
-    dispatch(back())
-
+    dispatch(back());
   };
 
   return (
@@ -65,24 +60,17 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Payment details
           </Typography>
-          <Grid container>
-            {paymentMethod}
-          </Grid>
+          <Grid container>{paymentMethod}</Grid>
         </Grid>
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  
-                    <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
-                    </Button>
-                    <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    Place order
-                  </Button>
-                </Box>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+          Back
+        </Button>
+        <Button variant="contained" onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+          Place order
+        </Button>
+      </Box>
     </React.Fragment>
   );
 }

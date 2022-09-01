@@ -8,11 +8,11 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendEmail = (
   to,
-  from,
   userName,
   orderNumber,
   productsArray,
-  receiverName
+  receiverName,
+  totalOrderPrice
 ) => {
   const msg = {
     to:
@@ -33,6 +33,7 @@ const sendEmail = (
       Receiver_Name:
         // "El que este en tu casa",
         receiverName,
+      Precio_Total: totalOrderPrice,
     },
   };
   sgMail
