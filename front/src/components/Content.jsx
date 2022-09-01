@@ -6,6 +6,7 @@ import { Link, MemoryRouter, Route, Routes, useLocation } from 'react-router-dom
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import UsePagination from './Pagination';
+import { Box } from '@mui/system';
 
 
 
@@ -41,7 +42,18 @@ const Content = () => {
   return (
       <div id='grid'>
         <Grid games={actualGames} />
+        <Box display="flex" justifyContent={"center"} alignItems={"center"}
+        sx={{
+        py: 3,
+        px: 2,
+        mt: 'auto',
+        width: 1
+        
+      }}
+      >
         <UsePagination games={games} />
+        </Box>
+        
       </div>
   )
 }
