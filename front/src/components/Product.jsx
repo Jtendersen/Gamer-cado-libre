@@ -10,7 +10,7 @@ import axios from "axios";
 import { addToCart } from '../state/cart'
 import { useDispatch, useSelector } from 'react-redux'
 import Cart from "./Cart/Cart";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const Product = () => {
@@ -46,6 +46,15 @@ const Product = () => {
   }
   const handleReview = (e)=>{
     setReview(e.target.value)
+  }
+  const handleDelete = (id)=>{
+    console.log(id)
+    console.log(user)
+    axios
+      .delete(`http://localhost:3001/api/reviews/${id}`)
+      .then((resp)=>{
+        if(resp.status == 204) alert('The review was deleted succesfully')
+      })
   }
   const handleCart = (e) => {
     //pedido a axios para agregar al carrito
@@ -130,12 +139,13 @@ const Product = () => {
                             name="simple-controlled"
                             value={data.rating}
                           />
+                          {data.userId == user.id || user.admin == true? <Button variant="text" onClick={()=>{handleDelete(data.id)}}><DeleteIcon /></Button> : <></>}
+                          
                         </Box>
                       </>
             })}
         </div>
       </Box>
-      <Footer />
     </>
   );
 };
