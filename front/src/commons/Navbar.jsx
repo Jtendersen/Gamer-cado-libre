@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Stack,Badge } from "@mui/material";
+import { Button, Stack, Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
@@ -68,7 +68,6 @@ export default function PrimarySearchAppBar() {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
-
   const [search, setSearch] = React.useState("");
 
   const handleSearch = (e) => {
@@ -109,25 +108,20 @@ export default function PrimarySearchAppBar() {
       Auth = (
         <>
           <Stack direction="row" spacing={2}>
-            <Button
-              variant="text"
-              color="text"
-              onClick={() => {
-                sendTo("user");
-              }}
+            <Badge
+              badgeContent={cart.length}
+              color="primary"
+              overlap="circular"
             >
-              {user.firstName}
-            </Button>
-            <Badge badgeContent={cart.length} color="primary" overlap="circular">
-            <Button
-              variant="text"
-              color="text"
-              onClick={() => {
-                dispatch(toggleCart());
-              }}
-            >
-              Cart
-            </Button>
+              <Button
+                variant="text"
+                color="text"
+                onClick={() => {
+                  dispatch(toggleCart());
+                }}
+              >
+                Cart
+              </Button>
             </Badge>
             <Button
               variant="text"
@@ -139,15 +133,7 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-            <Button
-              variant="text"
-              color="text"
-              onClick={() => {
-                sendTo("user");
-              }}
-            >
-              {user.firstName}
-            </Button>
+            <UserButton user={user} />
           </Stack>
         </>
       );

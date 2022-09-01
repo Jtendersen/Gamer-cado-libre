@@ -15,11 +15,11 @@ import { get_genres } from "../state/genre";
 
 const color = yellow[500];
 export default function SimpleSlider() {
-  const dispatch=useDispatch()
-  useEffect(()=>{
-    dispatch(get_genres())
-  },[])
-  const genres=useSelector(state=>state.genre)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(get_genres());
+  }, []);
+  const genres = useSelector((state) => state.genre);
 
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
@@ -36,85 +36,88 @@ export default function SimpleSlider() {
           slidesToShow: 7,
           slidesToScroll: 7,
           infinite: true,
-          dots: true
-        }
+          dots: true,
         },
+      },
       {
         breakpoint: 1040,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 5,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          initialSlide: 2
-        }
+          initialSlide: 2,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-
-    
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <Slider {...settings}>
+      {!genres.length ? (
+        <div>Loading...</div>
+      ) : (
+        genres.map((genre) => {
+          return (
+            <Box spacing={2}>
+              <div key={genre.id}>
+                <h3 key={genre.id}>
+                  <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
+                    <CardActionArea>
+                      {genre.products[0] && (
+                        <CardMedia
+                          component="img"
+                          height="200"
+                          image={baseUrl + genre.products[0].urlId + ".jpg"}
+                          alt="Genre_img"
+                        />
+                      )}
 
-      {!genres.length? <div>Loading...</div>:genres.map((genre) =>{console.log('SLIDER')
-       return(
-        <Box spacing={2} >
-        <div key={genre.id} >
-          <h3 key={genre.id}>
-            <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
-              <CardActionArea>
-                {genre.products[0] && <CardMedia
-
-                  component="img"
-                  height="200"
-                  image={baseUrl + genre.products[0].urlId + ".jpg"}
-                  alt="Genre_img"
-                  />
-                }
-                
-                <Link style={{ textDecoration: "none" }}  to={`/products/${genre.genre}`}>
-
-                  <CardContent
-                    component={Stack}
-                    direction="column"
-                    justifyContent="center"
-                    sx={{
-                      bgcolor: "secondary.main",
-                      height: 80,
-                    }}
-                  >
-                    <Typography
-                      color="text.main"
-                      gutterBottom
-                      variant="subtitle2"
-                      component="div"
-                      borderRadius={5}
-                    >
-                      {(genre.genre).toUpperCase()}
-                    </Typography>
-                  </CardContent>
-                  </Link> 
-              </CardActionArea>
-            </Card>
-           
-          </h3>
-        </div>
-        </Box>
-      )})}
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to={`/products/${genre.genre}`}
+                      >
+                        <CardContent
+                          component={Stack}
+                          direction="column"
+                          justifyContent="center"
+                          sx={{
+                            bgcolor: "secondary.main",
+                            height: 80,
+                          }}
+                        >
+                          <Typography
+                            color="text.main"
+                            gutterBottom
+                            variant="subtitle2"
+                            component="div"
+                            borderRadius={5}
+                          >
+                            {genre.genre.toUpperCase()}
+                          </Typography>
+                        </CardContent>
+                      </Link>
+                    </CardActionArea>
+                  </Card>
+                </h3>
+              </div>
+            </Box>
+          );
+        })
+      )}
     </Slider>
   );
 }

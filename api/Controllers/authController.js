@@ -1,3 +1,4 @@
+const { generateToken } = require("../middlewares/tokens");
 const { User } = require("../models");
 
 const me = (req, res) => {

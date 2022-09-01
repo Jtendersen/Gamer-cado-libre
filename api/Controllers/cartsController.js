@@ -1,4 +1,5 @@
 const { Cart, Product } = require("../models");
+const { Op } = require("sequelize");
 
 const getCart = (req, res, next) => {
   const userId = req.user.id;

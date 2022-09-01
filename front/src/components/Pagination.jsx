@@ -16,8 +16,10 @@ export default function PaginationControlled(games) {
     gamesPageQuantity = games.games[games.games.length - 1].page;
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
-    if (value == 1) {
-      return setPage(value), sendTo("");
+    if (value === 1) {
+      setPage(value);
+      sendTo("");
+      return;
     }
     setPage(value);
     sendTo(value);
