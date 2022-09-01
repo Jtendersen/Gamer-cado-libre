@@ -94,6 +94,7 @@ const deleteItem = (req, res, next) => {
 };
 
 const updateProduct = (req, res, next) => {
+  console.log("BODY EN UPDATE", req.body);
   const userId = req.user.id;
   Cart.findOne({
     where: {
@@ -103,6 +104,7 @@ const updateProduct = (req, res, next) => {
   })
 
     .then((productToUpdate) => {
+      console.log("este es el product to update", productToUpdate);
       productToUpdate.update({ quantity: req.body.quantity }).then(() => {
         Cart.findAll({
           include: {

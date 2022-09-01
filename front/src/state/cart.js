@@ -13,9 +13,9 @@ export const addToCart = createAsyncThunk("ADDTOCART", (itemId) => {
 
 export const removeFromCart = createAsyncThunk(
   "REMOVEFROMCART",
-  ({ userId, itemId }) => {
+  ({ itemId }) => {
     return axios
-      .delete(`/api/cart/delete/${userId}`, {
+      .delete(`/api/cart/delete/`, {
         data: { itemId: itemId },
       })
       .then((r) => r.data);
@@ -24,10 +24,10 @@ export const removeFromCart = createAsyncThunk(
 
 export const cartItemQuantity = createAsyncThunk(
   "CARTITEMQUANTITY",
-  ({ userId, productId, quantity }) => {
-    return axios
-      .put(`/api/cart//${userId}`, { productId, quantity })
-      .then(({ data }) => data);
+  ({ productId, quantity }) => {
+    return axios.put(`/api/cart`, { productId, quantity }).then(({ data }) => {
+      console.log(data);
+    });
   }
 );
 

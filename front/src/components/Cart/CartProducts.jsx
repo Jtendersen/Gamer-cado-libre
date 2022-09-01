@@ -15,10 +15,14 @@ const CartProducts = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  useEffect(() => {dispatch(totalPrice(CartTotalPrice))}, [cart]);
-  
-  
-  const CartTotalPrice = cart.reduce(((total,item)=> total +item.totalPrice),0);
+  useEffect(() => {
+    dispatch(totalPrice(CartTotalPrice));
+  }, [cart]);
+
+  const CartTotalPrice = cart.reduce(
+    (total, item) => total + item.totalPrice,
+    0
+  );
 
   return (
     <>
@@ -48,7 +52,10 @@ const CartProducts = () => {
                 $ {item.totalPrice}
               </Typography>
 
-              <ButtonsCounter itemId={item.productId} quantity={item.quantity} />
+              <ButtonsCounter
+                itemId={item.productId}
+                quantity={item.quantity}
+              />
             </Box>
             <Box
               onClick={() => {
