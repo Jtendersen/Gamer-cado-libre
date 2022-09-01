@@ -1,45 +1,21 @@
-
 const express = require("express");
+const {
+  deleteGenre,
+  addGenre,
+  nameChange,
+  getAllGenres,
+} = require("../Controllers/genresController");
 const router = express.Router();
-const { Product, User, Genre } = require("../models");
-const { validateToken } = require('../middlewares/tokens')
-
-
+const { Product, Genre } = require("../models");
 
 // Ruta para devolver todos los generos.
-router.get("/", (req, res, next) => {
-  Genre.findAll({
-    include: {
-      model: Product,
-    },
-  })
-    .then((genres) => res.status(200).send(genres))
-    .catch(next);
-});
+router.get("/", getAllGenres);
 // Ruta para cambiar el nombre de un genero.
-router.put("/:genreID", (req, res, next) => {
-  if (!req.params.genreID) return res.sendStatus(404);
-  const {input}=req.body
-  Genre.update({genre:input}, { where: { id: req.params.genreID } })
-    .then(() => res.sendStatus(201))
-    .catch(next);
-});
+router.put("/:genreID", nameChange);
 
 // Ruta para agregar un genero al modelo genres.
-router.post("/", (req, res, next) => {
-  Genre.create(req.body)
-    .then(() => res.sendStatus(204))
-    .catch(next);
-});
+router.post("/", router.post("/", addGenre););
 
-router.delete("/:id", (req, res, next) => {
-  console.log(req.params);
-  Genre.destroy({ where: { id: req.params.id } }).then((data) => {
-    if(!data)return res.sendStatus(404)
-    res.sendStatus(204);
-  })
-});
-
+router.delete("/:id", deleteGenre);
 
 module.exports = router;
-

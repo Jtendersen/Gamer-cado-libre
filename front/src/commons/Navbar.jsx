@@ -16,7 +16,6 @@ import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
 import UserButton from "../components/UserButton";
 
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -175,7 +174,7 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-            <UserButton  user={user}/>
+            <UserButton user={user} />
             <Admin_panel />
           </Stack>
         </>
@@ -184,8 +183,8 @@ export default function PrimarySearchAppBar() {
   }
 
   return (
-    <Box  sx={{ flexGrow: 1 }}>
-      <AppBar color="secondary" position="static" >
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar color="secondary" position="static">
         <Toolbar>
           <Typography
             variant="h6"
@@ -194,7 +193,7 @@ export default function PrimarySearchAppBar() {
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <Link to="/" id="link" style={{ textDecoration: "none" }}>
-              <Box sx={{ width: 0.25}}>
+              <Box sx={{ width: 0.5 }}>
                 <div id="loguito">
                   <img
                     id="loguitoPosta"

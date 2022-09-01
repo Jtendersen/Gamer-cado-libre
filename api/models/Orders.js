@@ -45,7 +45,6 @@ Order.addHook("beforeCreate", async (order) => {
   carts.map((cart) => {
     total += cart.dataValues.totalPrice;
   });
-  //console.log("ESTE ES EL TOTAL DENTRO DEL HOOK ORDER", total);
   order.totalOrderPrice = total;
 });
 
