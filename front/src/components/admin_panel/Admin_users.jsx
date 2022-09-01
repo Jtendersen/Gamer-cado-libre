@@ -29,7 +29,7 @@ export function GridAllUsers({ user }) {
     axios
       .put(`http://localhost:3001/api/users/admin/${user.id}`, { admin: false })
       .then((message) => {
-        if (message.status == 204) {
+        if (message.status === 204) {
           window.location.reload();
           alert("Producto eliminado correctamente");
         }
@@ -39,7 +39,7 @@ export function GridAllUsers({ user }) {
     axios
       .put(`http://localhost:3001/api/users/admin/${user.id}`, { admin: true })
       .then((message) => {
-        if (message.status == 204) {
+        if (message.status === 204) {
           window.location.reload();
           alert("Producto eliminado correctamente");
         }
