@@ -18,8 +18,32 @@ import axios from "axios";
 import Admin_products from "./components/admin_panel/Admin_products";
 import Admin_users from "./components/admin_panel/Admin_users";
 import { Route, Routes } from "react-router";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 axios.defaults.withCredentials = true;
+
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#0e2998',
+    },
+    secondary: {
+      main: '#f7de41',
+    },
+    error: {
+      main: '#ff1b1b',
+    },
+    info: {
+      main: '#0024d8',
+    },
+    text: {
+      main: 'rgba(0, 0, 0, 0.54)',
+    },
+  },
+}
+  
+)
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +62,7 @@ function App() {
 
 
   return (
+    <ThemeProvider theme={theme}>
     <Routes>
       <Route
         path="*"
@@ -67,6 +92,7 @@ function App() {
       <Route path="/admin/genres" element={<Admin_genres />} />
       <Route path="/admin/products" element={<Admin_products />} />
     </Routes>
+    </ThemeProvider>
   );
 }
 

@@ -25,18 +25,14 @@ export const removeFromCart = createAsyncThunk(
 
 
 
-// export const cartItemQuantity = createAsyncThunk(
-//   "CARTITEMQUANTITY",
-//   (recibido) => {
-//     //console.log("CARTITEMQUANTITY",recibido)
-//     return axios
-//       .put("http://localhost:3001/api/cart", itemId, counter)
-//       .then((r) => {
-//         // localStorage.setItem("cart", JSON.stringify(r.data));
-//         return r.data;
-//       });
-//   }
-// );
+export const cartItemQuantity = createAsyncThunk(
+  "CARTITEMQUANTITY",
+  ({userId,productId,quantity}) => {
+    return axios
+      .put(`http://localhost:3001/api/cart//${userId}`, {productId,quantity})
+      .then(({data}) => data);
+  }
+);
 
 export const makeOrder = createAsyncThunk(
   "MAKEORDER",
