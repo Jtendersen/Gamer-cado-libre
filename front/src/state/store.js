@@ -3,7 +3,6 @@ import logger from "redux-logger"
 import cartReducer from "./cart";
 import searchReducer from "./search";
 import userReducer from "./user";
-import openCartReducer from "./handleCart"
 import productReducer from "./product";
 import handleCartReducer from "./handleCart"
 
@@ -13,7 +12,7 @@ const store = configureStore({
       cart: cartReducer,
       user: userReducer,
       search:searchReducer,
-      product: productReducer
+      product: productReducer,
       handleCart: handleCartReducer,
       },
   });
