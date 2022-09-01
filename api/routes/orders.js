@@ -58,4 +58,21 @@ router.post("/", validateAuth, (req, res, next) => {
   });
 });
 
+//ruta para historial de ordenes
+router.get("/", (req, res, next) => {
+  const userId = req.user.id;
+  Order.findAll({
+    include: {
+      model: Cart,
+    },
+    where: {
+      userId: userId,
+    },
+  })
+    .then((resp) => {
+      res.send(resp);
+    })
+    .catch(next);
+});
+
 module.exports = router;
