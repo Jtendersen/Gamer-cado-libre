@@ -14,6 +14,7 @@ import { toggleCart } from "../state/handleCart";
 import imagen from "../assets/version1.png";
 import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
+import UserButton from "../components/UserButton";
 
 
 const Search = styled("div")(({ theme }) => ({
@@ -135,13 +136,6 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-          </Stack>
-        </>
-      );
-    } else {
-      Auth = (
-        <>
-          <Stack direction="row" spacing={2}>
             <Button
               variant="text"
               color="text"
@@ -151,6 +145,13 @@ export default function PrimarySearchAppBar() {
             >
               {user.firstName}
             </Button>
+          </Stack>
+        </>
+      );
+    } else {
+      Auth = (
+        <>
+          <Stack direction="row" spacing={2}>
             <Button
               variant="text"
               color="text"
@@ -170,6 +171,7 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
+            <UserButton  user={user}/>
             <Admin_panel />
           </Stack>
         </>

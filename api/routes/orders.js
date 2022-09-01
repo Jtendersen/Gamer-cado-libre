@@ -58,4 +58,12 @@ router.post("/", validateAuth, (req, res, next) => {
   });
 });
 
+//Ruta para traer todas las ordenes de un usuario
+router.get('/:userId', (req, res, next)=>{
+  Order
+    .findAll({where:{userId:req.params.userId}})
+    .then(resp=>res.status(200).send(resp))
+    .catch(next)
+})
+
 module.exports = router;

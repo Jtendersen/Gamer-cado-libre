@@ -25,6 +25,10 @@ export const setUser = createAsyncThunk("SETUSER", (input) => {
   return input;
 });
 
+export const changeUserInfo = createAsyncThunk("SETUSER", (input) => {
+  return input;
+});
+
 
 const userReducer = createReducer(
   {},
