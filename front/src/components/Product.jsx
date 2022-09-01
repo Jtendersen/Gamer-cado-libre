@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { useLocation } from "react-router";
-import Navbar from "../commons/Navbar";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { addToCart } from "../state/cart";
@@ -57,7 +56,6 @@ const Product = () => {
     });
   };
   const handleCart = (e) => {
-    //pedido a axios para agregar al carrito
     if (!user.id) alert("You are not logged");
     else {
       dispatch(

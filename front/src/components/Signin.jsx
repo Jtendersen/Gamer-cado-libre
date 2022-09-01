@@ -16,15 +16,12 @@ import { sendLoginRequest } from "../state/user";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "./GoogleLogin";
-import { AppBar} from "@mui/material";
-
-
+import { AppBar } from "@mui/material";
 
 export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
   const emailRe =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -37,20 +34,12 @@ export default function SignIn() {
   } = useForm();
 
   const onSubmit = (data) => dispatch(sendLoginRequest(data));
-    
 
-   user.id&&dispatch(getCart(user.id));
-   user.id&&navigate("/");
- 
+  user.id && dispatch(getCart(user.id));
+  user.id && navigate("/");
 
   return (
     <>
-
-
-
-    
-    
-    
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -135,8 +124,6 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
-      </>
-      
-      
+    </>
   );
 }
