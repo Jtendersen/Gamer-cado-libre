@@ -17,7 +17,7 @@ export default function SimpleSlider() {
   useEffect(() => {
     axios.get("/api/genres").then((res) => setNavbarGenres(res.data));
   }, []);
-  console.log("ESTOS SON LOS GENRERS", navbarGenres);
+  //console.log("ESTOS SON LOS GENRERS", navbarGenres);
 
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
@@ -32,7 +32,7 @@ export default function SimpleSlider() {
     <Slider {...settings}>
       {navbarGenres.map((genre) => (
         <div>
-          <h3 key={genre.id}>
+          <h3 key={genre.id} id="CardActionArea">
             <Card sx={{ maxWidth: 150, maxHeight: 280 }}>
               <CardActionArea>
                 <CardMedia
@@ -55,6 +55,7 @@ export default function SimpleSlider() {
                       gutterBottom
                       variant="subtitle2"
                       component="div"
+                      borderRadius={5}
                     >
                       {genre.genre}
                     </Typography>

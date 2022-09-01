@@ -36,6 +36,10 @@ export const setUser = createAsyncThunk("SETUSER", (input) => {
   return input;
 });
 
+export const changeUserInfo = createAsyncThunk("SETUSER", (input) => {
+  return input;
+});
+
 // const user = JSON.parse(window.localStorage.getItem("user"));
 
 const userReducer = createReducer(

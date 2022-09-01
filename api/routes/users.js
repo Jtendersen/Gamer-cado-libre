@@ -15,9 +15,10 @@ router.put("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    reurning: true,
-    plain: true,
+    returning:true,
+    plain:true
   }).then((result) => {
+    
     const userUpdate = result[1];
     res.json({
       message: "Se actualizo correctamente",

@@ -16,6 +16,7 @@ import imagen from "../assets/version1.png";
 import { yellow } from "@mui/material/colors";
 import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
+import UserButton from "../components/UserButton";
 
 const color = yellow[500];
 
@@ -114,15 +115,6 @@ export default function PrimarySearchAppBar() {
               variant="outlined"
               color="primary"
               onClick={() => {
-                sendTo("user");
-              }}
-            >
-              {user.firstName}
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
                 dispatch(toggleCart());
               }}
             >
@@ -137,6 +129,15 @@ export default function PrimarySearchAppBar() {
               }}
             >
               Logout
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
             </Button>
           </Stack>
         </>
@@ -149,15 +150,6 @@ export default function PrimarySearchAppBar() {
               variant="outlined"
               color="primary"
               onClick={() => {
-                sendTo("user");
-              }}
-            >
-              {user.firstName}
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => {
                 dispatch(toggleCart());
               }}
             >
@@ -173,6 +165,7 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
+            <UserButton  user={user}/>
             <Admin_panel />
           </Stack>
         </>

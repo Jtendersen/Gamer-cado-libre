@@ -20,6 +20,8 @@ import axios from "axios";
 
 import Admin_products from "./components/admin_panel/Admin_products";
 import Admin_users from "./components/admin_panel/Admin_users";
+import SingularUser from "./components/SingularUser";
+import Settings from "./components/Settings";
 
 axios.defaults.withCredentials = true;
 
@@ -52,14 +54,9 @@ function App() {
           </div>
         }
       />
-      <Route
-        path="/signup"
-        element={
-          <>
-            <SignUp />
-          </>
-        }
-      />
+      <Route path="/signup"element={<SignUp />}/>
+      <Route path="/user/history" element={<SingularUser/>}/>
+      <Route path="/user/settings" element={<Settings/>}/>
       <Route path="/signin" element={<SignIn />} />
       <Route path="/products/:genre" element={<Genre />} />
       <Route path="/products/search/:name" element={<Search />} />
