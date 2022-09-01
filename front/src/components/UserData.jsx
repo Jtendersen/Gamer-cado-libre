@@ -27,15 +27,12 @@ const UserData = () => {
 
     const handleFirstName = (e)=>{
         setFirstName(e.target.value)
-        console.log(firstName)
     }
     const handleLastName = (e)=>{
         setLastName(e.target.value)
-        console.log(lastName)
     }
     const handleAge = (e)=>{
         setAge(e.target.value)
-        console.log(age)
     }
     const handleChanges = ()=>{
         axios
