@@ -6,7 +6,6 @@ const {
   getAllGenres,
 } = require("../Controllers/genresController");
 const router = express.Router();
-const { Product, Genre } = require("../models");
 
 // Ruta para devolver todos los generos.
 router.get("/", getAllGenres);

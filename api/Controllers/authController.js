@@ -1,5 +1,5 @@
+const User = require("../models/Users");
 const { generateToken } = require("../middlewares/tokens");
-const { User } = require("../models");
 
 const me = (req, res) => {
   res.send(req.user);

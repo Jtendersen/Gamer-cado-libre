@@ -1,5 +1,6 @@
-const { Cart, Product } = require("../models");
+const Cart = require("../models/Carts");
 const { Op } = require("sequelize");
+const { Product } = require("../models");
 
 const getCart = (req, res, next) => {
   const userId = req.user.id;

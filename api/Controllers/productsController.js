@@ -1,4 +1,5 @@
 const { Product, Genre } = require("../models");
+const { Op } = require("sequelize");
 
 const getAllProducts = (req, res, next) => {
   try {

@@ -5,7 +5,6 @@ const {
   getAllReviews,
 } = require("../Controllers/reviewsController");
 const router = express.Router();
-const { Review } = require("../models");
 
 //Traer todas las reviews
 router.get("/:id", getAllReviews);

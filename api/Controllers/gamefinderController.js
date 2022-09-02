@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 const gamefinder = (req, res, next) => {
   const query = `fields age_ratings.*,artworks,checksum,cover.*,first_release_date,genres.*,name,screenshots.*,storyline,summary,url,videos,websites; search "${req.body.search}";`;
 
