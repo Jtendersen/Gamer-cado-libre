@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, Stack, Badge } from "@mui/material";
+import { Button, Stack, Badge, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sendLogoutRequest } from "../state/user";
@@ -15,7 +15,9 @@ import imagen from "../assets/version2.png";
 import { useNavigate } from "react-router";
 import Admin_panel from "../components/admin_panel";
 import UserButton from "../components/UserButton";
-
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AccountMenu from "../components/user_display_menu";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -29,6 +31,14 @@ const Search = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
+  },
+}));
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: "0 4px",
   },
 }));
 
@@ -67,6 +77,16 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+  const getQuantityCart = () => {
+    var totalItems = 0;
+    cart.map((item) => {
+      totalItems += item.quantity;
+    });
+    console.log(totalItems);
+    return totalItems;
+  };
 
   const [search, setSearch] = React.useState("");
 
@@ -108,21 +128,26 @@ export default function PrimarySearchAppBar() {
       Auth = (
         <>
           <Stack direction="row" spacing={2}>
-            <Badge
-              badgeContent={cart.length}
-              color="primary"
-              overlap="circular"
+            <Button
+              variant="text"
+              color="text"
+              onClick={() => {
+                sendTo("user");
+              }}
             >
-              <Button
-                variant="text"
-                color="text"
-                onClick={() => {
-                  dispatch(toggleCart());
-                }}
-              >
-                Cart
-              </Button>
-            </Badge>
+              {user.firstName}
+            </Button>
+            <IconButton
+              color="inherit"
+              aria-label="cart"
+              onClick={() => {
+                dispatch(toggleCart());
+              }}
+            >
+              <StyledBadge badgeContent={getQuantityCart()} color="primary">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
             <Button
               variant="text"
               color="text"
@@ -133,7 +158,15 @@ export default function PrimarySearchAppBar() {
             >
               Logout
             </Button>
-            <UserButton user={user} />
+            <Button
+              variant="text"
+              color="text"
+              onClick={() => {
+                sendTo("user");
+              }}
+            >
+              {user.firstName}
+            </Button>
           </Stack>
         </>
       );
@@ -141,15 +174,17 @@ export default function PrimarySearchAppBar() {
       Auth = (
         <>
           <Stack direction="row" spacing={2}>
-            <Button
-              variant="text"
-              color="text"
+            <IconButton
+              color="inherit"
+              aria-label="cart"
               onClick={() => {
                 dispatch(toggleCart());
               }}
             >
-              Cart
-            </Button>
+              <StyledBadge badgeContent={getQuantityCart()} color="primary">
+                <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
             <Button
               variant="text"
               color="text"
@@ -205,7 +240,20 @@ export default function PrimarySearchAppBar() {
               />
             </Search>
           </form>
-          {Auth}
+          <IconButton
+            color="inherit"
+            aria-label="cart"
+            onClick={() => {
+              dispatch(toggleCart());
+            }}
+          >
+            <StyledBadge badgeContent={getQuantityCart()} color="primary">
+              <ShoppingCartIcon />
+            </StyledBadge>
+          </IconButton>
+          <AccountMenu />
+          <Divider />
+          <Admin_panel />
         </Toolbar>
       </AppBar>
     </Box>

@@ -25,9 +25,9 @@ export const removeFromCart = createAsyncThunk(
 export const cartItemQuantity = createAsyncThunk(
   "CARTITEMQUANTITY",
   ({ productId, quantity }) => {
-    return axios.put(`/api/cart`, { productId, quantity }).then(({ data }) => {
-      console.log(data);
-    });
+    return axios
+      .put(`/api/cart`, { productId, quantity })
+      .then(({ data }) => data);
   }
 );
 

@@ -11,6 +11,7 @@ import Search from "./components/Search";
 import { useDispatch } from "react-redux";
 import { setUser } from "./state/user";
 import { getCart } from "./state/cart";
+
 import Admin_genres from "./components/admin_panel/Admin_genres";
 import { useEffect } from "react";
 import axios from "axios";
@@ -63,6 +64,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Navbar />
       <Cart />
+
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/user/history" element={<SingularUser />} />
