@@ -77,14 +77,12 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   const getQuantityCart = () => {
     var totalItems = 0;
     cart.map((item) => {
       totalItems += item.quantity;
     });
-    console.log(totalItems);
     return totalItems;
   };
 
