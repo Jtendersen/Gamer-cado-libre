@@ -22,6 +22,10 @@ export const removeFromCart = createAsyncThunk(
   }
 );
 
+export const setCart = createAsyncThunk("SETCART", () => {
+  return [];
+});
+
 export const cartItemQuantity = createAsyncThunk(
   "CARTITEMQUANTITY",
   ({ productId, quantity }) => {
@@ -41,6 +45,7 @@ const cartReducer = createReducer([], {
   [removeFromCart.fulfilled]: (state, action) => action.payload,
   [cartItemQuantity.fulfilled]: (state, action) => action.payload,
   [makeOrder.fulfilled]: (state, action) => action.payload,
+  [setCart.fulfilled]: (state, action) => action.payload,
 });
 
 export default cartReducer;

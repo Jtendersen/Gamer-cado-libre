@@ -7,7 +7,6 @@ const SingularUser = () => {
   return (
     <>
       <History />
-      <Footer />
     </>
   );
 };

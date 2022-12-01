@@ -37,15 +37,17 @@ const Product = () => {
           if (data.userId === user.id) setAlreadyPostedReview(true);
         });
       });
-  }, [reviews]);
+  }, []);
 
-  const handleAdd = (e) => {
-    axios.post("http://localhost:3001/api/reviews", {
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:3001/api/reviews", {
       review,
       rating: value,
       userId: user.id,
       productId: params.pathname.split("/")[2],
     });
+    window.location.reload();
   };
   const handleReview = (e) => {
     setReview(e.target.value);

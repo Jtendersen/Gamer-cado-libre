@@ -100,6 +100,7 @@ export default function SimpleSlider() {
                           }}
                         >
                           <Typography
+                            textAlign={"center"}
                             color="text.main"
                             gutterBottom
                             variant="subtitle2"

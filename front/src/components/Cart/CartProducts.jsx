@@ -49,13 +49,13 @@ const CartProducts = () => {
               alignItems={"center"}
             >
               <Typography variant="body1" sx={{ p: 2 }}>
-                $ {item.totalPrice}
+                $ {item.product.price}
               </Typography>
 
-              <ButtonsCounter
+              {/* <ButtonsCounter
                 itemId={item.productId}
                 quantity={item.quantity}
-              />
+              /> */}
             </Box>
             <Box
               onClick={() => {

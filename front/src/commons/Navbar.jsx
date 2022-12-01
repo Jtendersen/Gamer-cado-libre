@@ -18,6 +18,8 @@ import UserButton from "../components/UserButton";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountMenu from "../components/user_display_menu";
+import { setCart } from "../state/cart";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -80,8 +82,8 @@ export default function PrimarySearchAppBar() {
 
   const getQuantityCart = () => {
     var totalItems = 0;
-    cart.map((item) => {
-      totalItems += item.quantity;
+    cart.map((item, i) => {
+      totalItems += i;
     });
     return totalItems;
   };
@@ -188,6 +190,7 @@ export default function PrimarySearchAppBar() {
               color="text"
               onClick={() => {
                 dispatch(sendLogoutRequest());
+                dispatch(setCart());
                 sendTo("");
               }}
             >
@@ -212,7 +215,7 @@ export default function PrimarySearchAppBar() {
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <Link to="/" id="link" style={{ textDecoration: "none" }}>
-              <Box sx={{ width: 0.5 }}>
+              <Box sx={{ width: 0.4 }}>
                 <div id="loguito">
                   <img
                     id="loguitoPosta"
@@ -245,12 +248,13 @@ export default function PrimarySearchAppBar() {
               dispatch(toggleCart());
             }}
           >
-            <StyledBadge badgeContent={getQuantityCart()} color="primary">
+            <StyledBadge badgeContent={cart.length} color="primary">
               <ShoppingCartIcon />
             </StyledBadge>
           </IconButton>
           <AccountMenu />
           <Divider />
+
           <Admin_panel />
         </Toolbar>
       </AppBar>
