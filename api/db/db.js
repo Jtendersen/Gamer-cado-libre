@@ -1,10 +1,10 @@
 const Sequelize = require("sequelize");
 const db = new Sequelize(
-  process.env.DB_NAME || "e-commerce",
-  process.env.DB_USER || null,
-  process.env.DB_PASSWORD || null,
+  process.env.PGNAME || "e-commerce",
+  process.env.PGUSER || null,
+  process.env.PGPASSWORD || null,
   {
-    host: process.env.DB_HOST || "localhost",
+    host: process.env.PGHOST || "localhost",
     dialect: "postgres",
     logging: false,
   }

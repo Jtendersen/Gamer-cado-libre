@@ -24,7 +24,7 @@ app.get("/", function (req, res) {
 
 db.sync({ force: false }).then(() => {
   console.log("Se conecto bien la db");
-  app.listen(process.env.DB_PORT || 3001, () =>
+  app.listen(process.env.PGPORT || 3001, () =>
     console.log("Servidor corriendo en el puerto 3001")
   );
 });
