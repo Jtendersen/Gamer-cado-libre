@@ -8,7 +8,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://gamer-cado-libre.vercel.app/",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   })
