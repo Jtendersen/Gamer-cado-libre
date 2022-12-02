@@ -35,7 +35,7 @@ export const UserData = () => {
   };
   const handleChanges = () => {
     axios
-      .put(`http://localhost:3001/api/users/${user.id}`, {
+      .put(`/api/users/${user.id}`, {
         firstName,
         lastName,
         age,

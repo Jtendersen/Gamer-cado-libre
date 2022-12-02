@@ -22,26 +22,20 @@ const Product = () => {
 
   let commentary;
   React.useEffect(() => {
-    axios
-      .get(
-        `http://localhost:3001/api/products/${params.pathname.split("/")[2]}`
-      )
-      .then((game) => {
-        setGame(game.data);
+    axios.get(`/api/products/${params.pathname.split("/")[2]}`).then((game) => {
+      setGame(game.data);
+    });
+    axios.get(`/api/reviews/${params.pathname.split("/")[2]}`).then((res) => {
+      setReviews(res.data);
+      res.data.map((data) => {
+        if (data.userId === user.id) setAlreadyPostedReview(true);
       });
-    axios
-      .get(`http://localhost:3001/api/reviews/${params.pathname.split("/")[2]}`)
-      .then((res) => {
-        setReviews(res.data);
-        res.data.map((data) => {
-          if (data.userId === user.id) setAlreadyPostedReview(true);
-        });
-      });
+    });
   }, []);
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3001/api/reviews", {
+    await axios.post("/api/reviews", {
       review,
       rating: value,
       userId: user.id,
@@ -53,7 +47,7 @@ const Product = () => {
     setReview(e.target.value);
   };
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/api/reviews/${id}`).then((resp) => {
+    axios.delete(`/api/reviews/${id}`).then((resp) => {
       if (resp.status === 204) alert("The review was deleted succesfully");
     });
   };

@@ -20,14 +20,12 @@ export default function ComplexGrid({ product }) {
   const dispatch = useDispatch();
 
   const handleRemove = function () {
-    axios
-      .delete(`http://localhost:3001/api/products/${product.id}`)
-      .then((message) => {
-        if (message.status === 204) {
-          window.location.reload();
-          alert("Producto eliminado correctamente");
-        }
-      });
+    axios.delete(`/api/products/${product.id}`).then((message) => {
+      if (message.status === 204) {
+        window.location.reload();
+        alert("Producto eliminado correctamente");
+      }
+    });
   };
 
   const handleEdit = function () {

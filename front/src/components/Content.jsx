@@ -13,26 +13,24 @@ const Content = () => {
   var thisPath = thisPage.pathname.slice(1);
   var thisPath = thisPage.pathname.slice(1) ? thisPage.pathname.slice(1) : "/";
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/products/allProducts")
-      .then((dbGames) => {
-        setGames([]);
-        setActualGames([]);
-        var limitPerPage = 0;
-        var page = 1;
-        dbGames.data.map((game, i) => {
-          limitPerPage++;
-          if (limitPerPage === 12) {
-            page++;
-            limitPerPage = 0;
-          }
-          game.page = page === 1 ? "/" : page;
-          setGames((oldArray) => [...oldArray, game]);
-          if (!dbGames.data[i + 1]) setGames((oldArray) => [page, ...oldArray]);
-          if (game.page == thisPath)
-            setActualGames((oldArray) => [...oldArray, game]);
-        });
+    axios.get("/api/products/allProducts").then((dbGames) => {
+      setGames([]);
+      setActualGames([]);
+      var limitPerPage = 0;
+      var page = 1;
+      dbGames.data.map((game, i) => {
+        limitPerPage++;
+        if (limitPerPage === 12) {
+          page++;
+          limitPerPage = 0;
+        }
+        game.page = page === 1 ? "/" : page;
+        setGames((oldArray) => [...oldArray, game]);
+        if (!dbGames.data[i + 1]) setGames((oldArray) => [page, ...oldArray]);
+        if (game.page == thisPath)
+          setActualGames((oldArray) => [...oldArray, game]);
       });
+    });
   }, [thisPath]);
   return (
     <>

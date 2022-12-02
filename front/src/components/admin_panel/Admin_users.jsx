@@ -10,7 +10,7 @@ const Admin_users = () => {
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/users/allUsers").then((users) => {
+    axios.get("/api/users/allUsers").then((users) => {
       setUser(users.data);
     });
   }, []);
@@ -25,7 +25,7 @@ const Admin_users = () => {
 export function GridAllUsers({ user }) {
   const handleRemove = function () {
     axios
-      .put(`http://localhost:3001/api/users/admin/${user.id}`, { admin: false })
+      .put(`/api/users/admin/${user.id}`, { admin: false })
       .then((message) => {
         if (message.status === 204) {
           window.location.reload();
@@ -35,7 +35,7 @@ export function GridAllUsers({ user }) {
   };
   const handleEdit = function () {
     axios
-      .put(`http://localhost:3001/api/users/admin/${user.id}`, { admin: true })
+      .put(`/api/users/admin/${user.id}`, { admin: true })
       .then((message) => {
         if (message.status === 204) {
           window.location.reload();

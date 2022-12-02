@@ -37,12 +37,10 @@ export const Products = () => {
       if (name == "" || price == "")
         return alert("Name and Price are inputs does we need");
       else {
-        axios
-          .post("http://localhost:3001/api/products", newProduct)
-          .then((res) => {
-            if (res.status == 204) alert("The game was added succesfully");
-            if (res.status > 399) alert("The game wasn't be added");
-          });
+        axios.post("/api/products", newProduct).then((res) => {
+          if (res.status == 204) alert("The game was added succesfully");
+          if (res.status > 399) alert("The game wasn't be added");
+        });
       }
     } else {
       if (name == "") setName(productData.game.name);

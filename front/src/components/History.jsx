@@ -9,7 +9,7 @@ const History = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/order").then((res) => {
+    axios.get("/api/order").then((res) => {
       setOrders(res.data);
     });
   }, []);

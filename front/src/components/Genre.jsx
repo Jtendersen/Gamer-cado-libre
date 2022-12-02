@@ -11,11 +11,9 @@ const Genre = () => {
   const [games, setGames] = React.useState([]);
 
   React.useEffect(() => {
-    axios
-      .get(`http://localhost:3001/api/products/allGenres/${genre}`)
-      .then((games) => {
-        setGames(games.data);
-      });
+    axios.get(`/api/products/allGenres/${genre}`).then((games) => {
+      setGames(games.data);
+    });
   }, [genre]);
 
   return (
