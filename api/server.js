@@ -9,7 +9,8 @@ const cors = require("cors");
 app.use(
   cors({
     origin: "https://gamer-cado-libre.vercel.app/",
-    withCredentials: true,
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+    credentials: true,
     // credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   })
