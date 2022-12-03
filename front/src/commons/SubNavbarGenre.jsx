@@ -19,6 +19,7 @@ export default function SimpleSlider() {
     dispatch(get_genres());
   }, []);
   const genres = useSelector((state) => state.genre);
+  console.log("estos son los genres", genres);
 
   const baseUrl = "https://images.igdb.com/igdb/image/upload/t_720p/";
 
